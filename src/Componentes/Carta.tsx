@@ -23,17 +23,19 @@ function Carta({
   vida,
 }: props) {
   return (
-    <div>
+    <div className='border-2 border-gray-200 box-border-200 '>
 
       <h3>
         {nombre} (#{numero})
       </h3>
-      <img src={imagen} alt={nombre} />
-      <p>Tipo: {tipo}</p>
-      <p>Ataque: {ataque}</p>
-      <p>Defensa: {defensa}</p>
-      <p>Vida: {vida}</p>
-      <p>{descripcion}</p>
+      <img src={imagen} alt={nombre} className='rounded-sm size-1/9 p-2 '/>
+      <div>
+        <p>Tipo: {tipo}</p>
+        <p>Ataque: {ataque}</p>
+        <p>Defensa: {defensa}</p>
+        <p>Vida: {vida}</p>
+        <p>{descripcion}</p>
+      </div>
 
     </div>
   );

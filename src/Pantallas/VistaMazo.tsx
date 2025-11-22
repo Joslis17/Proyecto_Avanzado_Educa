@@ -6,11 +6,12 @@ import La_Monja from '../assets/Imagenes/Cartas/La_Monja.jpg'
 
 function VistaMazo() {
   return (
-    <div>
+    <div className=' flex'>
         <h1>Mazo</h1>
-        <Carta
+        <div>
+          <Carta
           numero={1}
-          nombre="Payaso It"
+          nombre="Payaso it"
           imagen= {Payaso_It}
           tipo="Payaso malvado"
           ataque={3000}
@@ -29,6 +30,7 @@ function VistaMazo() {
           vida={100}
           descripcion="Un demonio que usa la apariencia de una monja para engañar a sus víctimas y usa su fuerza física sobrenatural y la capacidad de poseer personas. "
         />
+        </div>
     </div>
   )
 }
