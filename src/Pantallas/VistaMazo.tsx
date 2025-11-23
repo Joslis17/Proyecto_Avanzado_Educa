@@ -1,4 +1,4 @@
-import './VistaMazo.css'
+import './vistaMazo.css'
 
 import Carta from "../Componentes/Carta"
 import Payaso_It from '../assets/Imagenes/Cartas/Payaso_It.jpg'
