@@ -1,4 +1,4 @@
-import '../Pantallas/vistaMazo.css'
+import '../Pantallas/vistaDetalle.css'
 
 function VistaDetalle() {
   return (

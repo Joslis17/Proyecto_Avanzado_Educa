@@ -1,4 +1,4 @@
-import './Carta.css'
+import './carta.css'
 import Fondo from '../assets/Imagenes/Componentes/Fondo_de_carta.jpg'
 
 type props = {
