@@ -1,5 +1,5 @@
 import './App.css'
-import VistaMazo from "./Pantallas/VistaMazo"
+import VistaMazo from "./Pantallas/VistaMazo.tsx"
 /* import VistaDetalle from './Pantallas/VistaDetalle' */
 
 
