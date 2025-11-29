@@ -5,11 +5,6 @@ type props = {
   numero: number;
   nombre: string;
   imagen: string;
-  /* tipo: string;
-  ataque?: number;
-  defensa: number;
-  descripcion: string;
-  vida: number; */
   button: string;
   button2: string;
 
@@ -19,11 +14,6 @@ function Carta({
   imagen,
   nombre,
   numero,
-  /* ataque=0,
-  defensa,
-  descripcion,
-  tipo,
-  vida, */
   button,
   button2,
 }: props) {
@@ -53,14 +43,6 @@ function Carta({
           {button2}
         </button>
       </div>
-      
-      {/* <div>
-        <p>Tipo: {tipo}</p>
-        <p>Ataque: {ataque}</p>
-        <p>Defensa: {defensa}</p>
-        <p>Vida: {vida}</p>
-        <p>{descripcion}</p>
-      </div> */}
 
     </div>
   );

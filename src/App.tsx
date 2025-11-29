@@ -1,14 +1,14 @@
 import './App.css'
-import VistaMazo from "./Pantallas/VistaMazo.tsx"
-/* import VistaDetalle from './Pantallas/VistaDetalle' */
+/* import VistaMazo from "./Pantallas/VistaMazo.tsx" */
+import VistaDetalle from './Pantallas/VistaDetalle'
 
 
 function App() {
 
   return (
     <div>
-      < VistaMazo />
-      {/* < VistaDetalle /> */}
+      {/* < VistaMazo /> */}
+      < VistaDetalle />
       
     </div>
   )
