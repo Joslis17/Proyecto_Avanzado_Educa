@@ -1,4 +1,4 @@
-import './CartaDetalle.css'
+import './cartaDetalle.css'
 import Fondo from '../assets/Imagenes/Componentes/Fondo_de_carta.jpg'
 
 let fondo={
