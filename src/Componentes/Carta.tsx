@@ -1,5 +1,4 @@
 import './carta.css'
-import Fondo from '../assets/Imagenes/Componentes/Fondo_de_carta.jpg'
 
 type props = {
   numero: number;
@@ -17,33 +16,33 @@ function Carta({
   button,
   button2,
 }: props) {
-  return (
-    <div className='w-60 h-105 border border-gray-100 box-border-200  rounded-2xl bg-center bg-cover' 
-              style={{backgroundImage: `url(${Fondo})`}}>
 
-      <h3 className=' m-3 text-white font-bold text-lg'>
+  return (
+    <div className='w-60 h-110 border border-white box-border-200  rounded-2xl bg-center bg-cover
+             mx-5 my-8 shadow-[0_0_60px_rgba(120,150,210)]' 
+            style={{backgroundImage: `url(${imagen})`}}
+                >
+
+      <h3 className=' m-3 text-white font-bold text-lg bg-gray-400/40 rounded-xl w-12 text-center'>
         {numero}
       </h3>
-      <img src={imagen} alt={nombre} className='rounded-2xl border-2 border-t-blue-950 border-r-blue-950
-             w-50 h-75 mx-4 '/>
 
-      <h3 className='text-center my-5 text-white font-bold '>
-        {nombre}
+      <h3 className='text-center my-5 text-white font-bold mt-85 text-2xl bg-gray-400/40'>
+       {nombre}
       </h3>
 
-      <div className='align-center justify-center flex'>
-        <button className='bg-gray-100 border rounded-md border-gray-300 px-3 py-2.5 mx-2 my-5 cursor-pointer 
-              text-white bg-center bg-cover'
-              style={{backgroundImage: `url(${Fondo})`}}>
-        {button}
+      <div className='align-center justify-center flex mt-10'>
+        <button 
+          className='bg-gray-100 border rounded-md border-gray-300 p-1 m-2 cursor-pointer 
+          text-white bg-center bg-cover bg-gradient-to-r from-[#5c0202] to-red-700 h-10 w-25 text-lg'>
+          {button}
         </button>
-        <button className='bg-gray-100 border rounded-md border-gray-300 px-3 py-2.5 mx-2 my-5 cursor-pointer 
-                text-white bg-center bg-cover'
-                style={{backgroundImage: `url(${Fondo})`}}>
+        <button className='bg-gray-100 border rounded-md border-gray-300 p-1 m-2 cursor-pointer 
+         text-white bg-center bg-cover bg-gradient-to-r from-green-400 to-green-900 h-10 w-30 text-lg'>
           {button2}
         </button>
       </div>
-
+        
     </div>
   );
 }
