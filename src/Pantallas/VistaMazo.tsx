@@ -11,9 +11,14 @@ import { IoAddOutline } from "react-icons/io5";
 
 type props = {
   seleccionarCarta : Function
+  mostrar : Function
 }
 
-function VistaMazo({ seleccionarCarta }:props) {
+function VistaMazo({
+   seleccionarCarta,
+   mostrar
+   }:props
+  ) {
 
   return (
     <div >
@@ -104,9 +109,10 @@ function VistaMazo({ seleccionarCarta }:props) {
 
       </div>
 
-        <button className='absolute top-5 right-5 bg-white border-3 border-gray-400/50 rounded-full p-1 m-2
+        <button onClick={() => mostrar()}
+        className='absolute top-10 right-10 bg-white border-3 border-gray-400/50 rounded-full p-1 m-2
          cursor-pointer hover:bg-gray-200 hover:scale-115 transition-background,scale duration-400'>
-          <IoAddOutline size={30} color={'#000000'}/>
+          <IoAddOutline size={40} color={'#000000'}/>
         </button>
 
     </div>
