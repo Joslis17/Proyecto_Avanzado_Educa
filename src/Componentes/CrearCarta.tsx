@@ -86,7 +86,7 @@ function CrearCarta(/*
                     </div>
                   </div>
 
-                  <div className='flex gap-4 '>
+                  <div className='flex gap-4 justify-center '>
 
                     <div className='my-3 p-3 border-3 border-purple-800 rounded-2xl hover:scale-105 transition-scale,shadow 
                                 duration-400 shadow-lg hover:shadow-purple-500'>
@@ -137,7 +137,7 @@ function CrearCarta(/*
                       </div>
                   </div>
 
-                  <div className='flex gap-4'>
+                  <div className='flex gap-4 justify-center'>
 
                     <div className='flex my-3 p-3 border-3 border-purple-800 rounded-2xl hover:scale-105 transition-scale,shadow 
                                   duration-400 shadow-lg hover:shadow-purple-500'>
