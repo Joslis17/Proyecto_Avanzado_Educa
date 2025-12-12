@@ -55,13 +55,24 @@ function CrearCarta(/*
                 <div className=''>
 
                   <div className='flex gap-3'>
+                    
+                    <div className='flex my-3 p-3 border-3 border-purple-800 rounded-2xl hover:scale-105 transition-scale,shadow 
+                                duration-400 shadow-lg hover:shadow-purple-500'>
+                        <h2 className=' m-2 text-2xl'>
+                          Id:
+                        </h2>
+                        <input type="text" placeholder='N°' 
+                        className='text-center Px-2 py-1 w-10 h-12 border rounded-lg border-gray-400 hover:bg-gray-100 hover:border-gray-500 hover:shadow-gray-300 shadow-lg'
+                        />
+                    </div>
+
                     <div className='flex my-3 p-3 border-3 border-purple-800 rounded-2xl hover:scale-105 transition-scale,shadow 
                                 duration-400 shadow-lg hover:shadow-purple-500'>
                         <h2 className=' m-2 text-2xl'>
                           Nombre:
                         </h2>
                         <input type="text" placeholder='Ingresa el nombre' 
-                        className=' Px-2 py-1 w-60 h-12 border rounded-lg border-gray-400 hover:bg-gray-100 hover:border-gray-500 hover:shadow-gray-300 shadow-lg'
+                        className='text-center Px-2 py-1 w-60 h-12 border rounded-lg border-gray-400 hover:bg-gray-100 hover:border-gray-500 hover:shadow-gray-300 shadow-lg'
                         />
                     </div>
                     <div className='flex my-3 p-3 border-3 border-purple-800 rounded-2xl hover:scale-105 transition-scale,shadow 
@@ -70,7 +81,7 @@ function CrearCarta(/*
                           Tipo:
                         </h2>
                         <input type="text" placeholder='Ingresa el tipo' 
-                        className=' Px-2 py-1 w-60 h-12 border rounded-lg border-gray-400 hover:bg-gray-100 hover:border-gray-500 hover:shadow-gray-300 shadow-lg'
+                        className='text-center Px-2 py-1 w-60 h-12 border rounded-lg border-gray-400 hover:bg-gray-100 hover:border-gray-500 hover:shadow-gray-300 shadow-lg'
                         />
                     </div>
                   </div>
@@ -83,7 +94,7 @@ function CrearCarta(/*
                         Ataque
                       </h2>
                       <input type="text" placeholder='Ingresa el dato númerico' 
-                      className='Px-2 py-1 w-60 h-12 border rounded-lg border-gray-400 hover:bg-gray-100 hover:border-gray-500 hover:shadow-gray-300 shadow-lg'
+                      className='text-center Px-2 py-1 w-50 h-12 border rounded-lg border-gray-400 hover:bg-gray-100 hover:border-gray-500 hover:shadow-gray-300 shadow-lg'
                       />
                     </div>
 
@@ -93,7 +104,7 @@ function CrearCarta(/*
                         Defensa
                       </h2>
                       <input type="text" placeholder='Ingresa el dato númerico' 
-                      className=' Px-2 py-1 w-60 h-12 border rounded-lg border-gray-400 hover:bg-gray-100 hover:border-gray-500 hover:shadow-gray-300 shadow-lg'
+                      className='text-center Px-2 py-1 w-50 h-12 border rounded-lg border-gray-400 hover:bg-gray-100 hover:border-gray-500 hover:shadow-gray-300 shadow-lg'
                       />
                     </div>
 
@@ -103,7 +114,7 @@ function CrearCarta(/*
                         Vida
                       </h2>
                       <input type="text" placeholder='Ingresa el dato númerico' 
-                      className=' Px-2 py-1 w-60 h-12 border rounded-lg border-gray-400 hover:bg-gray-100 hover:border-gray-500 hover:shadow-gray-300 shadow-lg'
+                      className='text-center Px-2 py-1 w-50 h-12 border rounded-lg border-gray-400 hover:bg-gray-100 hover:border-gray-500 hover:shadow-gray-300 shadow-lg'
                       />
                     </div>
                   </div>
@@ -115,13 +126,13 @@ function CrearCarta(/*
                       </h2>
                       <div className='flex gap-4'>
                         <input type="text" placeholder='Ingresa la primera habilidad' 
-                        className=' Px-2 py-1 w-60 h-12 border rounded-lg border-gray-400 hover:bg-gray-100 hover:border-gray-500 hover:shadow-gray-300 shadow-lg'
+                        className='text-center Px-2 py-1 w-60 h-12 border rounded-lg border-gray-400 hover:bg-gray-100 hover:border-gray-500 hover:shadow-gray-300 shadow-lg'
                         />
                         <input type="text" placeholder='Ingresa la segunda habilidad' 
-                        className=' Px-2 py-1 w-60 h-12 border rounded-lg border-gray-400 hover:bg-gray-100 hover:border-gray-500 hover:shadow-gray-300 shadow-lg'
+                        className='text-center Px-2 py-1 w-60 h-12 border rounded-lg border-gray-400 hover:bg-gray-100 hover:border-gray-500 hover:shadow-gray-300 shadow-lg'
                         />
                         <input type="text" placeholder='Ingresa la tercera habilidad' 
-                        className=' Px-2 py-1 w-60 h-12 border rounded-lg border-gray-400 hover:bg-gray-100 hover:border-gray-500 hover:shadow-gray-300 shadow-lg'
+                        className='text-center Px-2 py-1 w-60 h-12 border rounded-lg border-gray-400 hover:bg-gray-100 hover:border-gray-500 hover:shadow-gray-300 shadow-lg'
                         />
                       </div>
                   </div>
@@ -134,7 +145,7 @@ function CrearCarta(/*
                           Rareza:
                         </h2>
                         <input type="text" placeholder='Ingresa la rareza' 
-                        className=' Px-2 py-1 w-60 h-12 border rounded-lg border-gray-400 hover:bg-gray-100 hover:border-gray-500 hover:shadow-gray-300 shadow-lg'
+                        className='text-center Px-2 py-1 w-60 h-12 border rounded-lg border-gray-400 hover:bg-gray-100 hover:border-gray-500 hover:shadow-gray-300 shadow-lg'
                         />
                     </div>
 
@@ -144,7 +155,7 @@ function CrearCarta(/*
                           Descripción:
                         </h2>
                         <input type="text" placeholder='Ingresa una breve descripción' 
-                        className=' Px-2 py-1 w-60 h-12 border rounded-lg border-gray-400 hover:bg-gray-100 hover:border-gray-500 hover:shadow-gray-300 shadow-lg'
+                        className='text-center Px-2 py-1 w-60 h-12 border rounded-lg border-gray-400 hover:bg-gray-100 hover:border-gray-500 hover:shadow-gray-300 shadow-lg'
                         />
                     </div>
                   </div>
