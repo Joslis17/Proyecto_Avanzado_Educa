@@ -1,22 +1,36 @@
 import '../Pantallas/vistaDetalle.css'
 import CartaDetalle from '../Componentes/CartaDetalle'
+/* import PayasoIt from '../assets/Imagenes/Cartas/Payaso_It.jpg' */
+import Luces from '../assets/Imagenes/Componentes/Luces.png'
 
-function VistaDetalle() {
+type props ={
+  carta: any
+  noMostrar:Function
+}
+
+function VistaDetalle({carta, noMostrar}:props) {
   return (
-    <div>
+    <div >
+      <div className='flex justify-center '>
+        <img src={Luces} className='' /> <img src={Luces} className='' />
+      </div>
+      
       <CartaDetalle
-        numero={1}
-        nombre="El Payaso it"
-        tipo="Payaso malvado"
-        ataque={3000}
-        defensa={2500}
-        vida={80}
-        descripcion="Un payaso terrorífico que se alimenta del miedo, y crea ilusiones muy reales para atrapar a sus víctimas."
-        habilidades_Especiales="Puede cambiar de forma y manipular la realidad."
-        rareza="Legendaria"
+        noMostrar2={noMostrar}
+        numero={carta.numero}
+        nombre={carta.nombre}
+        imagen={carta.imagen}
+        tipo={carta.tipo}
+        ataque={carta.ataque}
+        defensa={carta.defensa}
+        vida={carta.vida}
+        descripcion={carta.descripcion}
+        habilidades_Especiales1 = {carta.habilidades_Especiales1}
+        habilidades_Especiales2 = {carta.habilidades_Especiales2}
+        habilidades_Especiales3 = {carta.habilidades_Especiales3}
+        rareza={carta.rareza}
         button='Eliminar'
         button2='Editar'
-        button3='X'
       />
 
     </div>

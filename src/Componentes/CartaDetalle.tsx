@@ -1,15 +1,15 @@
 import './cartaDetalle.css'
-import Fondo from '../assets/Imagenes/Componentes/Fondo_de_carta.jpg'
-import PayasoIt from '../assets/Imagenes/Cartas/Payaso_It.jpg'
+/* import Fondo from '../assets/Imagenes/Componentes/Fondo_de_carta.jpg' */
 
-let fondo={
-    backgroundImage: `url(${Fondo})`
-}
+import { MdClear } from "react-icons/md";
 
 type props = {
   numero: number;
   nombre: string;
-  habilidades_Especiales: string;
+  imagen:string,
+  habilidades_Especiales1:string,
+  habilidades_Especiales2: string,
+  habilidades_Especiales3:string,
   tipo: string;
   ataque?: number;
   defensa: number;
@@ -17,95 +17,105 @@ type props = {
   vida: number;
   button: string;
   button2: string;
-  button3?: string;
   rareza?: string;
+  noMostrar2:Function
 
 }
 
 function CartaDetalle({
-  habilidades_Especiales,
+  habilidades_Especiales1,
+  habilidades_Especiales2,
+  habilidades_Especiales3,
   nombre,
   numero,
-  ataque=0,
+  imagen,
+  ataque,
   defensa,
   descripcion,
   tipo,
   vida,
   button,
   button2,
-  button3,
-  rareza
+  rareza,
+  noMostrar2,
 }: props
 ) {
   return (
-    <div className='min-h-screen flex items-center justify-center'>
+    <div  className='min-h-screen flex items-center justify-center'>
 
-        <div className=' flex items-center justify-center'>
+        <div className=' flex items-center justify-center rounded-4xl shadow-xl shadow-purple-500  p-5 bg-white'>
+            
+            <div>
 
-            <div className='w-70 h-120 border border-white box-border-200  rounded-2xl bg-center bg-cover
-             mx-20 my-8 shadow-[0_0_60px_rgba(120,150,210)]' 
-            style={{backgroundImage: `url(${PayasoIt})`}}
-                >
+                <div
+                    className='  mx-10 my-2 w-80 h-130 border border-white rounded-2xl bg-center bg-cover    
+                         shadow-xl shadow-gray-400 hover:shadow-gray-700 transition-shadow duration-400'
+                    style={{backgroundImage: `url(${imagen})`}}>
 
-                <h3 className=' m-3 text-white font-bold text-lg bg-gray-400/40 rounded-xl w-12 text-center'>
-                    {numero}
-                </h3>
+                        <h3 className=' m-3 text-white font-bold text-2xl bg-gray-400/40 rounded-xl w-12 text-center'>
+                            {numero}
+                        </h3>
 
-                <h3 className='text-center my-5 text-white font-bold mt-95 text-2xl bg-gray-400/40'>
-                    {nombre}
-                </h3>
+                        
+                    </div>
 
-                <div className='align-center justify-center flex mt-10'>
-                    <button className='bg-gray-100 border rounded-md border-gray-300 px-3 py-2.5 mx-5 my-5 cursor-pointer 
-                        text-white bg-center bg-cover bg-gradient-to-r from-[#5c0202] to-red-700'>
-                    {button}
-                    </button>
-                    <button className='bg-gray-100 border rounded-md border-gray-300 px-3 py-2.5 mx-5 my-5 cursor-pointer 
-                            text-white bg-center bg-cover bg-gradient-to-r from-green-400 to-green-900'>
-                    {button2}
-                    </button>
-                </div>
-        
+                        <div className='align-center justify-center flex mt-10'>
+                            <button 
+                                className='border-3 rounded-[10px] border-gray-200 p-1 mx-2 my-1 cursor-pointer text-white h-13 w-28
+                                font-semibold text-lg bg-[#5c0202] hover:bg-[#940404] hover:scale-110 transition-background,scale,shadow 
+                                duration-400 shadow-lg hover:shadow-[#940404] shadow-gray-300'>
+                                {button}
+                            </button>
+                            <button 
+                                className='border-3 rounded-[10px] border-gray-200 p-1 mx-2 my-1 cursor-pointer text-white h-13 w-33
+                                font-semibold text-lg bg-purple-900 hover:bg-purple-700 hover:scale-110 transition-background,scale,shadow 
+                                duration-400 shadow-lg hover:shadow-purple-500 shadow-gray-300'>
+                                {button2}
+                            </button>
+                        </div>  
+
+
             </div>
+            <div className='w-160 h-160 my-2 mx-10 border-3 border-gray-300 rounded-4xl shadow-lg shadow-gray-400
+             py-5 bg-gray-300/50 hover:shadow-gray-700 transition-shadow duration-400'>
 
-            <div className='w-150 h-140 m-5 border-3 border-t-gray-400 border-r-gray-400 shadow-[0_0_60px_rgba(120,150,210)]
-             rounded-4xl ] bg-center bg-cover py-5'
-                style={fondo}>
-
-                <h1 className='my-5 p-1 relative text-2xl font-bold text-yellow-500 flex text-center justify-center bg-gray-300/12'>
-                    CARTA 1
+                <h1 className='mb-3 p-1 relative text-5xl font-bold flex text-center justify-center text-gradient-custom '>
+                    {nombre}
                 </h1>
                 <div className='flex mx-10 mb-5'>
-                    <p className="relative text-2xl font-bold text-yellow-500">
+                    <p className="relative text-2xl font-bold text-gradient-custom ">
                         Tipo:
                     </p>
-                    <p className="relative text-xl text-gray-300 px-5 ">
+                    <p className="relative text-[22px] px-5 ">
                         {tipo}
                     </p>
                 </div>
                 
                 <div className='flex my-2 justify-around'>
-                    <div className='mx-2 border border-yellow-400 rounded-2xl p-2 flex '>
-                        <p className="relative text-xl font-bold text-white m-1">
+                    <div className='mx-2 border-3 border-purple-700 rounded-2xl p-2 flex hover:scale-105 transition-scale,shadow 
+                                duration-400 shadow-lg hover:shadow-purple-500'>
+                        <p className="relative text-xl font-bold m-1">
                         Ataque:
                         </p>
-                        <p className="relative text-gray-300 m-1 text-xl">
+                        <p className="relative m-1 text-xl">
                             {ataque}
                         </p>
                     </div>
-                    <div className='mx-2 border border-yellow-400 rounded-2xl p-2 flex'>
-                        <p className="relative text-xl font-bold text-white m-1">
+                    <div className='mx-2 border-3 border-purple-700 rounded-2xl p-2 flex hover:scale-105 transition-scale,shadow 
+                                duration-400 shadow-lg hover:shadow-purple-500'>
+                        <p className="relative text-xl font-bold m-1">
                             Defensa:
                         </p>
-                        <p className="relative text-gray-300 m-1 text-xl">
+                        <p className="relative m-1 text-xl">
                             {defensa}
                         </p>
                     </div>
-                    <div className='mx-2 border border-yellow-400 rounded-2xl p-2 flex'>
-                        <p className="relative text-xl font-bold text-white m-1">
+                    <div className='mx-2 border-3 border-purple-700 rounded-2xl p-2 flex hover:scale-105 transition-scale,shadow 
+                                duration-400 shadow-lg hover:shadow-purple-500'>
+                        <p className="relative text-xl font-bold m-1">
                            Vida:
                         </p>
-                        <p className="relative text-gray-300 m-1 text-xl">
+                        <p className="relative m-1 text-xl">
                             {vida}
                         </p>`
                     </div>
@@ -113,38 +123,51 @@ function CartaDetalle({
                 </div>
 
                 <div className=' mx-5 my-10'>
-                    <p className="relative text-2xl font-bold text-yellow-400">
+                    <p className="relative text-2xl font-bold text-gradient-custom ">
                         Habilidades Especiales:
                     </p>
-                    <p className="relative text-gray-300 text-xl">
-                        {habilidades_Especiales}
-                    </p>
+                    <div className="flex  my-2 text-xl">
+                        <div className='m-2 border-3 border-purple-700 rounded-2xl p-2 flex hover:scale-105 transition-scale,shadow 
+                                duration-400 shadow-lg hover:shadow-purple-500'>
+                            {habilidades_Especiales1}
+                        </div>
+                        <div className='m-2 border-3 border-purple-700 rounded-2xl p-2 flex hover:scale-105 transition-scale,shadow 
+                                duration-400 shadow-lg hover:shadow-purple-500'>
+                            {habilidades_Especiales2}
+                        </div>
+                        <div className='m-2 border-3 border-purple-700 rounded-2xl p-2 flex hover:scale-105 transition-scale,shadow 
+                                duration-400 shadow-lg hover:shadow-purple-500'>
+                            {habilidades_Especiales3}
+                        </div>
+                        
+                    </div>
                 </div>
                 <div className='flex mx-5 my-10'>
-                    <p className="relative text-2xl font-bold text-yellow-400">
+                    <p className="relative text-2xl font-bold text-gradient-custom ">
                         Rarezas:
                     </p>
-                    <p className="relative text-gray-300 px-2 text-xl">
+                    <p className="relative px-2 text-[22px]">
                         {rareza}
                     </p>
                 </div>
 
                 <div className=' mx-5 my-10'>
-                    <p className="relative text-2xl font-bold text-yellow-400">
+                    <p className="relative text-2xl font-bold text-gradient-custom ">
                         Descripcion:
                     </p>
-                    <p className="relative text-gray-300 px-2 text-xl">
+                    <p className="relative px-2 text-[22px]">
                         {descripcion}
                     </p>
                 </div>
             </div>
 
-        </div>
+            <button  onClick={() => noMostrar2()}
+                className='absolute top-5 right-5 bg-white border-3 border-gray-400/50 rounded-full p-1 m-2
+                cursor-pointer hover:bg-gray-200 hover:scale-115 transition-background,scale duration-400'>
+                <MdClear size={30} color={'#000000'}/>
+            </button>
 
-        
-        <button className='text-white fixed top-5 right-5 bg-gray-400/40 rounded-full w-10 h-10'>
-            {button3}
-        </button>
+        </div>
 
     </div>
     

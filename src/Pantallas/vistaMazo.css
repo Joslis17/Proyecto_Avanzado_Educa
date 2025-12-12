@@ -1,9 +1,16 @@
 @import 'tailwindcss';
 
-/* body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-image: url('../assets/Imagenes/Componentes/Fondo1.jpg');
-    background-size: cover;
-    background-position: center;
-} */
+/* globals.css o styles.css */
+
+.text-gradient-custom {
+  /* Define el degradado que quieres usar */
+  background-image: linear-gradient(to bottom, #683083, #e207e2); /* Púrpura a Rosa */
+  
+  /* Hace que el fondo se recorte solo al texto */
+  -webkit-background-clip: text;
+  background-clip: text;
+  
+  /* Hace que el color del texto sea transparente para que se vea el fondo */
+  -webkit-text-fill-color: transparent;
+  color: transparent; /* Fallback */
+}

@@ -3,8 +3,9 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-image: url('./assets/Imagenes/Componentes/Fondo2.jpg');
-    /* background: #000818; */
+    /* background-image: url('./assets/Imagenes/Componentes/Fondo2.jpg'); */
+    /* background: rgb(2,0,32); */
+    background: rgb(240, 240, 240);
     background-size: cover;
     background-position: center;
 }
