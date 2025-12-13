@@ -13,17 +13,17 @@ function App() {
   return (
     <div>
       {
-        cartaSeleccionada ?
-           <VistaDetalle 
+        !cartaSeleccionada && !mostrarVistaCrear ?
+        <VistaMazo seleccionarCarta={setCartaSeleccionada} 
+          mostrar={() => setMostrarVistaCrear(true)/>
+        : cartaSeleccionada && !mostrarVistaCrear ?
+          <VistaDetalle 
             carta={cartaSeleccionada} 
-            noMostrar={() => setCartaSeleccionada(false)} 
-          />
-          
-        : mostrarVistaCrear ?
-        <VistaCrearCarta noMostrar={() => setMostrarVistaCrear(false)}/>
-        : <VistaMazo seleccionarCarta={setCartaSeleccionada} 
-                      mostrar={() => setMostrarVistaCrear(true)}
-        />
+            noMostrar={() => setCartaSeleccionada(false)} />
+        : //!cartaSeleccionada && mostrarVistaCrear ?
+            <VistaCrearCarta noMostrar={() => setMostrarVistaCrear(false)}/>
+            
+            
       }
       
       
