@@ -15,7 +15,7 @@ function App() {
       {
         !cartaSeleccionada && !mostrarVistaCrear ?
         <VistaMazo seleccionarCarta={setCartaSeleccionada} 
-          mostrar={() => setMostrarVistaCrear(true)/>
+          mostrar={() => setMostrarVistaCrear(true)}/>
         : cartaSeleccionada && !mostrarVistaCrear ?
           <VistaDetalle 
             carta={cartaSeleccionada} 
