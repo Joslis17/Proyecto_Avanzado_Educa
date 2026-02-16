@@ -1,9 +1,9 @@
 import './App.css'
 import { useState } from 'react'
 
-import VistaMazo from "./Pantallas/VistaMazo"
-import VistaDetalle from './Pantallas/VistaDetalle'
-import VistaCrearCarta from './Pantallas/VistaCrearCarta';
+import VistaMazo from "./Screens/VistaMazo"
+import VistaDetalle from './Screens/VistaDetalle'
+import VistaCrearCarta from './Screens/VistaCrearCarta';
 
 function App() {
 

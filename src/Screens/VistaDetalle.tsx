@@ -1,5 +1,5 @@
-import '../Pantallas/vistaDetalle.css'
-import CartaDetalle from '../Componentes/CartaDetalle'
+import '../Screens/VistaDetalle.css'
+import CartaDetalle from '../Components/CartaDetalle'
 /* import PayasoIt from '../assets/Imagenes/Cartas/Payaso_It.jpg' */
 import Luces from '../assets/Imagenes/Componentes/Luces.png'
 

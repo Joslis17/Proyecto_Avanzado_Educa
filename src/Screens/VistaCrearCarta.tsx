@@ -1,6 +1,6 @@
 import './vistaCrearCarta.css'
 import { MdClear } from "react-icons/md";
-import CrearCarta from '../Componentes/CrearCarta';
+import CrearCarta from '../Components/CrearCarta';
 
 type props =
  {

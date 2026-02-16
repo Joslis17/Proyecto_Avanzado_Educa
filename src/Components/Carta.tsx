@@ -15,9 +15,8 @@ type props = {
   habilidades_Especiales3:string,
   button: string;
   button2: string;
-  
-  seleccionarCarta2: Function
-
+  seleccionarCarta2: Function,
+  onEliminar?: () => void // NUEVO: función para eliminar
 }
 
 function Carta({
@@ -35,12 +34,12 @@ function Carta({
   habilidades_Especiales3,
   button,
   button2,
-  seleccionarCarta2
+  seleccionarCarta2,
+  onEliminar // NUEVO
 }: props) {
 
   return (
     <div className='bg-white p-4 rounded-2xl shadow-lg shadow-gray-400 hover:scale-106 transition-scale duration-400'>
-      
       <div className='w-60 h-110 border border-white rounded-2xl bg-center bg-cover m-5 
       shadow-[0_0_20px_rgba(110,110,110)] hover:shadow-purple-900 
       transition-shadow duration-400 cursor-pointer' 
@@ -73,7 +72,9 @@ function Carta({
           <button 
             className='border-3 rounded-[10px] border-gray-200 p-1 mx-2 my-1 cursor-pointer text-white h-13 w-28
             font-semibold text-lg bg-[#5c0202] hover:bg-[#940404] hover:scale-110 transition-background,scale,shadow 
-            duration-400 shadow-lg hover:shadow-[#940404] shadow-gray-300'>
+            duration-400 shadow-lg hover:shadow-[#940404] shadow-gray-300'
+            onClick={onEliminar} // NUEVO: ejecuta eliminación
+            >
             {button}
           </button>
           <button onClick={() => seleccionarCarta2({
@@ -97,7 +98,7 @@ function Carta({
           </button>
       </div>    
 
-  </div>
+    </div>
   );
 }
 
