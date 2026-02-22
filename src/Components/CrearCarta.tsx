@@ -1,5 +1,4 @@
 import './crearCarta.css'
-import fotoNavideña from '../assets/Imagenes/Componentes/White Christmas_2.png'
 import { useState } from 'react';
 
 type CrearCartaProps = {
