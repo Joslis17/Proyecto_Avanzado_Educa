@@ -2,15 +2,18 @@ import './vistaCrearCarta.css'
 import { MdClear } from "react-icons/md";
 import CrearCarta from '../Components/CrearCarta';
 
-type props =
- {
+type props = {
     noMostrar:Function
+    agregarCarta: (carta: any) => void
+    
 }
 
-function VistaCrearCarta({noMostrar}:props) {
+function VistaCrearCarta({noMostrar, agregarCarta}:props) {
   return (
     <div>
-        <CrearCarta />
+        <CrearCarta 
+        agregarCarta={agregarCarta}
+        />
 
         <button  onClick={() => noMostrar()}
             className='absolute top-10 right-10 bg-white border-3 border-gray-400/50 rounded-full p-1 m-2

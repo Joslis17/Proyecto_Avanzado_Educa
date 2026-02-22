@@ -1,14 +1,9 @@
 import './vistaMazo.css'
 import Carta from "../Components/Carta"
-import Payaso_It from '../assets/Imagenes/Cartas/Payaso_It.jpg'
-import La_Monja from '../assets/Imagenes/Cartas/La_Monja.jpg'
-import Annabelle from '../assets/Imagenes/Cartas/Annabelle.jpg'
-import Freddy_Krueger from '../assets/Imagenes/Cartas/Freddy_Krueger.jpg'
-import Luces from '../assets/Imagenes/Componentes/Luces.png'
 import { IoAddOutline } from "react-icons/io5";
 import { useState } from 'react'
 
-type CartaType = {
+type TipoDeCarta = {
   numero: number;
   nombre: string;
   imagen: string;
@@ -19,49 +14,21 @@ type CartaType = {
   habilidades_Especiales1: string;
   habilidades_Especiales2: string;
   habilidades_Especiales3: string;
-  rareza: string;
+  URL: string;
   descripcion: string;
 }
 
 type props = {
   seleccionarCarta : Function
   mostrar : Function
+  mazo: TipoDeCarta[]; // Recibimos el mazo de App
+  setMazo: Function;   // Recibimos el setter de App
+  
 }
 
-const MAZO_INICIAL: CartaType[] = [
-  {
-    numero: 1, nombre: "El Payaso it", imagen: Payaso_It,
-    tipo: "Entidad Cosmica", ataque: 70, defensa: 55, vida: 100,
-    habilidades_Especiales1: "Puede cambiar de forma.", habilidades_Especiales2: 'Manipular la realidad',
-    habilidades_Especiales3: 'Regeneracion casi Ilimitada', rareza: "Legendaria",
-    descripcion: "Un payaso terrorífico que se alimenta del miedo, y crea ilusiones muy reales para atrapar a sus víctimas."
-  },
-  {
-    numero: 2, nombre: "La Monja", imagen: La_Monja,
-    tipo: 'Demonio Alto Nivel', ataque: 100, defensa: 90, vida: 100,
-    habilidades_Especiales1: 'Control Sobre la Oscuridad', habilidades_Especiales2: 'Posee humanos y objetos',
-    habilidades_Especiales3: 'Invoca precencia menores', rareza: 'Mítica',
-    descripcion: 'Es un demonio que disfruta atormentar a sus víctimas, Puede moverse entre sombras y alterar la realidad '
-  },
-  {
-    numero: 3, nombre: "Anabelle", imagen: Annabelle,
-    tipo: 'Entidad Demoniaca', ataque: 80, defensa: 85, vida: 100,
-    habilidades_Especiales1: 'Mover Objetos.', habilidades_Especiales2: 'Povoca sucesos paranormales',
-    habilidades_Especiales3: 'Atrae entidades demoniacas', rareza: 'Extraña',
-    descripcion: 'Una muñeca poseída por una entidad demoníaca que utiliza el miedo y la desesperación para debilitar a sus víctimas.'
-  },
-  {
-    numero: 4, nombre: "Freddy Krueger", imagen: Freddy_Krueger,
-    tipo: 'Entidad Demoniaca', ataque: 50, defensa: 45, vida: 100,
-    habilidades_Especiales1: 'Controla los sueños', habilidades_Especiales2: 'Lastima físicamente',
-    habilidades_Especiales3: 'Cuchillas en sus guantes', rareza: 'Legendaria',
-    descripcion: 'Un espíritu vengativo que habita en los sueños, donde tiene un poder ilimitado. Usa su guante de cuchillas para atacarlas.'
-  }
-];
 
-function VistaMazo({ seleccionarCarta, mostrar }: props) {
-  // Ahora el mazo es dinámico
-  const [mazo, setMazo] = useState<CartaType[]>(MAZO_INICIAL);
+
+function VistaMazo({ seleccionarCarta, mostrar, mazo, setMazo }: props) {
 
   const eliminarCarta = (numero: number) => {
     setMazo(mazo.filter(carta => carta.numero !== numero));
@@ -69,9 +36,6 @@ function VistaMazo({ seleccionarCarta, mostrar }: props) {
 
   return (
     <div >
-      <div className='flex justify-center '>
-        <img src={Luces} className='' /> <img src={Luces} className='' />
-      </div>
       <h1 className='text-gradient-custom mt-2 p-2 text-5xl font-sans font-bold flex text-center justify-center'>
         ENTIDADES MALIGNAS
       </h1>
@@ -81,13 +45,13 @@ function VistaMazo({ seleccionarCarta, mostrar }: props) {
       <div className='flex items-center justify-center'>
         <div className=' flex p-1.5 gap-5 m-3 ' >
           {
-            mazo.map((carta, idx) => (
+            mazo.map(carta  => (
               <Carta
                 key={carta.numero}
                 {...carta}
                 seleccionarCarta2={seleccionarCarta}
                 button='Eliminar'
-                button2='Ver Detalles'
+                button2='Detalles'
                 onEliminar={() => eliminarCarta(carta.numero)}
               />
             ))

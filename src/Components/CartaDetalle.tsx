@@ -1,15 +1,13 @@
 import './cartaDetalle.css'
-/* import Fondo from '../assets/Imagenes/Componentes/Fondo_de_carta.jpg' */
-
 import { MdClear } from "react-icons/md";
 
 type props = {
   numero: number;
   nombre: string;
-  imagen:string,
-  habilidades_Especiales1:string,
-  habilidades_Especiales2: string,
-  habilidades_Especiales3:string,
+  imagen:string;
+  habilidades_Especiales1:string;
+  habilidades_Especiales2: string;
+  habilidades_Especiales3:string;
   tipo: string;
   ataque?: number;
   defensa: number;
@@ -17,161 +15,101 @@ type props = {
   vida: number;
   button: string;
   button2: string;
-  rareza?: string;
-  noMostrar2:Function
-
+  URL?: string;
+  noMostrar2:Function;
+  onEliminarClick: () => void;
 }
 
 function CartaDetalle({
-  habilidades_Especiales1,
-  habilidades_Especiales2,
-  habilidades_Especiales3,
-  nombre,
-  numero,
-  imagen,
-  ataque,
-  defensa,
-  descripcion,
-  tipo,
-  vida,
-  button,
-  button2,
-  rareza,
-  noMostrar2,
-}: props
-) {
+  habilidades_Especiales1, habilidades_Especiales2, habilidades_Especiales3,
+  nombre, numero, imagen, ataque, defensa, descripcion, tipo, vida,
+  button, button2, URL, noMostrar2, onEliminarClick,
+}: props) {
   return (
-    <div  className='min-h-screen flex items-center justify-center'>
-
-        <div className=' flex items-center justify-center rounded-4xl shadow-xl shadow-purple-500  p-5 bg-white'>
+    <div className='min-h-screen flex items-center justify-center p-4 bg-black/20 backdrop-blur-sm fixed inset-0 z-50'>
+        {/* Contenedor Principal: Adaptable como el de CrearCarta */}
+        <div className='relative bg-white rounded-4xl shadow-xl shadow-purple-500 p-4 md:p-8 w-full max-w-5xl h-auto overflow-y-auto max-h-[95vh] flex flex-col lg:flex-row gap-8 items-center'>
             
-            <div>
-
+            {/* SECCIÓN IZQUIERDA: Imagen y Botones */}
+            <div className='flex flex-col items-center w-full lg:w-1/3'>
                 <div
-                    className='  mx-10 my-2 w-80 h-130 border border-white rounded-2xl bg-center bg-cover    
-                         shadow-xl shadow-gray-400 hover:shadow-gray-700 transition-shadow duration-400'
+                    className='w-64 h-96 md:w-80 md:h-120 border border-gray-200 rounded-2xl bg-center bg-cover shadow-xl'
                     style={{backgroundImage: `url(${imagen})`}}>
+                    <h3 className='m-3 text-white font-bold text-xl bg-black/40 rounded-lg w-10 text-center'>
+                        {numero}
+                    </h3>
+                </div>
 
-                        <h3 className=' m-3 text-white font-bold text-2xl bg-gray-400/40 rounded-xl w-12 text-center'>
-                            {numero}
-                        </h3>
-
-                        
-                    </div>
-
-                        <div className='align-center justify-center flex mt-10'>
-                            <button 
-                                className='border-3 rounded-[10px] border-gray-200 p-1 mx-2 my-1 cursor-pointer text-white h-13 w-28
-                                font-semibold text-lg bg-[#5c0202] hover:bg-[#940404] hover:scale-110 transition-background,scale,shadow 
-                                duration-400 shadow-lg hover:shadow-[#940404] shadow-gray-300'>
-                                {button}
-                            </button>
-                            <button 
-                                className='border-3 rounded-[10px] border-gray-200 p-1 mx-2 my-1 cursor-pointer text-white h-13 w-33
-                                font-semibold text-lg bg-purple-900 hover:bg-purple-700 hover:scale-110 transition-background,scale,shadow 
-                                duration-400 shadow-lg hover:shadow-purple-500 shadow-gray-300'>
-                                {button2}
-                            </button>
-                        </div>  
-
-
+                <div className='flex gap-4 mt-6 w-full justify-center'>
+                    <button 
+                        onClick={onEliminarClick}
+                        className='flex-1 max-w-[120px] rounded-xl border-2 border-gray-200 p-2 text-white font-semibold bg-[#5c0202] hover:bg-[#940404] hover:scale-105 transition-all duration-300 shadow-md'>
+                        {button}
+                    </button>
+                    <button 
+                        className='flex-1 max-w-[120px] rounded-xl border-2 border-gray-200 p-2 text-white font-semibold bg-purple-900 hover:bg-purple-700 hover:scale-105 transition-all duration-300 shadow-md'>
+                        {button2}
+                    </button>
+                </div>  
             </div>
-            <div className='w-160 h-160 my-2 mx-10 border-3 border-gray-300 rounded-4xl shadow-lg shadow-gray-400
-             py-5 bg-gray-300/50 hover:shadow-gray-700 transition-shadow duration-400'>
 
-                <h1 className='mb-3 p-1 relative text-5xl font-bold flex text-center justify-center text-gradient-custom '>
+            {/* SECCIÓN DERECHA: Información (Equivalente al formulario) */}
+            <div className='flex-1 w-full flex flex-col gap-4'>
+                <h1 className='text-4xl md:text-5xl font-bold text-gradient-custom text-center lg:text-left'>
                     {nombre}
                 </h1>
-                <div className='flex mx-10 mb-5'>
-                    <p className="relative text-2xl font-bold text-gradient-custom ">
-                        Tipo:
-                    </p>
-                    <p className="relative text-[22px] px-5 ">
-                        {tipo}
-                    </p>
+
+                <div className='flex items-center gap-2 text-xl'>
+                    <span className="font-bold text-gradient-custom">Tipo:</span>
+                    <span>{tipo}</span>
                 </div>
                 
-                <div className='flex my-2 justify-around'>
-                    <div className='mx-2 border-3 border-purple-700 rounded-2xl p-2 flex hover:scale-105 transition-scale,shadow 
-                                duration-400 shadow-lg hover:shadow-purple-500'>
-                        <p className="relative text-xl font-bold m-1">
-                        Ataque:
-                        </p>
-                        <p className="relative m-1 text-xl">
-                            {ataque}
-                        </p>
+                {/* Stats en Grid */}
+                <div className='grid grid-cols-3 gap-2 md:gap-4'>
+                    <div className='border-2 border-purple-800 rounded-xl p-2 text-center hover:shadow-purple-400 shadow-md transition-all'>
+                        <p className="font-bold text-sm md:text-base">Ataque</p>
+                        <p className="text-lg">{ataque}</p>
                     </div>
-                    <div className='mx-2 border-3 border-purple-700 rounded-2xl p-2 flex hover:scale-105 transition-scale,shadow 
-                                duration-400 shadow-lg hover:shadow-purple-500'>
-                        <p className="relative text-xl font-bold m-1">
-                            Defensa:
-                        </p>
-                        <p className="relative m-1 text-xl">
-                            {defensa}
-                        </p>
+                    <div className='border-2 border-purple-800 rounded-xl p-2 text-center hover:shadow-purple-400 shadow-md transition-all'>
+                        <p className="font-bold text-sm md:text-base">Defensa</p>
+                        <p className="text-lg">{defensa}</p>
                     </div>
-                    <div className='mx-2 border-3 border-purple-700 rounded-2xl p-2 flex hover:scale-105 transition-scale,shadow 
-                                duration-400 shadow-lg hover:shadow-purple-500'>
-                        <p className="relative text-xl font-bold m-1">
-                           Vida:
-                        </p>
-                        <p className="relative m-1 text-xl">
-                            {vida}
-                        </p>`
+                    <div className='border-2 border-purple-800 rounded-xl p-2 text-center hover:shadow-purple-400 shadow-md transition-all'>
+                        <p className="font-bold text-sm md:text-base">Vida</p>
+                        <p className="text-lg">{vida}</p>
                     </div>
-                    
                 </div>
 
-                <div className=' mx-5 my-10'>
-                    <p className="relative text-2xl font-bold text-gradient-custom ">
-                        Habilidades Especiales:
-                    </p>
-                    <div className="flex  my-2 text-xl">
-                        <div className='m-2 border-3 border-purple-700 rounded-2xl p-2 flex hover:scale-105 transition-scale,shadow 
-                                duration-400 shadow-lg hover:shadow-purple-500'>
-                            {habilidades_Especiales1}
-                        </div>
-                        <div className='m-2 border-3 border-purple-700 rounded-2xl p-2 flex hover:scale-105 transition-scale,shadow 
-                                duration-400 shadow-lg hover:shadow-purple-500'>
-                            {habilidades_Especiales2}
-                        </div>
-                        <div className='m-2 border-3 border-purple-700 rounded-2xl p-2 flex hover:scale-105 transition-scale,shadow 
-                                duration-400 shadow-lg hover:shadow-purple-500'>
-                            {habilidades_Especiales3}
-                        </div>
-                        
+                {/* Habilidades */}
+                <div className='flex flex-col gap-2'>
+                    <p className="text-xl font-bold text-gradient-custom">Habilidades Especiales:</p>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                        {[habilidades_Especiales1, habilidades_Especiales2, habilidades_Especiales3].map((hab, i) => (
+                            <div key={i} className='border-2 border-purple-700 rounded-xl p-2 text-center text-sm shadow-sm hover:shadow-purple-500 transition-all'>
+                                {hab}
+                            </div>
+                        ))}
                     </div>
                 </div>
-                <div className='flex mx-5 my-10'>
-                    <p className="relative text-2xl font-bold text-gradient-custom ">
-                        Rarezas:
-                    </p>
-                    <p className="relative px-2 text-[22px]">
-                        {rareza}
-                    </p>
+
+                <div className='flex flex-col gap-1'>
+                    <p className="text-xl font-bold text-gradient-custom">Link de Imagen:</p>
+                    <p className="text-sm break-all bg-gray-50 p-2 rounded-lg border border-gray-200">{URL}</p>
                 </div>
 
-                <div className=' mx-5 my-10'>
-                    <p className="relative text-2xl font-bold text-gradient-custom ">
-                        Descripcion:
-                    </p>
-                    <p className="relative px-2 text-[22px]">
-                        {descripcion}
-                    </p>
+                <div className='flex flex-col gap-1'>
+                    <p className="text-xl font-bold text-gradient-custom">Descripción:</p>
+                    <p className="text-base italic text-gray-700 bg-gray-50 p-3 rounded-lg border border-gray-200">{descripcion}</p>
                 </div>
             </div>
 
-            <button  onClick={() => noMostrar2()}
-                className='absolute top-15 right-15 bg-white border-3 border-gray-400/50 rounded-full p-1 m-2
-                cursor-pointer hover:bg-gray-200 hover:scale-115 transition-background,scale duration-400'>
-                <MdClear size={40} color={'#000000'}/>
+            {/* Botón Cerrar */}
+            <button onClick={() => noMostrar2()}
+                className='absolute top-4 right-4 bg-white border-2 border-gray-300 rounded-full p-1 hover:bg-gray-100 transition-all shadow-md z-10'>
+                <MdClear size={30} className="text-black"/>
             </button>
-
         </div>
-
     </div>
-    
   )
 }
-
-export default CartaDetalle
+export default CartaDetalle;
