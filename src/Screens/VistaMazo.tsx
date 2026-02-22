@@ -1,8 +1,6 @@
 import './vistaMazo.css'
 import Carta from "../Components/Carta"
 import { IoAddOutline } from "react-icons/io5";
-import { useState } from 'react'
-
 type TipoDeCarta = {
   numero: number;
   nombre: string;
