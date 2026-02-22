@@ -1,4 +1,4 @@
-import 'src/Screens/VistaDetalle.css'
+import './vistaDetalle.css'
 import CartaDetalle from '../Components/CartaDetalle'
 
 type props ={
