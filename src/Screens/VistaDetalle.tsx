@@ -8,6 +8,15 @@ type props ={
 }
 
 function VistaDetalle({carta, noMostrar, onEliminarDetalle}:props) {
+  if (!carta) {
+    return (
+      <div className='p-8'>
+        <p>No se encontró la carta seleccionada.</p>
+        <button onClick={() => noMostrar()} className='mt-2 px-3 py-1 bg-slate-700 text-white rounded'>Volver</button>
+      </div>
+    );
+  }
+
   return (
     <div >
 

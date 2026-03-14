@@ -5,7 +5,11 @@ import VistaMazo from "./Screens/VistaMazo"
 import VistaDetalle from './Screens/VistaDetalle'
 import VistaCrearCarta from './Screens/VistaCrearCarta';
 
+
+import { Routes, Route, Link, useNavigate } from 'react-router-dom';
+
 function App() {
+  const navigate = useNavigate();
 
   const [mazo, setMazo] = useState([
     {
@@ -46,6 +50,21 @@ function App() {
   const [cartaSeleccionada, setCartaSeleccionada] = useState(false);
   const [mostrarVistaCrear, setMostrarVistaCrear] = useState(false);
 
+  const seleccionarCartaDetalle = (carta: any) => {
+    setCartaSeleccionada(carta);
+    navigate(`/detalle/${carta.numero}`);
+  };
+
+  const navegarCrearCarta = () => {
+    setMostrarVistaCrear(true);
+    navigate(`/crear`);
+  };
+
+  const navegarCerrarCrearCarta = () => {
+    setMostrarVistaCrear(false);
+    navigate(`/`);
+  }
+
   const agregarNuevaCarta = (nuevaCarta: any) => {
 
     const cartaNumero = {
@@ -59,7 +78,7 @@ function App() {
 
   return (
     <div>
-      {
+      {/* {
         !cartaSeleccionada && !mostrarVistaCrear ?
         <VistaMazo 
           mazo={mazo} // Pasamos el mazo del estado de App
@@ -77,8 +96,14 @@ function App() {
             agregarCarta={agregarNuevaCarta}/>
             
             
-      }
-      
+      } */}
+      <main>
+        <Routes>
+          <Route path="/" element={<VistaMazo  mazo={mazo} setMazo={setMazo} seleccionarCarta={setCartaSeleccionada} verDetalle={seleccionarCartaDetalle} mostrarCrear={navegarCrearCarta}/> } />
+          <Route path="/detalle/:numero" element={<VistaDetalle carta={cartaSeleccionada} noMostrar={() => { setCartaSeleccionada(false); navigate('/'); }} onEliminarDetalle={eliminarCartaGlobal} />} />
+          <Route path="/crear" element={<VistaCrearCarta noMostrar={navegarCerrarCrearCarta} agregarCarta={agregarNuevaCarta} />} />
+        </Routes>
+      </main>
       
     </div>
   )

@@ -18,7 +18,8 @@ type TipoDeCarta = {
 
 type props = {
   seleccionarCarta : Function
-  mostrar : Function
+  verDetalle: Function
+  mostrarCrear: Function
   mazo: TipoDeCarta[]; // Recibimos el mazo de App
   setMazo: Function;   // Recibimos el setter de App
   
@@ -26,7 +27,7 @@ type props = {
 
 
 
-function VistaMazo({ seleccionarCarta, mostrar, mazo, setMazo }: props) {
+function VistaMazo({ seleccionarCarta, verDetalle, mostrarCrear, mazo, setMazo }: props) {
 
   const eliminarCarta = (numero: number) => {
     setMazo(mazo.filter(carta => carta.numero !== numero));
@@ -48,6 +49,7 @@ function VistaMazo({ seleccionarCarta, mostrar, mazo, setMazo }: props) {
                 key={carta.numero}
                 {...carta}
                 seleccionarCarta2={seleccionarCarta}
+                verDetalle={() => verDetalle(carta)}
                 button='Eliminar'
                 button2='Detalles'
                 onEliminar={() => eliminarCarta(carta.numero)}
@@ -56,7 +58,7 @@ function VistaMazo({ seleccionarCarta, mostrar, mazo, setMazo }: props) {
           }
         </div>
       </div>
-      <button onClick={() => mostrar()}
+      <button onClick={() => mostrarCrear()}
         className='absolute top-10 right-10 bg-white border-3 border-gray-400/50 rounded-full p-1 m-2
          cursor-pointer hover:bg-gray-200 hover:scale-115 transition-background,scale duration-400'>
         <IoAddOutline size={40} color={'#000000'}/>

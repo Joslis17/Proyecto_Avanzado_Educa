@@ -16,6 +16,7 @@ type props = {
   button: string;
   button2: string;
   seleccionarCarta2: Function,
+  verDetalle?: () => void,
   onEliminar?: () => void // NUEVO: función para eliminar
 }
 
@@ -35,6 +36,7 @@ function Carta({
   button,
   button2,
   seleccionarCarta2,
+  verDetalle,
   onEliminar // NUEVO
 }: props) {
 
@@ -43,7 +45,7 @@ function Carta({
       <div className='w-50 h-90 border border-white rounded-2xl bg-center bg-cover m-5 
       shadow-[0_0_20px_rgba(110,110,110)] hover:shadow-purple-900 
       transition-shadow duration-400 cursor-pointer' 
-      onClick={() => seleccionarCarta2({
+      onClick={() => { seleccionarCarta2({
             imagen,
             numero,
             nombre,
@@ -56,7 +58,9 @@ function Carta({
             habilidades_Especiales1,
             habilidades_Especiales2,
             habilidades_Especiales3,
-          })}
+          })
+          verDetalle?.();
+      }}
             style={{backgroundImage: `url(${imagen})`}}>
 
         <h3 className=' m-3 text-white font-bold text-2xl bg-gray-400/40 rounded-xl w-10 text-center'>
@@ -77,20 +81,23 @@ function Carta({
             >
             {button}
           </button>
-          <button onClick={() => seleccionarCarta2({
-            imagen,
-            numero,
-            nombre,
-            tipo,
-            ataque,
-            defensa,
-            descripcion,
-            vida,
-            URL,
-            habilidades_Especiales1,
-            habilidades_Especiales2,
-            habilidades_Especiales3,
-          })}
+          <button onClick={() => {
+              seleccionarCarta2({
+                imagen,
+                numero,
+                nombre,
+                tipo,
+                ataque,
+                defensa,
+                descripcion,
+                vida,
+                URL,
+                habilidades_Especiales1,
+                habilidades_Especiales2,
+                habilidades_Especiales3,
+              });
+              verDetalle?.();
+            }}
             className='border-3 rounded-[10px] border-gray-200 p-1 mx-2 my-1 cursor-pointer text-white h-11 w-25
               font-semibold text-md bg-purple-900 hover:bg-purple-700 hover:scale-110 transition-background,scale,shadow 
               duration-400 shadow-lg hover:shadow-purple-500 shadow-gray-300'>
