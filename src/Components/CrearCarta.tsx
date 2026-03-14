@@ -3,9 +3,10 @@ import { useState } from 'react';
 
 type CrearCartaProps = {
   agregarCarta: (carta: any) => void;
+  noSeMuestra: Function;
 };
 
-function CrearCarta({ agregarCarta }: CrearCartaProps) {
+function CrearCarta({ agregarCarta, noSeMuestra }: CrearCartaProps) {
   // Cada campo que el usuario va a rellenar:
   const [nombre, setNombre] = useState('');
   const [imagen, setImagen] = useState('');
@@ -92,6 +93,8 @@ const manejarClickCrear = () => {
       URL: imagen,
       descripcion
     });
+
+    noSeMuestra();
   }
 };
 

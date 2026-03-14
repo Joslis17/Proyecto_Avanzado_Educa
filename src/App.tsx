@@ -6,7 +6,7 @@ import VistaDetalle from './Screens/VistaDetalle'
 import VistaCrearCarta from './Screens/VistaCrearCarta';
 
 
-import { Routes, Route, Link, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 
 function App() {
   const navigate = useNavigate();
@@ -62,6 +62,7 @@ function App() {
 
   const navegarCerrarCrearCarta = () => {
     setMostrarVistaCrear(false);
+    mostrarVistaCrear;
     navigate(`/`);
   }
 

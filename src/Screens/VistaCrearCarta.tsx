@@ -12,7 +12,8 @@ function VistaCrearCarta({noMostrar, agregarCarta}:props) {
   return (
     <div>
         <CrearCarta 
-        agregarCarta={agregarCarta}
+        agregarCarta={agregarCarta} 
+        noSeMuestra={noMostrar}
         />
 
         <button  onClick={() => noMostrar()}
