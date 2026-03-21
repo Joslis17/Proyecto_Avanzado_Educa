@@ -2,35 +2,34 @@ import './vistaMazo.css'
 import Carta from "../Components/Carta"
 import { IoAddOutline } from "react-icons/io5";
 type TipoDeCarta = {
-  numero: number;
-  nombre: string;
-  imagen: string;
-  tipo: string;
-  ataque: number;
-  defensa: number;
-  vida: number;
-  habilidades_Especiales1: string;
-  habilidades_Especiales2: string;
-  habilidades_Especiales3: string;
-  URL: string;
-  descripcion: string;
+  idCard: string;
+  name: string;
+  pictureUrl: string;
+  attack: number;
+  defense: number;
+  lifePoints: number;
+  attributes: {
+    habilidades_Especiales1: string;
+    habilidades_Especiales2: string;
+    habilidades_Especiales3: string;
+    tipo: string;
+  }
+  description: string;
 }
 
 type props = {
-  seleccionarCarta : Function
+  seleccionarCarta: Function
   verDetalle: Function
   mostrarCrear: Function
   mazo: TipoDeCarta[]; // Recibimos el mazo de App
   setMazo: Function;   // Recibimos el setter de App
-  
+
 }
-
-
 
 function VistaMazo({ seleccionarCarta, verDetalle, mostrarCrear, mazo, setMazo }: props) {
 
-  const eliminarCarta = (numero: number) => {
-    setMazo(mazo.filter(carta => carta.numero !== numero));
+  const eliminarCarta = (numero: string) => {
+    setMazo(mazo.filter(carta => carta.idCard !== numero));
   };
 
   return (
@@ -44,15 +43,15 @@ function VistaMazo({ seleccionarCarta, verDetalle, mostrarCrear, mazo, setMazo }
       <div className='flex items-center justify-center'>
         <div className=' flex p-1.5 gap-5 m-3 ' >
           {
-            mazo.map(carta  => (
+            mazo.map(carta => (
               <Carta
-                key={carta.numero}
-                {...carta}
+                key={carta.idCard}
+                carta={carta}
                 seleccionarCarta2={seleccionarCarta}
                 verDetalle={() => verDetalle(carta)}
                 button='Eliminar'
                 button2='Detalles'
-                onEliminar={() => eliminarCarta(carta.numero)}
+                onEliminar={() => eliminarCarta(carta.idCard)}
               />
             ))
           }
@@ -61,7 +60,7 @@ function VistaMazo({ seleccionarCarta, verDetalle, mostrarCrear, mazo, setMazo }
       <button onClick={() => mostrarCrear()}
         className='absolute top-10 right-10 bg-white border-3 border-gray-400/50 rounded-full p-1 m-2
          cursor-pointer hover:bg-gray-200 hover:scale-115 transition-background,scale duration-400'>
-        <IoAddOutline size={40} color={'#000000'}/>
+        <IoAddOutline size={40} color={'#000000'} />
       </button>
     </div>
   )

@@ -4,7 +4,7 @@ import CartaDetalle from '../Components/CartaDetalle'
 type props ={
   carta: any
   noMostrar:Function
-  onEliminarDetalle: (numero: number) => void;
+  onEliminarDetalle: (idCard: string) => void;
 }
 
 function VistaDetalle({carta, noMostrar, onEliminarDetalle}:props) {
@@ -23,19 +23,19 @@ function VistaDetalle({carta, noMostrar, onEliminarDetalle}:props) {
       
       <CartaDetalle
         noMostrar2={noMostrar}
-        onEliminarClick ={() => onEliminarDetalle(carta.numero)}
-        numero={carta.numero}
-        nombre={carta.nombre}
-        imagen={carta.imagen}
-        tipo={carta.tipo}
-        ataque={carta.ataque}
-        defensa={carta.defensa}
-        vida={carta.vida}
-        descripcion={carta.descripcion}
-        habilidades_Especiales1 = {carta.habilidades_Especiales1}
-        habilidades_Especiales2 = {carta.habilidades_Especiales2}
-        habilidades_Especiales3 = {carta.habilidades_Especiales3}
-        URL={carta.URL}
+        onEliminarClick ={() => onEliminarDetalle(carta.idCard)}
+        numero={carta.idCard}
+        nombre={carta.name}
+        imagen={carta.pictureUrl}
+        tipo={carta.attributes.tipo}
+        ataque={carta.attack}
+        defensa={carta.defense}
+        vida={carta.lifePoints}
+        descripcion={carta.description}
+        habilidades_Especiales1 = {carta.attributes.habilidades_Especiales1}
+        habilidades_Especiales2 = {carta.attributes.habilidades_Especiales2}
+        habilidades_Especiales3 = {carta.attributes.habilidades_Especiales3}
+        URL={carta.pictureUrl}
         button='Eliminar'
         button2='Editar'
       />

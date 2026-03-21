@@ -76,7 +76,7 @@ function CrearCarta({ agregarCarta, noSeMuestra }: CrearCartaProps) {
     return formularioValido;
 };
 
-const manejarClickCrear = () => {
+const manejarClickCrear = async () => {
   const esValido = validacionCarta();
 
   if (esValido) {
@@ -95,7 +95,29 @@ const manejarClickCrear = () => {
     });
 
     noSeMuestra();
+    
   }
+  let urlAPI = 'https://educapi-v2.onrender.com/card';
+
+    const respuesta = await fetch(urlAPI,{
+      method: 'POST', 
+      headers: {
+        //Josl998465OS
+        usersecretpasskey:'Josl998465OS',
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name :nombre,
+        description: descripcion,
+        attack: ataque,
+        defense: defensa,
+        lifePoints: vida,
+        pictureUrl: imagen,
+        attributes: {tipo: tipo, habilidad1: habilidad1, habilidad2: habilidad2, habilidad3: habilidad3}
+      })
+
+    });
+
 };
 
   return (

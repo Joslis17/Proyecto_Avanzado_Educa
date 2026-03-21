@@ -1,18 +1,24 @@
 import './carta.css'
 
+type TipoDeCarta = {
+  idCard: string;
+  name: string;
+  pictureUrl: string;
+  attack: number;
+  defense: number;
+  lifePoints: number;
+  attributes: {
+    habilidades_Especiales1: string;
+    habilidades_Especiales2: string;
+    habilidades_Especiales3: string;
+    tipo: string;
+  }
+  description: string;
+}
+
+
 type props = {
-  numero: number;
-  nombre: string;
-  imagen: string; 
-  tipo: string;
-  ataque?: number;
-  defensa: number;
-  descripcion: string;
-  vida: number;
-  URL?: string;
-  habilidades_Especiales1:string,
-  habilidades_Especiales2: string,
-  habilidades_Especiales3:string,
+  carta: TipoDeCarta;
   button: string;
   button2: string;
   seleccionarCarta2: Function,
@@ -21,18 +27,7 @@ type props = {
 }
 
 function Carta({
-  imagen,
-  nombre,
-  numero,
-  tipo,
-  ataque,
-  defensa,
-  descripcion,
-  vida,
-  URL,
-  habilidades_Especiales1,
-  habilidades_Especiales2,
-  habilidades_Especiales3,
+  carta,
   button,
   button2,
   seleccionarCarta2,
@@ -46,29 +41,29 @@ function Carta({
       shadow-[0_0_20px_rgba(110,110,110)] hover:shadow-purple-900 
       transition-shadow duration-400 cursor-pointer' 
       onClick={() => { seleccionarCarta2({
-            imagen,
-            numero,
-            nombre,
-            tipo,
-            ataque,
-            defensa,
-            descripcion,
-            vida,
-            URL,
-            habilidades_Especiales1,
-            habilidades_Especiales2,
-            habilidades_Especiales3,
+            imagen: carta.pictureUrl,
+            numero: carta.idCard,
+            nombre: carta.name,
+            tipo: carta.attributes.tipo,
+            ataque: carta.attack,
+            defensa: carta.defense,
+            descripcion: carta.description,
+            vida: carta.lifePoints,
+            URL: carta.pictureUrl,
+            habilidades_Especiales1: carta.attributes.habilidades_Especiales1,
+            habilidades_Especiales2: carta.attributes.habilidades_Especiales2,
+            habilidades_Especiales3: carta.attributes.habilidades_Especiales3,
           })
           verDetalle?.();
       }}
-            style={{backgroundImage: `url(${imagen})`}}>
+            style={{backgroundImage: `url(${carta.pictureUrl})`}}>
 
         <h3 className=' m-3 text-white font-bold text-2xl bg-gray-400/40 rounded-xl w-10 text-center'>
-          {numero}
+          {carta.idCard}
         </h3>
 
         <h3 className='text-center text-white font-bold mt-65 text-2xl bg-gray-400/40 '>
-        {nombre}
+        {carta.name}
         </h3>
       </div>
 
@@ -83,18 +78,18 @@ function Carta({
           </button>
           <button onClick={() => {
               seleccionarCarta2({
-                imagen,
-                numero,
-                nombre,
-                tipo,
-                ataque,
-                defensa,
-                descripcion,
-                vida,
-                URL,
-                habilidades_Especiales1,
-                habilidades_Especiales2,
-                habilidades_Especiales3,
+                imagen: carta.pictureUrl,
+                numero: carta.idCard,
+                nombre: carta.name,
+                tipo: carta.attributes.tipo,
+                ataque: carta.attack,
+                defensa: carta.defense,
+                descripcion: carta.description,
+                vida: carta.lifePoints,
+                URL: carta.pictureUrl,
+                habilidades_Especiales1: carta.attributes.habilidades_Especiales1,
+                habilidades_Especiales2: carta.attributes.habilidades_Especiales2,
+                habilidades_Especiales3: carta.attributes.habilidades_Especiales3,
               });
               verDetalle?.();
             }}
