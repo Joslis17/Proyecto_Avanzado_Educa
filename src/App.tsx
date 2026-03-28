@@ -12,53 +12,7 @@ import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 
 function App() {
 
-  const [mazo, setMazo] = useState<any[]>([
-  {
-    idCard: "1", name: "El Payaso it", pictureUrl: "https://dmn-dallas-news-prod.cdn.arcpublishing.com/resizer/v2/DLG2TE7OJQIEWY27KKDLAGNKC4.jpg?auth=d706ae708ec1ad6c11d309b3a45da12566762a48596fd3b71b5e109be6ed78e7&quality=80&width=1200&height=1200&smart=true",
-    attributes: {
-      tipo: "Entidad Cosmica",
-      habilidades_Especiales1: "Puede cambiar de forma.",
-      habilidades_Especiales2: 'Manipular la realidad',
-      habilidades_Especiales3: 'Regeneracion casi Ilimitada'
-    },
-    attack: 70, defense: 55, lifePoints: 100,
-    description: "Un payaso terrorífico que se alimenta del miedo, y crea ilusiones muy reales para atrapar a sus víctimas."
-  },
-  {
-    idCard: "2", name: "La Monja", pictureUrl: "https://i.pinimg.com/736x/28/0f/7c/280f7ca3d1a22c208a2798e2b2bdf4a8.jpg",
-    attributes: {
-      tipo: 'Demonio Alto Nivel',
-      habilidades_Especiales1: 'Control Sobre la Oscuridad',
-      habilidades_Especiales2: 'Posee humanos y objetos',
-      habilidades_Especiales3: 'Invoca precencia menores'
-    },
-    attack: 100, defense: 90, lifePoints: 100,
-    description: 'Es un demonio que disfruta atormentar a sus víctimas, Puede moverse entre sombras y alterar la realidad '
-  },
-  {
-    idCard: "3", name: "Anabelle", pictureUrl: "https://m.media-amazon.com/images/I/51SQvcfnZSL.jpg",
-    attributes: {
-      tipo: 'Entidad Demoniaca',
-      habilidades_Especiales1: 'Mover Objetos.',
-      habilidades_Especiales2: 'Povoca sucesos paranormales',
-      habilidades_Especiales3: 'Atrae entidades demoniacas'
-    },
-    attack: 80, defense: 85, lifePoints: 100,
-    description: 'Una muñeca poseída por una entidad demoníaca que utiliza el miedo y la desesperación para debilitar a sus víctimas.'
-  },
-  {
-    idCard: "4", name: "Freddy Krueger", pictureUrl: "https://i.pinimg.com/170x/40/b1/ae/40b1aec0ebdb40f8900c1dcdc541e562.jpg",
-    attributes: {
-      tipo: 'Entidad Demoniaca',
-      habilidades_Especiales1: 'Controla los sueños',
-      habilidades_Especiales2: 'Lastima físicamente',
-      habilidades_Especiales3: 'Cuchillas en sus guantes'
-    },
-    attack: 50, defense: 45, lifePoints: 100,
-    description: 'Un espíritu vengativo que habita en los sueños, donde tiene un poder ilimitado. Usa su guante de cuchillas para atacarlas.'
-  }
-  ]);
-
+  const [mazo, setMazo] = useState<any[]>([]);
 
   const navigate = useNavigate();
   const location = useLocation(); // 2. Obtener la ubicación actual
@@ -96,7 +50,7 @@ function App() {
           'usersecretpasskey': 'Josl998465OS',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(datosActualizados)
+        body: JSON.stringify({ name: datosActualizados.name, description: datosActualizados.description, pictureUrl: datosActualizados.pictureUrl, attack: datosActualizados.attack, defense: datosActualizados.defense, lifePoints: datosActualizados.lifePoints, attributes: { tipo: datosActualizados.attributes.tipo, habilidades_Especiales1: datosActualizados.attributes.habilidades_Especiales1, habilidades_Especiales2: datosActualizados.attributes.habilidades_Especiales2, habilidades_Especiales3: datosActualizados.attributes.habilidades_Especiales3 } })
       });
         
         const resultado = await respuesta.json();
