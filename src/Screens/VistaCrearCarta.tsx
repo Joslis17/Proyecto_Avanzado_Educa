@@ -9,6 +9,7 @@ type props = {
 }
 
 function VistaCrearCarta({noMostrar, agregarCarta}:props) {
+  
   return (
     <div>
         <CrearCarta 

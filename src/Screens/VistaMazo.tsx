@@ -21,17 +21,18 @@ type props = {
   seleccionarCarta: Function
   verDetalle: Function
   mostrarCrear: Function
-  mazo: TipoDeCarta[]; // Recibimos el mazo de App
+  mazo: TipoDeCarta[] // Recibimos el mazo de App
   setMazo: Function;   // Recibimos el setter de App
+  eliminarCarta: Function; // Recibimos la función de eliminación de App
 
 }
 
-function VistaMazo({ seleccionarCarta, verDetalle, mostrarCrear, mazo, setMazo }: props) {
-
-  const eliminarCarta = (numero: string) => {
+function VistaMazo({ seleccionarCarta, verDetalle, mostrarCrear, mazo, setMazo, eliminarCarta }: props) {
+  
+  const eliminarCarta2 = (numero: string) => {
     setMazo(mazo.filter(carta => carta.idCard !== numero));
   };
-
+  
   return (
     <div >
       <h1 className='text-gradient-custom mt-2 p-2 text-5xl font-sans font-bold flex text-center justify-center'>
@@ -51,7 +52,8 @@ function VistaMazo({ seleccionarCarta, verDetalle, mostrarCrear, mazo, setMazo }
                 verDetalle={() => verDetalle(carta)}
                 button='Eliminar'
                 button2='Detalles'
-                onEliminar={() => eliminarCarta(carta.idCard)}
+                onEliminar={() => {eliminarCarta(carta.idCard), eliminarCarta2(carta.idCard)}
+                }
               />
             ))
           }

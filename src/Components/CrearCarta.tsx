@@ -8,36 +8,36 @@ type CrearCartaProps = {
 
 function CrearCarta({ agregarCarta, noSeMuestra }: CrearCartaProps) {
   // Cada campo que el usuario va a rellenar:
-  const [nombre, setNombre] = useState('');
-  const [imagen, setImagen] = useState('');
+  const [name, setName] = useState('');
+  const [pictureUrl, setPictureUrl] = useState('');
   const [tipo, setTipo] = useState("");
-  const [ataque, setAtaque] = useState(0);
-  const [defensa, setDefensa] = useState(0);
-  const [vida, setVida] = useState(0);
+  const [attack, setAttack] = useState(0);
+  const [defense, setDefense] = useState(0);
+  const [lifePoints, setLifePoints] = useState(0);
   const [habilidad1, setHabilidad1] = useState('');
   const [habilidad2, setHabilidad2] = useState('');
   const [habilidad3, setHabilidad3] = useState('');
-  const [descripcion, setDescripcion] = useState('');
+  const [description, setDescription] = useState('');
 
-  const [nombreError, setNombreError] = useState('');
-  const [imagenError, setImagenError] = useState('');
+  const [nameError, setNameError] = useState('');
+  const [pictureUrlError, setPictureUrlError] = useState('');
   const [tipoError, setTipoError] = useState('');
-  const [ataqueError, setAtaqueError] = useState('');
-  const [defensaError, setDefensaError] = useState('');
-  const [vidaError, setVidaError] = useState('');
+  const [attackError, setAttackError] = useState('');
+  const [defenseError, setDefenseError] = useState('');
+  const [lifePointsError, setLifePointsError] = useState('');
   const [habilidad1Error, setHabilidad1Error] = useState('');
   const [habilidad2Error, setHabilidad2Error] = useState('');
   const [habilidad3Error, setHabilidad3Error] = useState('');
-  const [descripcionError, setDescripcionError] = useState('');
+  const [descriptionError, setDescriptionError] = useState('');
 
   const validacionCarta = () => {
-    setNombreError('');
+    setNameError('');
     setTipoError('');
-    setAtaqueError('');
-    setDefensaError('');
-    setVidaError('');
-    setDescripcionError('');
-    setImagenError('');
+    setAttackError('');
+    setDefenseError('');
+    setLifePointsError('');
+    setDescriptionError('');
+    setPictureUrlError('');
     setHabilidad1Error('');
     setHabilidad2Error('');
     setHabilidad3Error('');
@@ -46,27 +46,27 @@ function CrearCarta({ agregarCarta, noSeMuestra }: CrearCartaProps) {
 
 // Validación usando operadores ternarios
   // NOMBRES Y TIPOS
-  nombre === "" ? (setNombreError("El nombre es obligatorio"), formularioValido = false) : setNombreError("");
+  name === "" ? (setNameError("El nombre es obligatorio"), formularioValido = false) : setNameError("");
   tipo === "" ? (setTipoError("El tipo es obligatorio"), formularioValido = false) : setTipoError("");
 
   // ATAQUE
-  Number(ataque) <= 0 || isNaN(Number(ataque)) 
-    ? (setAtaqueError("El ataque debe ser mayor a 0"), formularioValido = false) 
-    : setAtaqueError("");
+  Number(attack) <= 0 || isNaN(Number(attack)) 
+    ? (setAttackError("El ataque debe ser mayor a 0"), formularioValido = false) 
+    : setAttackError("");
 
   // DEFENSA (Aquí estaba el error, el false estaba fuera)
-  Number(defensa) <= 0 || isNaN(Number(defensa)) 
-    ? (setDefensaError("La defensa debe ser mayor a 0"), formularioValido = false) 
-    : setDefensaError("");
+  Number(defense) <= 0 || isNaN(Number(defense)) 
+    ? (setDefenseError("La defensa debe ser mayor a 0"), formularioValido = false) 
+    : setDefenseError("");
 
   // VIDA (Aquí también estaba el error)
-  Number(vida) <= 0 || isNaN(Number(vida)) 
-    ? (setVidaError("La vida debe ser mayor a 0"), formularioValido = false) 
-    : setVidaError("");
+  Number(lifePoints) <= 0 || isNaN(Number(lifePoints)) 
+    ? (setLifePointsError("La vida debe ser mayor a 0"), formularioValido = false) 
+    : setLifePointsError("");
 
   // DESCRIPCIÓN E IMAGEN
-  descripcion === "" ? (setDescripcionError("La descripción es obligatoria"), formularioValido = false) : setDescripcionError("");
-  imagen === "" ? (setImagenError("La URL es obligatoria"), formularioValido = false) : setImagenError("");
+  description === "" ? (setDescriptionError("La descripción es obligatoria"), formularioValido = false) : setDescriptionError("");
+  pictureUrl === "" ? (setPictureUrlError("La URL es obligatoria"), formularioValido = false) : setPictureUrlError("");
 
   // HABILIDADES
   habilidad1 === "" ? (setHabilidad1Error("Obligatoria"), formularioValido = false) : setHabilidad1Error("");
@@ -75,49 +75,45 @@ function CrearCarta({ agregarCarta, noSeMuestra }: CrearCartaProps) {
 
     return formularioValido;
 };
-
 const manejarClickCrear = async () => {
   const esValido = validacionCarta();
 
   if (esValido) {
-    agregarCarta({
-      nombre,
-      imagen,
-      tipo,
-      ataque,
-      defensa,
-      vida,
-      habilidades_Especiales1: habilidad1,
-      habilidades_Especiales2: habilidad2,
-      habilidades_Especiales3: habilidad3,
-      URL: imagen,
-      descripcion
-    });
+    const nuevaCartaRaw = {
+      name: name,
+      description: description,
+      attack: attack,
+      defense: defense,
+      lifePoints: lifePoints,
+      pictureUrl: pictureUrl,
+      attributes: { 
+        tipo, 
+        // Cambiamos los nombres aquí para que coincidan con el mazo
+        habilidades_Especiales1: habilidad1, 
+        habilidades_Especiales2: habilidad2, 
+        habilidades_Especiales3: habilidad3 
+      }
+    };
 
-    noSeMuestra();
-    
+    let urlAPI = 'https://educapi-v2.onrender.com/card';
+
+      const respuesta = await fetch(urlAPI, {
+        method: 'POST',
+        headers: {
+          'usersecretpasskey': 'Josl998465OS',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(nuevaCartaRaw)
+      });
+
+      const resultado = await respuesta.json();
+
+      if (respuesta.ok) {
+        // Usamos el objeto que nos devuelve la API (que ya trae su ID real)
+        agregarCarta(resultado.data); 
+        noSeMuestra(); // Esto navega a la pantalla principal
+      } 
   }
-  let urlAPI = 'https://educapi-v2.onrender.com/card';
-
-    const respuesta = await fetch(urlAPI,{
-      method: 'POST', 
-      headers: {
-        //Josl998465OS
-        usersecretpasskey:'Josl998465OS',
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        name :nombre,
-        description: descripcion,
-        attack: ataque,
-        defense: defensa,
-        lifePoints: vida,
-        pictureUrl: imagen,
-        attributes: {tipo: tipo, habilidad1: habilidad1, habilidad2: habilidad2, habilidad3: habilidad3}
-      })
-
-    });
-
 };
 
   return (
@@ -150,11 +146,11 @@ const manejarClickCrear = async () => {
 
                   <input type="text" placeholder='Ingresa el nombre' 
                   className='text-center mx-2 mb-2 p-1 w-full border rounded-lg border-gray-400 hover:bg-gray-50'
-                  value={nombre} onChange={(e) => setNombre(e.target.value)} />
+                  value={name} onChange={(e) => setName(e.target.value)} />
 
                 </div>
                 
-                {nombreError && <p className="text-red-500 text-[12px] text-center italic">{nombreError}</p>}
+                {nameError && <p className="text-red-500 text-[12px] text-center italic">{nameError}</p>}
 
               </div>
 
@@ -186,10 +182,10 @@ const manejarClickCrear = async () => {
                   
                   <input type="number"
                   className='text-center p-1 w-16 border rounded-lg border-gray-400 hover:bg-gray-50'
-                  value={ataque} onChange={(e) => setAtaque(Number(e.target.value))} />
+                  value={attack} onChange={(e) => setAttack(Number(e.target.value))} />
 
                 </div>
-                  {ataqueError && <p className="text-red-500 text-[11px] text-center italic">{ataqueError}</p>}
+                  {attackError && <p className="text-red-500 text-[11px] text-center italic">{attackError}</p>}
               </div>
 
               <div className='p-2 border-2 border-purple-800 rounded-2xl hover:scale-[1.02] transition-transform duration-400 shadow-lg hover:shadow-purple-500'>
@@ -199,10 +195,10 @@ const manejarClickCrear = async () => {
                   
                   <input type="number"
                   className='text-center p-1 w-16 border rounded-lg border-gray-400 hover:bg-gray-50'
-                  value={defensa} onChange={(e) => setDefensa(Number(e.target.value))} />
+                  value={defense} onChange={(e) => setDefense(Number(e.target.value))} />
 
                 </div>
-                  {defensaError && <p className="text-red-500 text-[11px] text-center italic">{defensaError}</p>}
+                  {defenseError && <p className="text-red-500 text-[11px] text-center italic">{defenseError}</p>}
               </div>
               
 
@@ -213,10 +209,10 @@ const manejarClickCrear = async () => {
                   
                   <input type="number"
                   className='text-center p-1 w-16 border rounded-lg border-gray-400 hover:bg-gray-50'
-                  value={vida} onChange={(e) => setVida(Number(e.target.value))} />
+                  value={lifePoints} onChange={(e) => setLifePoints(Number(e.target.value))} />
 
                 </div>
-                  {vidaError && <p className="text-red-500 text-[11px] text-center italic">{vidaError}</p>}
+                  {lifePointsError && <p className="text-red-500 text-[11px] text-center italic">{lifePointsError}</p>}
               </div>
             </div>
 
@@ -264,8 +260,8 @@ const manejarClickCrear = async () => {
                 
                 <input type="text" placeholder='URL de imagen' 
                 className='text-center p-1 w-full border rounded-lg border-gray-400 hover:bg-gray-50'
-                value={imagen} onChange={(e) => setImagen(e.target.value)} />
-                {imagenError && <p className="text-red-500 text-[12px] text-center italic">{imagenError}</p>}
+                value={pictureUrl} onChange={(e) => setPictureUrl(e.target.value)} />
+                {pictureUrlError && <p className="text-red-500 text-[12px] text-center italic">{pictureUrlError}</p>}
 
               </div>
 
@@ -275,8 +271,8 @@ const manejarClickCrear = async () => {
                 
                 <input type="text" placeholder='Breve descripción' 
                 className='text-center p-1 w-full border rounded-lg border-gray-400 hover:bg-gray-50'
-                value={descripcion} onChange={(e) => setDescripcion(e.target.value)} />
-                {descripcionError && <p className="text-red-500 text-[12px] text-center italic">{descripcionError}</p>}
+                value={description} onChange={(e) => setDescription(e.target.value)} />
+                {descriptionError && <p className="text-red-500 text-[12px] text-center italic">{descriptionError}</p>}
 
               </div>
 
