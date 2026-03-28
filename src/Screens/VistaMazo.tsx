@@ -41,8 +41,8 @@ function VistaMazo({ seleccionarCarta, verDetalle, mostrarCrear, mazo, setMazo, 
       <h2 className='flex text-center justify-center p-2 font-sans text-2xl font-medium border-b-3 border-gray-200 '>
         Mi Mazo de Cartas Terrorificas
       </h2>
-      <div className='flex items-center justify-center'>
-        <div className=' flex p-1.5 gap-5 m-3 ' >
+      <div className='flex justify-center max-w-8xl'>
+        <div className=' flex flex-wrap justify-center p-2 gap-10 m-3  max-w-8xl' >
           {
             mazo.map(carta => (
               <Carta
