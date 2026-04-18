@@ -11,10 +11,6 @@ type Props = {
 function VistaEditar({ carta, onEditar }: Props) {
   const navigate = useNavigate();
 
-  if (!carta) {
-    return (  navigate('/') );
-  }
-
   return (
     <div className='min-h-screen flex items-center justify-center p-4 bg-gray-200 backdrop-blur-sm fixed inset-0 z-50'>
       <CartaEditar 

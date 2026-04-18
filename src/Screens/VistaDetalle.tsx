@@ -1,6 +1,5 @@
 import './vistaDetalle.css'
 import CartaDetalle from '../Components/CartaDetalle'
-import { useNavigate } from 'react-router-dom';
 
 type props ={
   carta: any
@@ -9,11 +8,8 @@ type props ={
 }
 
 function VistaDetalle({carta, noMostrar, onEliminarDetalle}:props) {
-
-    const navigate = useNavigate();
-
   if (!carta) {
-    return (  navigate('/') );
+    return (noMostrar());
   }
 
   return (
