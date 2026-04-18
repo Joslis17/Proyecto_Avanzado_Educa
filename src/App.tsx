@@ -12,7 +12,8 @@ import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 
 function App() {
 
-  const [mazo, setMazo] = useState<any[]>([]);
+  const [mazo, setMazo] = useState<any[]>([])
+  const [seleccionadas, setSeleccionadas] = useState<string[]>([]);
 
   const navigate = useNavigate();
   const location = useLocation(); // 2. Obtener la ubicación actual
@@ -39,7 +40,23 @@ function App() {
     getCarta();
   }, [location]);
 
+  const toggleSeleccion = (id: string) => {
+    setSeleccionadas(prev => 
+      prev.includes(id) 
+        ? prev.filter(item => item !== id) // Si ya está, la quitamos
+        : [...prev, id] // Si no está, la agregamos
+    );
+  };
 
+  const manejarPelea = () => {
+    if (seleccionadas.length !== 2) {
+      alert("⚠️ Error: Debes seleccionar exactamente dos cartas para iniciar una pelea.");
+    } else {
+      const cartasPeleando = mazo.filter(c => seleccionadas.includes(c.idCard));
+      alert(`⚔️ ¡Iniciando duelo entre ${cartasPeleando[0].name} y ${cartasPeleando[1].name}!`);
+      // Aquí podrías navegar a una pantalla de combate si la tienes
+    }
+  };
 
   const editarCartaGlobal = async (idCard: string, datosActualizados: any) => {
     
@@ -82,6 +99,7 @@ function App() {
 
     if (respuesta.status === 200 || respuesta.status === 204) {
       setMazo(mazo.filter(carta => carta.idCard !== numero));
+      setSeleccionadas(seleccionadas.filter(id => id !== numero));
       navigate('/');
     }
   };
@@ -117,10 +135,33 @@ function App() {
 
   return (
     <div>
-
       <main>
+        {/* El botón ahora aparece si hay al menos 1 carta, pero valida al hacer click */}
+        {seleccionadas.length > 0 && (
+          <button
+            className={`fixed top-5 right-40 text-white font-bold py-3 px-6 rounded-2xl border-gray-200 shadow-2xl z-50 transition-all duration-300
+              ${seleccionadas.length === 2 
+                ? 'bg-purple-900 hover:bg-purple-700 hover:scale-110 hover:shadow-purple-500' 
+                : ' bg-[#5c0202] hover:bg-[#940404] hover:scale-110'}`}
+            onClick={manejarPelea}
+          >
+            {seleccionadas.length === 2 ? '¡PELEAR AHORA!' : `SELECCIONADAS: ${seleccionadas.length}`}
+          </button>
+        )}
+
         <Routes>
-          <Route path="/" element={<VistaMazo  mazo={mazo} setMazo={setMazo} seleccionarCarta={setCartaSeleccionada} verDetalle={seleccionarCartaDetalle} mostrarCrear={navegarCrearCarta} eliminarCarta={eliminarCartaGlobal} />} />
+          <Route path="/" element={
+            <VistaMazo  
+              mazo={mazo} 
+              setMazo={setMazo} 
+              seleccionarCarta={setCartaSeleccionada} 
+              verDetalle={(c: any) => { setCartaSeleccionada(c); navigate(`/detalle/${c.idCard}`); }} 
+              mostrarCrear={() => navigate('/crear')} 
+              eliminarCarta={eliminarCartaGlobal}
+              seleccionadas={seleccionadas}
+              toggleSeleccion={toggleSeleccion}
+            />
+          } />
           <Route path="/detalle/:numero" element={<VistaDetalle carta={cartaSeleccionada} noMostrar={() => { setCartaSeleccionada(false); navigate('/'); }} onEliminarDetalle={eliminarCartaGlobal} />} />
           <Route path="/crear" element={<VistaCrearCarta noMostrar={navegarCerrarCrearCarta} agregarCarta={agregarNuevaCarta} />} />
           <Route path="/editar/:numero" element={<VistaEditar carta={cartaSeleccionada} onEditar={editarCartaGlobal} />} />

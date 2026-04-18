@@ -12,12 +12,7 @@ function VistaEditar({ carta, onEditar }: Props) {
   const navigate = useNavigate();
 
   if (!carta) {
-    return (
-        // Fondo oscuro también para el mensaje de carga
-        <div className="min-h-screen flex items-center justify-center bg-gray-200 backdrop-blur-sm fixed inset-0 z-50 text-white text-xl">
-            Cargando datos para editar...
-        </div>
-    );
+    return (  navigate('/') );
   }
 
   return (
