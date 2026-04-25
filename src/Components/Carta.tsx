@@ -52,7 +52,7 @@ const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
       setIsPressing(false);
       setShowFeedback(false);
       setBlockClick(true);
-    }, 5000);
+    }, 2000);
   };
 
   // Cancelar si se suelta antes de tiempo
