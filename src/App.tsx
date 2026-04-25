@@ -155,8 +155,8 @@ function App() {
               mazo={mazo} 
               setMazo={setMazo} 
               seleccionarCarta={setCartaSeleccionada} 
-              verDetalle={(c: any) => { setCartaSeleccionada(c); navigate(`/detalle/${c.idCard}`); }} 
-              mostrarCrear={() => navigate('/crear')} 
+              verDetalle={seleccionarCartaDetalle} 
+              mostrarCrear={navegarCrearCarta} 
               eliminarCarta={eliminarCartaGlobal}
               seleccionadas={seleccionadas}
               toggleSeleccion={toggleSeleccion}
