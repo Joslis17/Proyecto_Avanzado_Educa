@@ -178,11 +178,12 @@ const manejarClickCrear = async () => {
               <div className='p-2 border-2 border-purple-800 rounded-2xl hover:scale-[1.02] transition-transform duration-400 shadow-lg hover:shadow-purple-500'>
                 <div className='flex-1 flex items-center justify-center '>
 
-                  <h2 className='text-sm font-semibold mr-2'>Ataque:</h2>
+                  <h2 className='text-sm font-semibold mr-2'>Ataque (min 100, max 500):</h2>
                   
                   <input type="number"
                   className='text-center p-1 w-16 border rounded-lg border-gray-400 hover:bg-gray-50'
-                  value={attack} onChange={(e) => setAttack(Number(e.target.value))} />
+                  value={attack} onChange={(e) => setAttack(Number(e.target.value))} 
+                  onBlur={(e) => setAttack(Math.max(100, Math.min(500, Number(e.target.value))))} />
 
                 </div>
                   {attackError && <p className="text-red-500 text-[11px] text-center italic">{attackError}</p>}
@@ -191,11 +192,12 @@ const manejarClickCrear = async () => {
               <div className='p-2 border-2 border-purple-800 rounded-2xl hover:scale-[1.02] transition-transform duration-400 shadow-lg hover:shadow-purple-500'>
                 <div className='flex-1 flex items-center justify-center '>
 
-                  <h2 className='text-sm font-semibold mr-2'>Defensa:</h2>
+                  <h2 className='text-sm font-semibold mr-2'>Defensa (min 300, max 500):</h2>
                   
                   <input type="number"
                   className='text-center p-1 w-16 border rounded-lg border-gray-400 hover:bg-gray-50'
-                  value={defense} onChange={(e) => setDefense(Number(e.target.value))} />
+                  value={defense} onChange={(e) => setDefense(Number(e.target.value))} 
+                  onBlur={(e) => setDefense(Math.max(300, Math.min(500, Number(e.target.value))))} />
 
                 </div>
                   {defenseError && <p className="text-red-500 text-[11px] text-center italic">{defenseError}</p>}
@@ -205,11 +207,12 @@ const manejarClickCrear = async () => {
               <div className='p-2 border-2 border-purple-800 rounded-2xl hover:scale-[1.02] transition-transform duration-400 shadow-lg hover:shadow-purple-500'>
                 <div className='flex-1 flex items-center justify-center '>
 
-                  <h2 className='text-sm font-semibold mr-2'>Vida:</h2>
+                  <h2 className='text-sm font-semibold mr-2'>Vida (min 60,max 100):</h2>
                   
                   <input type="number"
                   className='text-center p-1 w-16 border rounded-lg border-gray-400 hover:bg-gray-50'
-                  value={lifePoints} onChange={(e) => setLifePoints(Number(e.target.value))} />
+                  value={lifePoints} onChange={(e) => setLifePoints(Number(e.target.value))} 
+                  onBlur={(e) => setLifePoints(Math.max(60, Math.min(100, Number(e.target.value))))} />
 
                 </div>
                   {lifePointsError && <p className="text-red-500 text-[11px] text-center italic">{lifePointsError}</p>}
