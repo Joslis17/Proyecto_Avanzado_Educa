@@ -1,24 +1,65 @@
 import './vistaMazo.css'
 import Carta from "../Components/Carta"
 import { IoAddOutline } from "react-icons/io5";
+import { useState } from 'react'
+
+import {  useNavigate } from 'react-router-dom';
 
 type props = {
   seleccionarCarta: Function
+  irBatalla: Function
   verDetalle: Function
   mostrarCrear: Function
   mazo: any[]
   setMazo: Function;
   eliminarCarta: Function;
-  seleccionadas: string[]; // Nueva prop
-  toggleSeleccion: (id: string) => void; // Nueva prop
 }
 
-function VistaMazo({ seleccionarCarta, verDetalle, mostrarCrear, mazo, eliminarCarta, seleccionadas, toggleSeleccion }: props) {
+function VistaMazo({ seleccionarCarta, verDetalle, mostrarCrear, mazo, eliminarCarta, irBatalla }: props) {
+
+  const [seleccionadas, setSeleccionadas] = useState<string[]>([]);
+  const [cartaBloqueada, setCartaBloqueada] = useState(false);
+
+  
+   const toggleSeleccion = (id: string) => {
+    setSeleccionadas(prev => 
+      prev.includes(id) 
+        ? prev.filter(item => item !== id) // Si ya está, la quitamos
+        : [...prev, id] // Si no está, la agregamos
+    );
+  };
+
+  const manejarPelea = () => {
+    if (seleccionadas.length !== 2) {
+      alert("⚠️ Error: Debes seleccionar exactamente dos cartas para iniciar una pelea.");
+    } else {
+      const cartasPeleando = mazo.filter(c => seleccionadas.includes(c.idCard));
+      irBatalla(cartasPeleando[0].idCard,cartasPeleando[1].idCard)
+    }
+  };
+
   return (
     <div >
       <h1 className='text-gradient-custom mt-2 p-2 text-5xl font-sans font-bold flex text-center justify-center'>
         ENTIDADES MALIGNAS
       </h1>
+      
+      <div >
+     
+        {seleccionadas.length > 0 && (
+          <button
+            className={`fixed top-5 right-40 text-white font-bold py-3 px-6 rounded-2xl border-gray-200 shadow-2xl z-50 transition-all duration-300
+              ${seleccionadas.length === 2 
+                ? 'bg-purple-900 hover:bg-purple-700 hover:scale-110 hover:shadow-purple-500' 
+                : ' bg-[#5c0202] hover:bg-[#940404] hover:scale-110'}`}
+            onClick={manejarPelea}
+          >
+            {seleccionadas.length === 2 ? '¡PELEAR AHORA!' : `SELECCIONADAS: ${seleccionadas.length}`}
+          </button>
+        )}
+      </div >
+
+
       <div className='flex justify-center max-w-8xl'>
         <div className=' flex flex-wrap justify-center p-2 gap-10 m-3  max-w-8xl' >
           {

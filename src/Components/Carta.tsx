@@ -114,13 +114,16 @@ const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
       <div className='align-center justify-center flex mt-5 gap-2'>
           <button 
+            disabled= {isSeleccionada}
             className='border-3 rounded-[10px] border-gray-200 p-1 mx-2 my-1 cursor-pointer text-white h-11 w-25
             font-semibold text-md bg-[#5c0202] hover:bg-[#940404] hover:scale-110 transition-all shadow-lg'
             onClick={(e) => { e.stopPropagation(); onEliminar?.(); }}
             >
             {button}
           </button>
-          <button onClick={(e) => {
+          <button 
+          disabled={isSeleccionada}
+          onClick={(e) => {
               e.stopPropagation();
               seleccionarCarta2({...carta});
               verDetalle?.();
