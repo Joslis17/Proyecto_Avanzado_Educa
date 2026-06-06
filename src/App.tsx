@@ -66,13 +66,35 @@ function App() {
   const editarCartaGlobal = async (idCard: string, datosActualizados: any) => {
     
       const urlAPI = `https://educapi-v2.onrender.com/card/${idCard}`;
+      
+      // Unimos las habilidades en una sola cadena de texto separada por comas
+      // Soportando tanto si vienen del componente de edición como hab1, hab2, hab3
+      const lasHabilidades = [
+        datosActualizados.attributes?.habilidades_Especiales1,
+        datosActualizados.attributes?.habilidades_Especiales2,
+        datosActualizados.attributes?.habilidades_Especiales3
+      ].filter(id => id !== undefined && id !== "").join(",");
+
       const respuesta = await fetch(urlAPI, {
         method: 'PATCH', // Verifica si tu API usa PUT o PATCH
         headers: {
           'usersecretpasskey': 'Josl998465OS',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ name: datosActualizados.name, description: datosActualizados.description, pictureUrl: datosActualizados.pictureUrl, attack: datosActualizados.attack, defense: datosActualizados.defense, lifePoints: datosActualizados.lifePoints, attributes: { tipo: datosActualizados.attributes.tipo, habilidades_Especiales1: datosActualizados.attributes.habilidades_Especiales1, habilidades_Especiales2: datosActualizados.attributes.habilidades_Especiales2, habilidades_Especiales3: datosActualizados.attributes.habilidades_Especiales3 } })
+        // Enviamos el body estructurado correctamente para la API
+        body: JSON.stringify({ 
+          name: datosActualizados.name, 
+          description: datosActualizados.description, 
+          pictureUrl: datosActualizados.pictureUrl, 
+          attack: Number(datosActualizados.attack), 
+          defense: Number(datosActualizados.defense), 
+          lifePoints: Number(datosActualizados.lifePoints), 
+          attributes: { 
+            tipo: datosActualizados.attributes.tipo, 
+            // Enviamos el string mapeado que la API sí acepta
+            habilidades_Especiales: lasHabilidades || datosActualizados.attributes.habilidades_Especiales
+          } 
+        })
       });
         
       const resultado = await respuesta.json();
@@ -86,6 +108,7 @@ function App() {
 
         console.log("Carta actualizada con éxito");
       } else {
+        console.error("Error de la API al editar:", resultado);
         alert("Error al guardar los cambios en el servidor");
       }
   };
@@ -112,8 +135,10 @@ function App() {
 
   const seleccionarCartaDetalle = (carta: any) => {
     setCartaSeleccionada(carta);
-    navigate(`/detalle/${carta.idCard}`);
-  };
+    // Usamos el id de la carta, o en su defecto el número secuencial si es nueva
+    const idRuta = carta.idCard || carta.numero;
+    navigate(`/detalle/${idRuta}`);
+};
 
   const navegarCrearCarta = () => {
     setMostrarVistaCrear(true);
@@ -127,18 +152,15 @@ function App() {
   }
 
   const agregarNuevaCarta = (nuevaCarta: any) => {
-
     const cartaNumero = {
        ...nuevaCarta,
         numero: mazo.length + 1 };
     setMazo([...mazo, cartaNumero]);
-
     setMostrarVistaCrear(false);
   };
 
   const irBatalla = (idCarta1: string, idCarta2: string) => {
     navigate (`/CampoBatalla/${idCarta1}/${idCarta2}`)
-  //  navigate(`/CampoBatalla/${cartasPeleando[0].idCard}/${cartasPeleando[1].idCard}`);
   }
   
 

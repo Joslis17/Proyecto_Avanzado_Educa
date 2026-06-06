@@ -1,7 +1,6 @@
-// Screens/VistaEditar.tsx
 import { useNavigate } from 'react-router-dom';
 import CartaEditar from '../Components/CartaEditar';
-import './vistaEditar.css' // Puedes mantenerlo o vaciarlo si usas solo Tailwind
+import './vistaEditar.css'
 
 type Props = {
   carta: any;
@@ -15,11 +14,9 @@ function VistaEditar({ carta, onEditar }: Props) {
     <div className='min-h-screen flex items-center justify-center p-4 bg-gray-200 backdrop-blur-sm fixed inset-0 z-50'>
       <CartaEditar 
         cartaInicial={carta} 
-        // Cerramos la vista después de editar
         onSave={(datos) => {
             onEditar(carta.idCard, datos);
         }}
-        // Volvemos atrás si cancelamos
         onCancel={() => navigate('/')}
       />
     </div>

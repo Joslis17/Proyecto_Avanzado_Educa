@@ -27,7 +27,7 @@ function VistaMazo({ seleccionarCarta, verDetalle, mostrarCrear, mazo, eliminarC
 
   const manejarPelea = () => {
     if (seleccionadas.length !== 2) {
-      alert("⚠️ Error: Debes seleccionar exactamente dos cartas para iniciar una pelea.");
+      alert(" Error: Debes seleccionar exactamente dos cartas para iniciar una pelea.");
     } else {
       const cartasPeleando = mazo.filter(c => seleccionadas.includes(c.idCard));
       irBatalla(cartasPeleando[0].idCard,cartasPeleando[1].idCard)
@@ -57,22 +57,27 @@ function VistaMazo({ seleccionarCarta, verDetalle, mostrarCrear, mazo, eliminarC
 
 
       <div className='flex justify-center max-w-8xl'>
-        <div className=' flex flex-wrap justify-center p-2 gap-10 m-3  max-w-8xl' >
+        <div className='flex flex-wrap justify-center p-2 gap-10 m-3 max-w-8xl'>
           {
-            mazo.map(carta => (
-              <Carta
-                key={carta.idCard}
-                carta={carta}
-                seleccionarCarta2={seleccionarCarta}
-                verDetalle={() => verDetalle(carta)}
-                button='Eliminar'
-                button2='Detalles'
-                onEliminar={() => eliminarCarta(carta.idCard)}
-                isSeleccionada={seleccionadas.includes(carta.idCard)} // Uso de includes
-                totalSeleccionadas={seleccionadas.length}
-                onLongPress={() => toggleSeleccion(carta.idCard)}
-              />
-            ))
+            mazo.map((carta, index) => {
+              // Si no tiene idCard (carta creada localmente), le asignamos una llave única combinada
+              const llaveUnica = carta.idCard || `temporal-${index}`;
+
+              return (
+                <Carta
+                  key={llaveUnica}
+                  carta={carta}
+                  seleccionarCarta2={seleccionarCarta}
+                  verDetalle={() => verDetalle(carta)}
+                  button='Eliminar'
+                  button2='Detalles'
+                  onEliminar={() => eliminarCarta(carta.idCard)}
+                  isSeleccionada={seleccionadas.includes(carta.idCard)}
+                  totalSeleccionadas={seleccionadas.length}
+                  onLongPress={() => toggleSeleccion(carta.idCard)}
+                />
+              );
+            })
           }
         </div>
       </div>

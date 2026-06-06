@@ -1,0 +1,45 @@
+[
+    {   "id": 1, "nombre": "Contorsión extrema","ataque": 20    },
+    {   "id": 2, "nombre": "Omnisciencia Local", "ataque": 20   },
+    {
+        "id": 3,
+        "nombre": "Cambio de forma",
+        "ataque": 30    
+    },
+    {
+        "id": 4,
+        "nombre": "Ilusiones y Alucinaciones",
+        "ataque": 30    
+    },
+    {
+        "id": 5,
+        "nombre": "Telequinesis",
+        "ataque": 40    
+    },
+    {
+        "id": 6,
+        "nombre": "Telepatia",
+        "ataque": 40    
+    },
+    {
+        "id": 7,
+        "nombre": "Bucles temporales",
+        "ataque": 50    
+    },
+    {
+        "id": 8,
+        "nombre": "Posesiones",
+        "ataque": 50    
+    },
+    {
+        "id": 9,
+        "nombre": "Parálisis del sueño inducida",
+        "ataque": 60    
+    },
+    {
+        "id": 10,
+        "nombre": "Manipulación de la realidad",
+        "ataque": 60    
+    }
+   
+]

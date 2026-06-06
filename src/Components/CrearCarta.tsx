@@ -1,12 +1,15 @@
 import './crearCarta.css'
 import { useState } from 'react';
 
+import habilidadesData from '../../habilidades.json';
+
 type CrearCartaProps = {
   agregarCarta: (carta: any) => void;
   noSeMuestra: Function;
 };
 
-function CrearCarta({ agregarCarta, noSeMuestra }: CrearCartaProps) {
+function CrearCarta({ agregarCarta, noSeMuestra }: CrearCartaProps) { 
+
   // Cada campo que el usuario va a rellenar:
   const [name, setName] = useState('');
   const [pictureUrl, setPictureUrl] = useState('');
@@ -79,24 +82,28 @@ const manejarClickCrear = async () => {
   const esValido = validacionCarta();
 
   if (esValido) {
+    // Unimos los IDs de las habilidades en una sola cadena de texto separada por comas
+    // Ejemplo resultado: "1,5,7"
+    const cadenaHabilidades = [habilidad1, habilidad2, habilidad3]
+      .filter(id => id !== "") // Quitamos campos vacíos si los hay
+      .join(",");
+
     const nuevaCartaRaw = {
       name: name,
       description: description,
-      attack: attack,
-      defense: defense,
-      lifePoints: lifePoints,
+      attack: Number(attack),
+      defense: Number(defense),
+      lifePoints: Number(lifePoints),
       pictureUrl: pictureUrl,
       attributes: { 
-        tipo, 
-        // Cambiamos los nombres aquí para que coincidan con el mazo
-        habilidades_Especiales1: habilidad1, 
-        habilidades_Especiales2: habilidad2, 
-        habilidades_Especiales3: habilidad3 
+        tipo: tipo, 
+        // Cambiamos los 3 campos por el único que tu API acepta y reconoce
+        habilidades_Especiales: cadenaHabilidades 
       }
     };
 
-    let urlAPI = 'https://educapi-v2.onrender.com/card';
-
+    try {
+      let urlAPI = 'https://educapi-v2.onrender.com/card';
       const respuesta = await fetch(urlAPI, {
         method: 'POST',
         headers: {
@@ -109,12 +116,34 @@ const manejarClickCrear = async () => {
       const resultado = await respuesta.json();
 
       if (respuesta.ok) {
-        // Usamos el objeto que nos devuelve la API (que ya trae su ID real)
         agregarCarta(resultado.data); 
-        noSeMuestra(); // Esto navega a la pantalla principal
-      } 
+        noSeMuestra();
+      } else {
+        console.error("Error detallado de la API:", resultado);
+        alert(`Error al crear: ${resultado.message || 'Revisa los datos enviados'}`);
+      }
+    } catch (error) {
+      console.error("Error de red:", error);
+    }
   }
-};
+};  
+  const renderSelectHabilidad = (value: string, setter: (v: string) => void, error: string) => (
+        <div className='flex flex-col items-center w-full'>
+          <select 
+            className='text-center p-1 w-full border rounded-lg border-gray-400 bg-white hover:bg-gray-50'
+            value={value} 
+            onChange={(e) => setter(e.target.value)}
+          >
+            <option value="">Selecciona habilidad</option>
+            {habilidadesData.map((hab) => (
+              <option key={hab.id} value={hab.id}>
+                {hab.nombre} (Atq: {hab.ataque})
+              </option>
+            ))}
+          </select>
+          {error && <p className="text-red-500 text-[12px] text-center italic">{error}</p>}
+        </div>
+    );
 
   return (
     <div className='min-h-screen bg-gray-100 flex items-center justify-center p-4'>
@@ -220,39 +249,14 @@ const manejarClickCrear = async () => {
             </div>
 
             {/* Habilidades Especiales */}
-            <div className='py-3 px-2 border-2 border-purple-800 rounded-2xl shadow-lg hover:shadow-purple-500'>
-
-              <h2 className='mb-2 text-ml text-center font-semibold'>Habilidades:</h2>
-
-              <div className='grid grid-cols-1 sm:grid-cols-3 gap-2'>
-
-                <div className='flex flex-col items-center'>
-                  <input type="text" placeholder='Habilidad 1' 
-                  className='text-center p-1 w-full border rounded-lg border-gray-400 hover:bg-gray-50'
-                  value={habilidad1} onChange={(e) => setHabilidad1(e.target.value)} />
-                {habilidad1Error && <p className="text-red-500 text-[12px] text-center italic">{habilidad1Error}</p>}
-
-                </div>
-
-                <div className='flex flex-col items-center'>
-                  <input type="text" placeholder='Habilidad 2' 
-                  className='text-center p-1 w-full border rounded-lg border-gray-400 hover:bg-gray-50'
-                  value={habilidad2} onChange={(e) => setHabilidad2(e.target.value)} />
-                {habilidad2Error && <p className="text-red-500 text-[12px] text-center italic">{habilidad2Error}</p>}
-
-                </div>
-
-                <div className='flex flex-col items-center'>
-                  <input type="text" placeholder='Habilidad 3' 
-                  className='text-center p-1 w-full border rounded-lg border-gray-400 hover:bg-gray-50'
-                  value={habilidad3} onChange={(e) => setHabilidad3(e.target.value)} />
-                {habilidad3Error && <p className="text-red-500 text-[12px] text-center italic">{habilidad3Error}</p>}
-
-                </div>
-
-              </div>
-
-            </div>
+      <div className='py-3 px-2 border-2 border-purple-800 rounded-2xl shadow-lg'>
+          <h2 className='mb-2 text-ml text-center font-semibold'>Habilidades:</h2>
+          <div className='grid grid-cols-1 sm:grid-cols-3 gap-4'>
+            {renderSelectHabilidad(habilidad1, setHabilidad1, habilidad1Error)}
+            {renderSelectHabilidad(habilidad2, setHabilidad2, habilidad2Error)}
+            {renderSelectHabilidad(habilidad3, setHabilidad3, habilidad3Error)}
+          </div>
+    </div>
 
             {/* Link e Imagen */}
             <div className='flex flex-col sm:flex-row gap-4 justify-center'>
