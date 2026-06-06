@@ -3,8 +3,6 @@ import Carta from "../Components/Carta"
 import { IoAddOutline } from "react-icons/io5";
 import { useState } from 'react'
 
-import {  useNavigate } from 'react-router-dom';
-
 type props = {
   seleccionarCarta: Function
   irBatalla: Function
@@ -18,8 +16,6 @@ type props = {
 function VistaMazo({ seleccionarCarta, verDetalle, mostrarCrear, mazo, eliminarCarta, irBatalla }: props) {
 
   const [seleccionadas, setSeleccionadas] = useState<string[]>([]);
-  const [cartaBloqueada, setCartaBloqueada] = useState(false);
-
   
    const toggleSeleccion = (id: string) => {
     setSeleccionadas(prev => 
