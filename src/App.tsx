@@ -21,20 +21,42 @@ function App() {
   const [cartaSeleccionada, setCartaSeleccionada] = useState(false);
   const [mostrarVistaCrear, setMostrarVistaCrear] = useState(false);
 
+  // ESTADO DE CARGA PRINCIPAL
+  const [loading, setLoading] = useState<boolean>(true);
+
   const getCarta = async () => {
     let urlAPI = 'https://educapi-v2.onrender.com/card';
+    let conectado = false;
 
-    const respuesta = await fetch(urlAPI,{
-      method: 'GET', 
-      headers: {
-        //Josl998465OS
-        usersecretpasskey:'Josl998465OS'
+    // Bucle para que si falla la API, siga cargando y reintentando en segundo plano
+    while (!conectado) {
+      try {
+        const respuesta = await fetch(urlAPI, {
+          method: 'GET', 
+          headers: {
+            usersecretpasskey: 'Josl998465OS'
+          }
+        });
+
+        if (!respuesta.ok) {
+          throw new Error("Respuesta incorrecta del servidor");
+        }
+
+        const objeto = await respuesta.json();
+        setMazo(objeto.data);
+        console.log(objeto.data);
+        
+        // Si todo sale bien, salimos del bucle y apagamos la pantalla de carga
+        conectado = true;
+        setLoading(false);
+      } catch (error) {
+        console.log("La API falló, reintentando conexión en 3 segundos...", error);
+        // Espera 3 segundos antes de volver a intentar el fetch
+        await new Promise(resolve => setTimeout(resolve, 3000));
       }
-    });
-    const objeto = await respuesta.json();
-    setMazo(objeto.data);
-    console.log(objeto.data);
+    }
   }
+
   useEffect(() => {
     console.log("La ruta cambió a:", location.pathname);
     getCarta();
@@ -53,7 +75,7 @@ function App() {
         body: JSON.stringify({ name: datosActualizados.name, description: datosActualizados.description, pictureUrl: datosActualizados.pictureUrl, attack: datosActualizados.attack, defense: datosActualizados.defense, lifePoints: datosActualizados.lifePoints, attributes: { tipo: datosActualizados.attributes.tipo, habilidades_Especiales1: datosActualizados.attributes.habilidades_Especiales1, habilidades_Especiales2: datosActualizados.attributes.habilidades_Especiales2, habilidades_Especiales3: datosActualizados.attributes.habilidades_Especiales3 } })
       });
         
-        const resultado = await respuesta.json();
+      const resultado = await respuesta.json();
 
       if (respuesta.status === 200 || respuesta.status === 204) {
         setMazo(mazo.map(carta => carta.idCard === idCard ? { ...carta, ...datosActualizados } : carta));
@@ -114,17 +136,26 @@ function App() {
     setMostrarVistaCrear(false);
   };
 
-  const irBatalla = (idCarta1, idCarta2) => {
+  const irBatalla = (idCarta1: string, idCarta2: string) => {
     navigate (`/CampoBatalla/${idCarta1}/${idCarta2}`)
   //  navigate(`/CampoBatalla/${cartasPeleando[0].idCard}/${cartasPeleando[1].idCard}`);
   }
   
 
+  // RENDERIZADO CONDICIONAL DE CARGA ESTILO GRIS, MORADO Y ROSADO
+  if (loading) {
+    return (
+      <div className='min-h-screen flex flex-col items-center justify-center bg-gray-200 text-purple-900 gap-4'>
+        <div className='text-3xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-purple-800 to-pink-600 animate-pulse uppercase text-center px-4'>
+          Cargando Colección de Cartas...
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div>
       <main>
-        
-
         <Routes>
           <Route path="/" element={
             <VistaMazo  
@@ -144,7 +175,6 @@ function App() {
           <Route path="/CampoBatalla/:id1/:id2" element={<CampoBatalla />} />
         </Routes>
       </main>
-      
     </div>
   )
 }
