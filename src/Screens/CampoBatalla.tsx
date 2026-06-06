@@ -49,20 +49,6 @@ function CampoBatalla() {
     buscarCartasEnAPI()
   }, [id1, id2])
 
-  // --- LÓGICA REUTILIZABLE PARA EXTRAER LOS NOMBRES DE LAS 3 HABILIDADES REALES ---
-  const obtenerHabilidadesCarta = (carta: any) => {
-    const cadenaIds = carta?.attributes?.habilidades_Especiales || "";
-    const ids = cadenaIds ? cadenaIds.split(',') : [];
-    return ids.map((id: string) => {
-      const h = habilidadesData.find((hab: any) => hab.id.toString() === id.trim().toString());
-      return h ? h.nombre : "Habilidad Vacía";
-    });
-  };
-
-  const habilidadesC1 = obtenerHabilidadesCarta(carta1);
-  const habilidadesC2 = obtenerHabilidadesCarta(carta2);
-
-
   // Renderizados Condicionales de control
   if (loading) {
     return (
@@ -104,48 +90,33 @@ function CampoBatalla() {
           
           {/* Contenedor Jugador 1 (Morado) */}
           {carta1 && (
-            <div className='flex flex-col items-center gap-4 transition-all duration-300 hover:scale-105 filter drop-shadow-md'>
+            <div className='flex flex-col items-center gap-4 transition-all duration-300 filter drop-shadow-md'>
               <span className='text-white font-black text-xl tracking-widest bg-purple-900 px-6 py-1.5 rounded-full shadow-md uppercase'>
                 JUGADOR 1
               </span>
               
-              {/* Contenedor que cambia a borde Rojo si es su turno */}
+              {/* INTERRUPTOR DE COLOR: Si la batalla inició y es su turno, se pone rojo */}
               <div className={`p-2 rounded-3xl transition-all duration-300 shadow-lg ${
-                batallaIniciada && turnoActual === 'C1'
-                  ? 'bg-red-600 shadow-2xl shadow-red-500 scale-105 border-4 border-red-500 animate-pulse'
+                batallaIniciada && turnoActual === 'C1' 
+                  ? 'bg-red-600 shadow-2xl shadow-red-500 scale-105 border-4 border-red-500 ' 
                   : 'bg-white border-2 border-purple-500/20'
               }`}>
-                
-                {/* TRUCO LÓGICO: Si la batalla inició, inyectamos una clase para ocultar los botones nativos de la carta */}
-                <div className={batallaIniciada ? '[&_button]:hidden pb-4' : ''}>
-                  <Carta 
-                    carta={carta1} 
-                    button="Eliminar" 
-                    button2="Detalles" 
-                    seleccionarCarta2={() => {}} 
-                    isSeleccionada={false} 
-                    onLongPress={() => {}} 
-                    totalSeleccionadas={2} 
-                  />
-                </div>
+                <Carta 
+                  carta={carta1} 
+                  button="Eliminar" 
+                  button2="Detalles" 
+                  seleccionarCarta2={() => {}} 
+                  isSeleccionada={false} 
+                  onLongPress={() => {}} 
+                  totalSeleccionadas={2} 
+                />
               </div>
 
-              {/* LÓGICA DE SUS 3 BOTONES DE HABILIDADES: Solo se muestran si inició la batalla y es el turno de C1 */}
-              {batallaIniciada && turnoActual === 'C1' ? (
-                <div className='flex flex-col gap-2 w-full mt-2 animate-fadeIn px-2'>
-                  {habilidadesC1.map((nombreHab, index) => (
-                    <button
-                      key={index}
-                      className='border-2 rounded-[10px] border-gray-200 p-2 text-white font-bold text-sm bg-purple-900 hover:bg-purple-700 hover:scale-105 transition-all shadow-md uppercase tracking-wider'
-                      onClick={() => console.log(`Jugador 1 usó: ${nombreHab}`)}
-                    >
-                      {nombreHab}
-                    </button>
-                  ))}
-                </div>
-              ) : batallaIniciada && (
-                /* Si la batalla inició pero NO es su turno, dejamos un espacio vacío bloqueado o no mostramos nada */
-                <div className='h-[120px]' /> 
+              {/* Mensaje indicador debajo de la carta */}
+              {batallaIniciada && turnoActual === 'C1' && (
+                <span className="text-red-800 font-black text-lg bg-pink-100 px-4 py-1 rounded-full animate-bounce shadow-sm">
+                   ¡Tu Turno!
+                </span>
               )}
             </div>
           )}
@@ -159,48 +130,33 @@ function CampoBatalla() {
 
           {/* Contenedor Jugador 2 (Rosa fuerte / fucsia) */}
           {carta2 && (
-            <div className='flex flex-col items-center gap-4 transition-all duration-300 hover:scale-105 filter drop-shadow-md'>
+            <div className='flex flex-col items-center gap-4 transition-all duration-300 filter drop-shadow-md'>
               <span className='text-white font-black text-xl tracking-widest bg-pink-600 px-6 py-1.5 rounded-full shadow-md uppercase'>
                 JUGADOR 2
               </span>
-              
-              {/* Contenedor que cambia a borde Rojo si es su turno */}
+
+              {/* INTERRUPTOR DE COLOR: Si la batalla inició y es su turno, se pone rojo */}
               <div className={`p-2 rounded-3xl transition-all duration-300 shadow-lg ${
-                batallaIniciada && turnoActual === 'C2'
-                  ? 'bg-red-600 shadow-2xl shadow-red-500 scale-105 border-4 border-red-500 animate-pulse'
+                batallaIniciada && turnoActual === 'C2' 
+                  ? 'bg-red-600 shadow-2xl shadow-red-500 scale-105 border-4 border-red-500 ' 
                   : 'bg-white border-2 border-pink-500/20'
               }`}>
-                
-                {/* TRUCO LÓGICO: Si la batalla inició, inyectamos una clase para ocultar los botones nativos de la carta */}
-                <div className={batallaIniciada ? '[&_button]:hidden pb-4' : ''}>
-                  <Carta 
-                    carta={carta2} 
-                    button="Eliminar" 
-                    button2="Detalles"
-                    seleccionarCarta2={() => {}} 
-                    isSeleccionada={false} 
-                    onLongPress={() => {}} 
-                    totalSeleccionadas={2} 
-                  />
-                </div>
+                <Carta 
+                  carta={carta2} 
+                  button="Eliminar" 
+                  button2="Detalles"
+                  seleccionarCarta2={() => {}} 
+                  isSeleccionada={false} 
+                  onLongPress={() => {}} 
+                  totalSeleccionadas={2} 
+                />
               </div>
 
-              {/* LÓGICA DE SUS 3 BOTONES DE HABILIDADES: Solo se muestran si inició la batalla y es el turno de C2 */}
-              {batallaIniciada && turnoActual === 'C2' ? (
-                <div className='flex flex-col gap-2 w-full mt-2 animate-fadeIn px-2'>
-                  {habilidadesC2.map((nombreHab, index) => (
-                    <button
-                      key={index}
-                      className='border-2 rounded-[10px] border-gray-200 p-2 text-white font-bold text-sm bg-pink-600 hover:bg-pink-500 hover:scale-105 transition-all shadow-md uppercase tracking-wider'
-                      onClick={() => console.log(`Jugador 2 usó: ${nombreHab}`)}
-                    >
-                      {nombreHab}
-                    </button>
-                  ))}
-                </div>
-              ) : batallaIniciada && (
-                /* Si la batalla inició pero NO es su turno, dejamos un espacio vacío para mantener la simetría visual */
-                <div className='h-[120px]' />
+              {/* Mensaje indicador debajo de la carta */}
+              {batallaIniciada && turnoActual === 'C2' && (
+                <span className="text-red-800 font-black text-lg bg-pink-100 px-4 py-1 rounded-full animate-bounce shadow-sm">
+                   ¡Tu Turno!
+                </span>
               )}
             </div>
           )}
@@ -209,33 +165,51 @@ function CampoBatalla() {
 
         <div className='flex gap-6 justify-center mt-8'>
           {/* Botón para regresar con el estilo Morado de tu pantalla principal */}
-        <button 
-          onClick={() => navigate('/')} 
-          className='mt-8 px-10 py-3.5 bg-[#5c0202] hover:bg-[#940404] text-white font-black uppercase tracking-wider rounded-xl shadow-md transition-all duration-300 hover:scale-110 active:scale-95 border-2 border-gray-200'
-        >\
-          Terminar Batalla
-        </button>
-        <button 
-          onClick={() => {
-            if (!batallaIniciada) {
-              // Iniciamos la batalla y mostramos la primera configuración de turno
-              setBatallaIniciada(true);
-            } else {
-              // Cambiar turno como interruptor alternador continuo
-              if (turnoActual === 'C1') {
-                setTurnoActual('C2');
+          <button 
+            onClick={() => navigate('/')} 
+            className='mt-8 px-10 py-3.5 bg-[#5c0202] hover:bg-[#940404] text-white font-black uppercase tracking-wider rounded-xl shadow-md transition-all duration-300 hover:scale-110 active:scale-95 border-2 border-gray-200'
+          >
+            Terminar Batalla
+          </button>
+          
+          <button 
+            onClick={() => {
+              if (!batallaIniciada) {
+                // --- TU LÓGICA EXISTENTE PARA MOSTRAR LAS HABILIDADES AL EMPEZAR ---
+                const idsCarta1 = carta1?.attributes?.habilidades_Especiales?.split(',') || [];
+                const idsCarta2 = carta2?.attributes?.habilidades_Especiales?.split(',') || [];
+
+                const nombresCarta1 = idsCarta1.map((id: string) => {
+                  const h = habilidadesData.find((hab: any) => hab.id.toString() === id.trim().toString());
+                  return h ? h.nombre : "Habilidad vacía";
+                });
+
+                const nombresCarta2 = idsCarta2.map((id: string) => {
+                  const h = habilidadesData.find((hab: any) => hab.id.toString() === id.trim().toString());
+                  return h ? h.nombre : "Habilidad vacía";
+                });
+
+                console.log(`Habilidades de ${carta1?.name}:`, nombresCarta1);
+                console.log(`Habilidades de ${carta2?.name}:`, nombresCarta2);
+                
+                // Iniciamos la batalla
+                setBatallaIniciada(true);
               } else {
-                setTurnoActual('C1');
+                // --- NUEVA LÓGICA: CAMBIAR EL TURNO COMO UN INTERRUPTOR ---
+                if (turnoActual === 'C1') {
+                  setTurnoActual('C2'); // Si era el turno de la 1, pasa a la 2
+                } else {
+                  setTurnoActual('C1'); // Si era el turno de la 2, pasa a la 1
+                }
               }
-            }
-          }}
-          className='mt-8 px-10 py-3.5 bg-purple-900 hover:bg-purple-700 text-white font-black uppercase tracking-wider rounded-xl shadow-md transition-all duration-300 hover:scale-110 active:scale-95 border-2 border-gray-200'
-        >
-          {batallaIniciada ? 'Siguiente Turno' : 'Empezar Batalla'}
-        </button>
+            }}
+            className='mt-8 px-10 py-3.5 bg-purple-900 hover:bg-purple-700 text-white font-black uppercase tracking-wider rounded-xl shadow-md transition-all duration-300 hover:scale-110 active:scale-95 border-2 border-gray-200'
+          >
+            {batallaIniciada ? 'Siguiente Turno' : 'Empezar Batalla'}
+          </button>
         </div>
     </div>
   )
 }
 
-export default CampoBatalla
+export default CampoBatalla;
