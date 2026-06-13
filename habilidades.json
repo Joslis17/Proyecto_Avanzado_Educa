@@ -1,6 +1,12 @@
 [
-    {   "id": 1, "nombre": "Contorsión extrema","ataque": 20    },
-    {   "id": 2, "nombre": "Omnisciencia Local", "ataque": 20   },
+    {   "id": 1,
+     "nombre": "Contorsión extrema",
+     "ataque": 20    
+    },
+    {   "id": 2,
+     "nombre": "Omnisciencia Local",
+      "ataque": 20
+    },
     {
         "id": 3,
         "nombre": "Cambio de forma",
