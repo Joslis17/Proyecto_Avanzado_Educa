@@ -11,7 +11,7 @@ type props = {
   isSeleccionada: boolean, // Nueva prop
   onLongPress: () => void  // Nueva prop
   totalSeleccionadas: number
-  ocultarBotones: boolean;
+  ocultarBotones?: boolean;
 }
 
 function Carta({ 

@@ -65,6 +65,7 @@ function VistaMazo({ seleccionarCarta, verDetalle, mostrarCrear, mazo, eliminarC
 
               return (
                 <Carta
+                  ocultarBotones={false}
                   key={llaveUnica}
                   carta={carta}
                   seleccionarCarta2={seleccionarCarta}
