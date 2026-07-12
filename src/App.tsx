@@ -7,6 +7,7 @@ import VistaCrearCarta from './Screens/VistaCrearCarta';
 import PaginaInexistente from './Screens/PaginaInexistente';
 import VistaEditar from './Screens/VistaEditar';
 import CampoBatalla from './Screens/CampoBatalla';
+import VistaGenerarCarta from './Screens/VistaGenerarCarta';
 
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 
@@ -195,6 +196,7 @@ function App() {
           <Route path="/editar/:numero" element={<VistaEditar carta={cartaSeleccionada} onEditar={editarCartaGlobal} />} />
           <Route path="*" element={<PaginaInexistente />} />
           <Route path="/CampoBatalla/:id1/:id2" element={<CampoBatalla />} />
+          <Route path="/generar-carta-ia" element={<VistaGenerarCarta />} />
         </Routes>
       </main>
     </div>
