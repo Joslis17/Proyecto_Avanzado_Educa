@@ -112,65 +112,66 @@ function CampoBatalla() {
 
   // --- LÓGICA DE COMBATE REVISADA Y CORREGIDA ---
   const ejecutarAtaque = (valorHabilidad: number, nombreHabilidad: string) => {
-  if (ganador) return;
+    console.log(`Usando habilidad: ${nombreHabilidad}`); // Ahora nombreHabilidad se está "leyendo"
+    if (ganador) return;
 
-  const esJ1 = turnoActual === 'C1';
-  const ataqueEmisorActual = esJ1 ? ataqueC1 : ataqueC2;
-  const vidaReceptor = esJ1 ? vidaC2 : vidaC1;
-  const setVidaReceptor = esJ1 ? setVidaC2 : setVidaC1;
-  const setAtaqueEmisor = esJ1 ? setAtaqueC1 : setAtaqueC2;
+    const esJ1 = turnoActual === 'C1';
+    const ataqueEmisorActual = esJ1 ? ataqueC1 : ataqueC2;
+    const vidaReceptor = esJ1 ? vidaC2 : vidaC1;
+    const setVidaReceptor = esJ1 ? setVidaC2 : setVidaC1;
+    const setAtaqueEmisor = esJ1 ? setAtaqueC1 : setAtaqueC2;
 
-  // 1. REGLA: Derrota automática si el ataque es 0
-  if (ataqueEmisorActual <= 0) {
-    setVidaReceptor(0);
-    setGanador(esJ1 ? (carta2?.name || "Jugador 2") : (carta1?.name || "Jugador 1"));
-    return;
-  }
+    // 1. REGLA: Derrota automática si el ataque es 0
+    if (ataqueEmisorActual <= 0) {
+      setVidaReceptor(0);
+      setGanador(esJ1 ? (carta2?.name || "Jugador 2") : (carta1?.name || "Jugador 1"));
+      return;
+    }
 
-  setAtaqueEmisor(Math.max(0, ataqueEmisorActual - valorHabilidad));
+    setAtaqueEmisor(Math.max(0, ataqueEmisorActual - valorHabilidad));
 
-  const defensaActual = esJ1 ? defensaC2 : defensaC1;
-  const miedoActual = esJ1 ? miedoC2 : miedoC1;
-  const ataqueBaseEmisor = esJ1 ? ataqueBaseC1 : ataqueBaseC2;
+    const defensaActual = esJ1 ? defensaC2 : defensaC1;
+    const miedoActual = esJ1 ? miedoC2 : miedoC1;
+    const ataqueBaseEmisor = esJ1 ? ataqueBaseC1 : ataqueBaseC2;
 
-  let danoFinal = 0;
+    let danoFinal = 0;
 
-  // 2. REGLA: Si el miedo es igual a 50, vida baja 20
-  if (miedoActual === 50) {
-    danoFinal = 20;
-  } 
-  // 3. REGLA: Si la defensa es 0, ataque directamente a la vida (daño base)
-  else if (defensaActual <= 0) {
-    danoFinal = ataqueBaseEmisor;
-  } 
-  // 4. REGLA: Si la defensa es > 0, usamos la fórmula exacta del diagrama
-  else {
-    const valorActualizado = valorHabilidad >= 50 ? defensaActual : miedoActual;
-    // Fórmula: DañoBase * (Ataque / (Ataque + ValorActualizado + 5))
-    danoFinal = Math.floor(ataqueBaseEmisor * (valorHabilidad / (valorHabilidad + valorActualizado + 50)));
-  }
+    // 2. REGLA: Si el miedo es igual a 50, vida baja 20
+    if (miedoActual === 50) {
+      danoFinal = 20;
+    } 
+    // 3. REGLA: Si la defensa es 0, ataque directamente a la vida (daño base)
+    else if (defensaActual <= 0) {
+      danoFinal = ataqueBaseEmisor;
+    } 
+    // 4. REGLA: Si la defensa es > 0, usamos la fórmula exacta del diagrama
+    else {
+      const valorActualizado = valorHabilidad >= 50 ? defensaActual : miedoActual;
+      // Fórmula: DañoBase * (Ataque / (Ataque + ValorActualizado + 5))
+      danoFinal = Math.floor(ataqueBaseEmisor * (valorHabilidad / (valorHabilidad + valorActualizado + 50)));
+    }
 
-  // Asegurar que el daño sea al menos 0
-  const danoReal = Math.max(0, danoFinal);
-  const vidaResultante = Math.max(0, vidaReceptor - danoReal);
+    // Asegurar que el daño sea al menos 0
+    const danoReal = Math.max(0, danoFinal);
+    const vidaResultante = Math.max(0, vidaReceptor - danoReal);
   
-  setVidaReceptor(vidaResultante);
+    setVidaReceptor(vidaResultante);
 
-  // Actualizar estados secundarios
-  if (valorHabilidad >= 50) {
-    const setDefensaReceptor = esJ1 ? setDefensaC2 : setDefensaC1;
-    setDefensaReceptor(Math.max(0, defensaActual - valorHabilidad));
-  } else {
-    const setMiedoReceptor = esJ1 ? setMiedoC2 : setMiedoC1;
-    setMiedoReceptor(Math.min(100, miedoActual + valorHabilidad));
-  }
+    // Actualizar estados secundarios
+    if (valorHabilidad >= 50) {
+      const setDefensaReceptor = esJ1 ? setDefensaC2 : setDefensaC1;
+      setDefensaReceptor(Math.max(0, defensaActual - valorHabilidad));
+    } else {
+      const setMiedoReceptor = esJ1 ? setMiedoC2 : setMiedoC1;
+      setMiedoReceptor(Math.min(100, miedoActual + valorHabilidad));
+    } 
 
-  if (vidaResultante <= 0) {
-    setGanador(esJ1 ? (carta1?.name || "Jugador 1") : (carta2?.name || "Jugador 2"));
-  } else {
-    setTurnoActual(esJ1 ? 'C2' : 'C1');
-  }
-};
+    if (vidaResultante <= 0) {
+      setGanador(esJ1 ? (carta1?.name || "Jugador 1") : (carta2?.name || "Jugador 2"));
+    } else {
+      setTurnoActual(esJ1 ? 'C2' : 'C1');
+    }
+  };
 
   // Manejador dinámico inteligente para el botón de salida / detención / reinicio de vista
   const manejarBotonRojo = () => {
