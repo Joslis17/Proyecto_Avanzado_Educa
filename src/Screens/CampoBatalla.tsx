@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import Carta from '../Components/Carta'
 
+import { Ghost, Swords, Shield, Heart } from 'lucide-react'
+
 import habilidadesData from '../../habilidades.json';
 
 function CampoBatalla() {
@@ -110,72 +112,65 @@ function CampoBatalla() {
 
   // --- LÓGICA DE COMBATE REVISADA Y CORREGIDA ---
   const ejecutarAtaque = (valorHabilidad: number, nombreHabilidad: string) => {
-    if (ganador) return;
+  if (ganador) return;
 
-    const esJ1 = turnoActual === 'C1';
+  const esJ1 = turnoActual === 'C1';
+  const ataqueEmisorActual = esJ1 ? ataqueC1 : ataqueC2;
+  const vidaReceptor = esJ1 ? vidaC2 : vidaC1;
+  const setVidaReceptor = esJ1 ? setVidaC2 : setVidaC1;
+  const setAtaqueEmisor = esJ1 ? setAtaqueC1 : setAtaqueC2;
 
-    // Desestructuración de estados dinámicos correspondientes al rol de la acción
-    const ataqueEmisorInicial = esJ1 ? ataqueBaseC1 : ataqueBaseC2;
-    const ataqueEmisorActual = esJ1 ? ataqueC1 : ataqueC2;
-    const setAtaqueEmisor = esJ1 ? setAtaqueC1 : setAtaqueC2;
+  // 1. REGLA: Derrota automática si el ataque es 0
+  if (ataqueEmisorActual <= 0) {
+    setVidaReceptor(0);
+    setGanador(esJ1 ? (carta2?.name || "Jugador 2") : (carta1?.name || "Jugador 1"));
+    return;
+  }
 
-    const vidaReceptor = esJ1 ? vidaC2 : vidaC1;
-    const setVidaReceptor = esJ1 ? setVidaC2 : setVidaC1;
+  setAtaqueEmisor(Math.max(0, ataqueEmisorActual - valorHabilidad));
 
-    const defensaReceptor = esJ1 ? defensaC2 : defensaC1;
+  const defensaActual = esJ1 ? defensaC2 : defensaC1;
+  const miedoActual = esJ1 ? miedoC2 : miedoC1;
+  const ataqueBaseEmisor = esJ1 ? ataqueBaseC1 : ataqueBaseC2;
+
+  let danoFinal = 0;
+
+  // 2. REGLA: Si el miedo es igual a 50, vida baja 20
+  if (miedoActual === 50) {
+    danoFinal = 20;
+  } 
+  // 3. REGLA: Si la defensa es 0, ataque directamente a la vida (daño base)
+  else if (defensaActual <= 0) {
+    danoFinal = ataqueBaseEmisor;
+  } 
+  // 4. REGLA: Si la defensa es > 0, usamos la fórmula exacta del diagrama
+  else {
+    const valorActualizado = valorHabilidad >= 50 ? defensaActual : miedoActual;
+    // Fórmula: DañoBase * (Ataque / (Ataque + ValorActualizado + 5))
+    danoFinal = Math.floor(ataqueBaseEmisor * (valorHabilidad / (valorHabilidad + valorActualizado + 50)));
+  }
+
+  // Asegurar que el daño sea al menos 0
+  const danoReal = Math.max(0, danoFinal);
+  const vidaResultante = Math.max(0, vidaReceptor - danoReal);
+  
+  setVidaReceptor(vidaResultante);
+
+  // Actualizar estados secundarios
+  if (valorHabilidad >= 50) {
     const setDefensaReceptor = esJ1 ? setDefensaC2 : setDefensaC1;
-
-    const miedoReceptor = esJ1 ? miedoC2 : miedoC1;
+    setDefensaReceptor(Math.max(0, defensaActual - valorHabilidad));
+  } else {
     const setMiedoReceptor = esJ1 ? setMiedoC2 : setMiedoC1;
+    setMiedoReceptor(Math.min(100, miedoActual + valorHabilidad));
+  }
 
-    const nombreAtacante = esJ1 ? (carta1?.name || "Jugador 1") : (carta2?.name || "Jugador 2");
-
-    // El ataque usado (coste) se le resta al ataque actual del jugador emisor
-    const ataqueRestanteEmisor = ataqueEmisorActual - valorHabilidad;
-    setAtaqueEmisor(Math.max(0, ataqueRestanteEmisor));
-
-    let danoALaVida = 0;
-    const ataqueHabilidad = valorHabilidad;
-
-    // ¿El ataque de la habilidad es mayor o igual a 50?
-    if (ataqueHabilidad >= 50) {
-      const nuevaDefensaCalculada = defensaReceptor - ataqueHabilidad;
-      setDefensaReceptor(Math.max(0, nuevaDefensaCalculada));
-
-      if (nuevaDefensaCalculada <= 0) {
-        danoALaVida = ataqueEmisorInicial * (ataqueHabilidad / (ataqueHabilidad + nuevaDefensaCalculada + 5));
-      } else {
-        danoALaVida = 0;
-      }
-    } else {
-      const nuevoMiedoCalculado = miedoReceptor + ataqueHabilidad;
-      setMiedoReceptor(nuevoMiedoCalculado);
-
-      if (nuevoMiedoCalculado >= 100) {
-        danoALaVida = ataqueEmisorInicial * (ataqueHabilidad / (ataqueHabilidad + nuevoMiedoCalculado + 5));
-      } else {
-        danoALaVida = 0;
-      }
-    }
-
-    // Redondeo matemático hacia abajo
-    const danoFinal = Math.max(0, Math.floor(danoALaVida));
-
-    // La vida será igual a la resta de la vida con el daño calculado
-    const vidaResultante = Math.max(0, vidaReceptor - danoFinal);
-    setVidaReceptor(vidaResultante);
-
-    console.log(`${nombreAtacante} usó habilidad "${nombreHabilidad}". Daño: ${danoFinal}`);
-
-    // Validar si la barra de salud llegó a su fin
-    if (vidaResultante <= 0) {
-      setGanador(nombreAtacante);
-      return;
-    }
-
-    // Cambiar el turno del juego automáticamente
+  if (vidaResultante <= 0) {
+    setGanador(esJ1 ? (carta1?.name || "Jugador 1") : (carta2?.name || "Jugador 2"));
+  } else {
     setTurnoActual(esJ1 ? 'C2' : 'C1');
-  };
+  }
+};
 
   // Manejador dinámico inteligente para el botón de salida / detención / reinicio de vista
   const manejarBotonRojo = () => {
@@ -208,11 +203,11 @@ function CampoBatalla() {
         <button
           key={index}
           disabled={!!ganador}
-          className={`px-4 py-2 border-2 border-purple-400 rounded-xl text-white font-semibold text-xs md:text-sm 
-                     bg-purple-900 hover:bg-purple-700 hover:scale-105 transition-all duration-300 shadow-md cursor-pointer whitespace-nowrap ${ganador ? 'opacity-50 cursor-not-allowed' : ''}`}
+          className={` px-5 py-3 border-2 border-purple-400 rounded-xl text-white font-semibold text-sm 
+                    bg-purple-900 hover:bg-purple-700 transition-all duration-300 shadow-md ${ganador ? 'opacity-50' : ''}`}
           onClick={() => ejecutarAtaque(valorHabilidad, nombreHabilidad)}
         >
-          {nombreHabilidad} ({valorHabilidad} ATK)
+          {nombreHabilidad} 
         </button>
       );
     });
@@ -244,6 +239,22 @@ function CampoBatalla() {
       </div>
     )
   }
+  const renderStats = (miedo: number, ataque: number, defensa: number) => (
+    <div className="flex justify-center gap-7 mb-4 bg-white/50 p-4 rounded-xl border border-gray-200 shadow-sm w-full">
+      <div className="flex flex-col items-center">
+        <Ghost className="w-8 h-8 text-blue-500 stroke-[1.5]" />
+        <span className="text-blue-900 font-black text-sm">{miedo}</span>
+      </div>
+      <div className="flex flex-col items-center">
+        <Swords className="w-8 h-8 text-red-500 stroke-[1.5]" />
+        <span className="text-red-900 font-black text-sm">{ataque}</span>
+      </div>
+      <div className="flex flex-col items-center">
+        <Shield className="w-8 h-8 text-green-600 stroke-[1.5]" />
+        <span className="text-green-900 font-black text-sm">{defensa}</span>
+      </div>
+    </div>
+  );
 
   return (
     <div className='min-h-screen bg-gray-200 p-4 flex flex-col items-center justify-between pb-12'>
@@ -276,29 +287,7 @@ function CampoBatalla() {
                 JUGADOR 1
               </span>
 
-              {/* BARRA SUPERIORES: MIEDO, ATAQUE Y DEFENSA */}
-              {batallaIniciada && (
-                <div className="w-full max-w-[240px] bg-white border border-gray-300 rounded-xl p-2 flex flex-col gap-1.5 shadow-inner">
-                  <div>
-                    <div className="flex justify-between text-[10px] font-bold text-blue-800"><span>😱 MIEDO:</span> <span>{miedoC1}</span></div>
-                    <div className="w-full bg-gray-300 rounded-full h-2">
-                      <div className="bg-blue-600 h-2 rounded-full transition-all duration-500" style={{ width: `${Math.min(100, Math.max(0, (miedoC1 / 100) * 100))}%` }}></div>
-                    </div>
-                  </div>
-                  <div>
-                    <div className="flex justify-between text-[10px] font-bold text-red-700"><span>⚔️ ATAQUE:</span> <span>{ataqueC1}</span></div>
-                    <div className="w-full bg-gray-300 rounded-full h-2">
-                      <div className="bg-red-500 h-2 rounded-full transition-all duration-500" style={{ width: `${Math.min(100, (ataqueC1 / 150) * 100)}%` }}></div>
-                    </div>
-                  </div>
-                  <div>
-                    <div className="flex justify-between text-[10px] font-bold text-green-700"><span>🛡️ DEFENSA:</span> <span>{defensaC1}</span></div>
-                    <div className="w-full bg-gray-300 rounded-full h-2">
-                      <div className="bg-green-500 h-2 rounded-full transition-all duration-500" style={{ width: `${Math.min(100, (defensaC1 / 150) * 100)}%` }}></div>
-                    </div>
-                  </div>
-                </div>
-              )}
+              {batallaIniciada && renderStats(miedoC1, ataqueC1, defensaC1)}
               
               <div className="flex flex-row items-center gap-3">
                 <div className={`p-1 md:p-2 rounded-3xl transition-all duration-300 shadow-lg ${
@@ -321,7 +310,7 @@ function CampoBatalla() {
                 {/* BARRA LATERAL DE VIDA */}
                 {batallaIniciada && (
                   <div className="flex flex-col items-center bg-white p-2 rounded-xl border border-gray-300 h-[280px] w-12 justify-between shadow-sm">
-                    <span className="text-[10px] font-black text-red-600">❤️ VIDA</span>
+                    <Heart className="w-8 h-8 text-red-600 stroke-[1.5]" />
                     <div className="w-4 bg-gray-200 rounded-full h-full flex flex-col justify-end overflow-hidden border border-gray-300">
                       <div className="bg-red-600 w-full transition-all duration-500 rounded-b-full" style={{ height: `${(vidaC1 / maxVidaC1) * 100}%` }}></div>
                     </div>
@@ -358,35 +347,13 @@ function CampoBatalla() {
                 JUGADOR 2
               </span>
 
-              {/* BARRA SUPERIORES: MIEDO, ATAQUE Y DEFENSA */}
-              {batallaIniciada && (
-                <div className="w-full max-w-[240px] bg-white border border-gray-300 rounded-xl p-2 flex flex-col gap-1.5 shadow-inner">
-                  <div>
-                    <div className="flex justify-between text-[10px] font-bold text-blue-800"><span>😱 MIEDO:</span> <span>{miedoC2}</span></div>
-                    <div className="w-full bg-gray-300 rounded-full h-2">
-                      <div className="bg-blue-600 h-2 rounded-full transition-all duration-500" style={{ width: `${Math.min(100, Math.max(0, (miedoC2 / 100) * 100))}%` }}></div>
-                    </div>
-                  </div>
-                  <div>
-                    <div className="flex justify-between text-[10px] font-bold text-red-700"><span>⚔️ ATAQUE:</span> <span>{ataqueC2}</span></div>
-                    <div className="w-full bg-gray-300 rounded-full h-2">
-                      <div className="bg-red-500 h-2 rounded-full transition-all duration-500" style={{ width: `${Math.min(100, (ataqueC2 / 150) * 100)}%` }}></div>
-                    </div>
-                  </div>
-                  <div>
-                    <div className="flex justify-between text-[10px] font-bold text-green-700"><span>🛡️ DEFENSA:</span> <span>{defensaC2}</span></div>
-                    <div className="w-full bg-gray-300 rounded-full h-2">
-                      <div className="bg-green-500 h-2 rounded-full transition-all duration-500" style={{ width: `${Math.min(100, (defensaC2 / 150) * 100)}%` }}></div>
-                    </div>
-                  </div>
-                </div>
-              )}
+              {batallaIniciada && renderStats(miedoC2, ataqueC2, defensaC2)}
 
               <div className="flex flex-row items-center gap-3">
                 {/* BARRA LATERAL DE VIDA */}
                 {batallaIniciada && (
                   <div className="flex flex-col items-center bg-white p-2 rounded-xl border border-gray-300 h-[280px] w-12 justify-between shadow-sm">
-                    <span className="text-[10px] font-black text-red-600">❤️ VIDA</span>
+                    <Heart className="w-8 h-8 text-red-600 stroke-[1.5]" />
                     <div className="w-4 bg-gray-200 rounded-full h-full flex flex-col justify-end overflow-hidden border border-gray-300">
                       <div className="bg-red-600 w-full transition-all duration-500 rounded-b-full" style={{ height: `${(vidaC2 / maxVidaC2) * 100}%` }}></div>
                     </div>

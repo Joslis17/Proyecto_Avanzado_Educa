@@ -38,7 +38,7 @@ function VistaMazo({ seleccionarCarta, verDetalle, mostrarCrear, mazo, eliminarC
 
   return (
     <div >
-      <h1 className='text-gradient-custom mt-2 p-2 text-5xl font-sans font-bold flex text-center justify-center'>
+      <h1 className='text-gradient-custom font-sans mt-2 p-2 text-5xl font-bold flex text-center justify-center'>
         ENTIDADES MALIGNAS
       </h1>
       
