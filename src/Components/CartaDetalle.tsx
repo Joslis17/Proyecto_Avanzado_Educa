@@ -14,8 +14,9 @@ type props = {
   lifePoints: number;
   tipo: string;
   description: string;
-  button: string;
   button2: string;
+  button: any;
+  button2: any;
   noMostrar2: Function;
   onEliminarClick: () => void;
   attributes?: {
@@ -59,7 +60,7 @@ function CartaDetalle({
                         {name}
                     </h1>
                     
-                    <div className='grid grid-cols-4 m-3 gap-10'>
+                    <div className='grid grid-cols-4 m-3 gap-2 text-center justify-center items-center'>
                         <div className='flex items-center gap-2 text-xl'>
                             <span className="font-bold text-gradient-custom">Tipo:</span>
                             <span>{tipo || "No definido"}</span>
@@ -121,17 +122,19 @@ function CartaDetalle({
                 <MdClear size={30} className="text-black"/>
             </button>
             
-            <div className='flex gap-4 mt-6 w-full justify-center'>
+            <div className='flex gap-4 mt-2 w-full justify-center'>
                 <button 
                     onClick={onEliminarClick}
-                    className='flex-1 max-w-[120px] rounded-xl border-2 border-gray-200 p-2 text-white font-semibold bg-[#5c0202] hover:bg-[#940404] hover:scale-105 transition-all duration-300 
-                    shadow-xl cursor-pointer hover:shadow-gray-400'>
+                    className='border-3 rounded-[10px] border-gray-200 p-1 mx-2 my-1 cursor-pointer text-white h-12 w-25
+                    font-semibold text-md bg-red-800 hover:bg-red-600 hover:scale-110 transition-all shadow-lg shadow-gray-400
+                    hover:shadow-red-500 duration-300 flex items-center justify-center'>
                     {button}
                 </button>
                 <button 
                     onClick={() => navigate(`/editar/${idCard}`)}
-                    className='flex-1 max-w-[120px] rounded-xl border-2 border-gray-200 p-2 text-white font-semibold bg-purple-900 hover:bg-purple-700 hover:scale-105 transition-all duration-300 
-                    shadow-md cursor-pointer hover:shadow-gray-400'>
+                    className='border-3 rounded-[10px] border-gray-200 p-1 mx-2 my-1 cursor-pointer text-white h-12 w-25
+                    font-semibold text-md bg-purple-900 hover:bg-purple-700 hover:scale-110 transition-all shadow-lg shadow-gray-400
+                    hover:shadow-purple-500 duration-300 flex items-center justify-center'>
                     {button2}
                 </button>
             </div> 

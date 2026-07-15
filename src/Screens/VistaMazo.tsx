@@ -4,6 +4,8 @@ import { IoAddOutline } from "react-icons/io5";
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
+import { Trash2, FileText, CheckSquare, Skull } from 'lucide-react'
+
 type props = {
   seleccionarCarta: Function
   irBatalla: Function
@@ -36,6 +38,9 @@ function VistaMazo({ seleccionarCarta, verDetalle, mostrarCrear, mazo, eliminarC
     }
   };
 
+  const botonEliminar = <Trash2 size={20} className="text-white" />
+  const botonDetalles = <FileText size={20} className="text-white" />
+
   return (
     <div >
       <h1 className='text-gradient-custom font-sans mt-2 p-2 text-5xl font-bold flex text-center justify-center'>
@@ -46,13 +51,16 @@ function VistaMazo({ seleccionarCarta, verDetalle, mostrarCrear, mazo, eliminarC
      
         {seleccionadas.length > 0 && (
           <button
-            className={`fixed top-5 right-40 text-white font-bold py-3 px-6 rounded-2xl border-gray-200 shadow-2xl z-50 transition-all duration-300
+            className={`fixed top-5 right-50 text-white font-bold py-3 px-6 rounded-2xl border-gray-200 shadow-2xl z-50 transition-all duration-300
               ${seleccionadas.length === 2 
-                ? 'bg-purple-900 hover:bg-purple-700 hover:scale-110 hover:shadow-purple-500' 
-                : ' bg-[#5c0202] hover:bg-[#940404] hover:scale-110'}`}
+                ? 
+                'bg-purple-900 hover:bg-purple-700 hover:scale-110 hover:shadow-purple-500' 
+                : 'bg-[#5c0202] hover:bg-[#940404] hover:scale-110'}`}
             onClick={manejarPelea}
           >
-            {seleccionadas.length === 2 ? '¡PELEAR AHORA!' : `SELECCIONADAS: ${seleccionadas.length}`}
+            {seleccionadas.length === 2 
+            ? <Skull size={30} className="text-white" />
+            : <CheckSquare size={30} className="text-white" />}
           </button>
         )}
       </div >
@@ -72,8 +80,8 @@ function VistaMazo({ seleccionarCarta, verDetalle, mostrarCrear, mazo, eliminarC
                   carta={carta}
                   seleccionarCarta2={seleccionarCarta}
                   verDetalle={() => verDetalle(carta)}
-                  button='Eliminar'
-                  button2='Detalles'
+                  button= {botonEliminar}
+                  button2= {botonDetalles}
                   onEliminar={() => eliminarCarta(carta.idCard)}
                   isSeleccionada={seleccionadas.includes(carta.idCard)}
                   totalSeleccionadas={seleccionadas.length}

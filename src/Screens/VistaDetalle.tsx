@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import './vistaDetalle.css'
 import CartaDetalle from '../Components/CartaDetalle'
+import { Trash2, Edit2 } from 'lucide-react'
 
 type props ={
   carta: any
@@ -22,6 +23,9 @@ function VistaDetalle({carta, noMostrar, onEliminarDetalle}:props) {
     return null;
   }
 
+  const botonEliminar = <Trash2 size={20} className="text-white" />
+  const botonEditar = <Edit2 size={20} className="text-white" />
+
   return (
     <div>
       <CartaDetalle
@@ -37,8 +41,8 @@ function VistaDetalle({carta, noMostrar, onEliminarDetalle}:props) {
         lifePoints={carta.lifePoints}
         description={carta.description}
         attributes={carta.attributes || {}}
-        button='Eliminar'
-        button2='Editar'
+        button={botonEliminar}
+        button2={botonEditar}
       />
     </div>
   )

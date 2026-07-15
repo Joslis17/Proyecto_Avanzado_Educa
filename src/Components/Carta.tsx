@@ -3,8 +3,8 @@ import './carta.css'
 
 type props = {
   carta: any;
-  button: string;
-  button2: string;
+  button: any;
+  button2: any;
   seleccionarCarta2: Function,
   verDetalle?: () => void,
   onEliminar?: () => void,
@@ -109,11 +109,12 @@ const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
       {/* RENDERIZADO CONDICIONAL: Si ocultarBotones es true, este div no se genera en el DOM */}
       {!ocultarBotones && (
-        <div className='align-center justify-center flex mt-5 gap-2'>
+        <div className='flex items-center aling-center justify-center gap-1'>
             <button 
               disabled={isSeleccionada}
-              className='border-3 rounded-[10px] border-gray-200 p-1 mx-2 my-1 cursor-pointer text-white h-11 w-25
-              font-semibold text-md bg-red-800 hover:bg-red-600 hover:scale-110 transition-all shadow-lg'
+              className='border-3 rounded-[10px] border-gray-200 p-1 mx-2 my-1 cursor-pointer text-white h-12 w-25
+              font-semibold text-md bg-red-800 hover:bg-red-600 hover:scale-110 transition-all shadow-lg shadow-gray-400
+              hover:shadow-red-500 duration-300 flex items-center justify-center'
               onClick={(e) => { e.stopPropagation(); onEliminar?.(); }}
               >
               {button}
@@ -125,8 +126,9 @@ const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
                 seleccionarCarta2({...carta});
                 verDetalle?.();
               }}
-              className='border-3 rounded-[10px] border-gray-200 p-1 mx-2 my-1 cursor-pointer text-white h-11 w-25
-                font-semibold text-md bg-purple-900 hover:bg-purple-700 hover:scale-110 transition-all shadow-lg'>
+              className='border-3 rounded-[10px] border-gray-200 p-1 mx-2 my-1 cursor-pointer text-white h-12 w-25
+                font-semibold text-md bg-purple-900 hover:bg-purple-700 hover:scale-110 transition-all shadow-lg shadow-gray-400
+                hover:shadow-purple-500 duration-300 flex items-center justify-center'>
               {button2}
             </button>
         </div>    
