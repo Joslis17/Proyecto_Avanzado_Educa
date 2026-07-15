@@ -1,203 +1,43 @@
 [
-    {
-        "id": 1,
-        "nombre": "Susurro Oscuro",
-        "ataque": 20
-    },
-    {
-        "id": 2,
-        "nombre": "Garra Fantasmal",
-        "ataque": 80
-    },
-    {
-        "id": 3,
-        "nombre": "Sombra Asfixiante",
-        "ataque": 30
-    },
-    {
-        "id": 4,
-        "nombre": "Grito del Inframundo",
-        "ataque": 50
-    },
-    {
-        "id": 5,
-        "nombre": "Embestida Demoníaca",
-        "ataque": 150
-    },
-    {
-        "id": 6,
-        "nombre": "Mirada Vacía",
-        "ataque": 40
-    },
-    {
-        "id": 7,
-        "nombre": "Cadenas de Ánimas",
-        "ataque": 120
-    },
-    {
-        "id": 8,
-        "nombre": "Pacto de Sangre",
-        "ataque": 200
-    },
-    {
-        "id": 9,
-        "nombre": "Pesadilla Lúcida",
-        "ataque": 60
-    },
-    {
-        "id": 10,
-        "nombre": "Drenaje de Esencia",
-        "ataque": 100
-    },
-    {
-        "id": 11,
-        "nombre": "Maldición de la Bruja",
-        "ataque": 45
-    },
-    {
-        "id": 12,
-        "nombre": "Explosión de Odio",
-        "ataque": 220
-    },
-    {
-        "id": 13,
-        "nombre": "Invocar Poltergeist",
-        "ataque": 35
-    },
-    {
-        "id": 14,
-        "nombre": "Niebla de Almas",
-        "ataque": 55
-    },
-    {
-        "id": 15,
-        "nombre": "Corte de la Parca",
-        "ataque": 180
-    },
-    {
-        "id": 16,
-        "nombre": "Risa Maníaca",
-        "ataque": 25
-    },
-    {
-        "id": 17,
-        "nombre": "Tumba Profana",
-        "ataque": 240
-    },
-    {
-        "id": 18,
-        "nombre": "Ojos Rojos",
-        "ataque": 30
-    },
-    {
-        "id": 19,
-        "nombre": "Corrosión Ácida",
-        "ataque": 110
-    },
-    {
-        "id": 20,
-        "nombre": "Garra del Abismo",
-        "ataque": 190
-    },
-    {
-        "id": 21,
-        "nombre": "Telequinesis Oscura",
-        "ataque": 40
-    },
-    {
-        "id": 22,
-        "nombre": "Infierno Ardiente",
-        "ataque": 250
-    },
-    {
-        "id": 23,
-        "nombre": "Tótem del Miedo",
-        "ataque": 50
-    },
-    {
-        "id": 24,
-        "nombre": "Filo Maldito",
-        "ataque": 130
-    },
-    {
-        "id": 25,
-        "nombre": "Susurros del Más Allá",
-        "ataque": 35
-    },
-    {
-        "id": 26,
-        "nombre": "Castigo de Ultratumba",
-        "ataque": 210
-    },
-    {
-        "id": 27,
-        "nombre": "Aura de Desolación",
-        "ataque": 45
-    },
-    {
-        "id": 28,
-        "nombre": "Látigo de Espinas",
-        "ataque": 90
-    },
-    {
-        "id": 29,
-        "nombre": "Velo de Muerte",
-        "ataque": 60
-    },
-    {
-        "id": 30,
-        "nombre": "Golpe de la Bestia",
-        "ataque": 160
-    },
-    {
-        "id": 31,
-        "nombre": "Ritual de Sangre",
-        "ataque": 50
-    },
-    {
-        "id": 32,
-        "nombre": "Escudo de Cráneos",
-        "ataque": 70
-    },
-    {
-        "id": 33,
-        "nombre": "Llanto del Condenado",
-        "ataque": 30
-    },
-    {
-        "id": 34,
-        "nombre": "Cuchillas Invisibles",
-        "ataque": 140
-    },
-    {
-        "id": 35,
-        "nombre": "Marca de Lucifer",
-        "ataque": 55
-    },
-    {
-        "id": 36,
-        "nombre": "Tormenta de Sombras",
-        "ataque": 200
-    },
-    {
-        "id": 37,
-        "nombre": "Mano del Demonio",
-        "ataque": 40
-    },
-    {
-        "id": 38,
-        "nombre": "Impacto Abismal",
-        "ataque": 230
-    },
-    {
-        "id": 39,
-        "nombre": "Eco de Pesadilla",
-        "ataque": 45
-    },
-    {
-        "id": 40,
-        "nombre": "Juicio Final",
-        "ataque": 250
-    }
+    { "id": 1, "nombre": "Susurro Oscuro", "ataque": 20 },
+    { "id": 2, "nombre": "Garra Fantasmal", "ataque": 80 },
+    { "id": 3, "nombre": "Sombra Asfixiante", "ataque": 30 },
+    { "id": 4, "nombre": "Grito del Inframundo", "ataque": 50 },
+    { "id": 5, "nombre": "Embestida Demoníaca", "ataque": 150 },
+    { "id": 6, "nombre": "Mirada Vacía", "ataque": 40 },
+    { "id": 7, "nombre": "Cadenas de Ánimas", "ataque": 120 },
+    { "id": 8, "nombre": "Pacto de Sangre", "ataque": 200 },
+    { "id": 9, "nombre": "Pesadilla Lúcida", "ataque": 60 },
+    { "id": 10, "nombre": "Drenaje de Esencia", "ataque": 100 },
+    { "id": 11, "nombre": "Maldición de la Bruja", "ataque": 45 },
+    { "id": 12, "nombre": "Explosión de Odio", "ataque": 200 },
+    { "id": 13, "nombre": "Invocar Poltergeist", "ataque": 35 },
+    { "id": 14, "nombre": "Niebla de Almas", "ataque": 55 },
+    { "id": 15, "nombre": "Corte de la Parca", "ataque": 180 },
+    { "id": 16, "nombre": "Risa Maníaca", "ataque": 25 },
+    { "id": 17, "nombre": "Tumba Profana", "ataque": 200 },
+    { "id": 18, "nombre": "Ojos Rojos", "ataque": 30 },
+    { "id": 19, "nombre": "Corrosión Ácida", "ataque": 110 },
+    { "id": 20, "nombre": "Garra del Abismo", "ataque": 190 },
+    { "id": 21, "nombre": "Telequinesis Oscura", "ataque": 40 },
+    { "id": 22, "nombre": "Infierno Ardiente", "ataque": 200 },
+    { "id": 23, "nombre": "Tótem del Miedo", "ataque": 50 },
+    { "id": 24, "nombre": "Filo Maldito", "ataque": 130 },
+    { "id": 25, "nombre": "Susurros del Más Allá", "ataque": 35 },
+    { "id": 26, "nombre": "Castigo de Ultratumba", "ataque": 200 },
+    { "id": 27, "nombre": "Aura de Desolación", "ataque": 45 },
+    { "id": 28, "nombre": "Látigo de Espinas", "ataque": 90 },
+    { "id": 29, "nombre": "Velo de Muerte", "ataque": 60 },
+    { "id": 30, "nombre": "Golpe de la Bestia", "ataque": 160 },
+    { "id": 31, "nombre": "Ritual de Sangre", "ataque": 50 },
+    { "id": 32, "nombre": "Escudo de Cráneos", "ataque": 70 },
+    { "id": 33, "nombre": "Llanto del Condenado", "ataque": 30 },
+    { "id": 34, "nombre": "Cuchillas Invisibles", "ataque": 140 },
+    { "id": 35, "nombre": "Marca de Lucifer", "ataque": 55 },
+    { "id": 36, "nombre": "Tormenta de Sombras", "ataque": 200 },
+    { "id": 37, "nombre": "Mano del Demonio", "ataque": 40 },
+    { "id": 38, "nombre": "Impacto Abismal", "ataque": 200 },
+    { "id": 39, "nombre": "Eco de Pesadilla", "ataque": 45 },
+    { "id": 40, "nombre": "Juicio Final", "ataque": 200 }
    
 ]
