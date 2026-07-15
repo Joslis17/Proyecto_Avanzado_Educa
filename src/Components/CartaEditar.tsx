@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { MdClear } from "react-icons/md";
 import habilidadesData from '../../habilidades.json';
 import { Swords, Shield, Heart } from 'lucide-react'
 
