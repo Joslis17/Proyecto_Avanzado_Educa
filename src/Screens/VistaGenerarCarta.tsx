@@ -8,7 +8,6 @@ function VistaGenerarCarta() {
   const [prompt, setPrompt] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [cartaGenerada, setCartaGenerada] = useState<any>(null);
   const navigate = useNavigate();
   const [mostrarAyuda, setMostrarAyuda] = useState(false);
 
@@ -108,9 +107,8 @@ function VistaGenerarCarta() {
       });
 
       if (!respuesta.ok) throw new Error("Error en la IA");
-      
-      const data = await respuesta.json();
-      setCartaGenerada(data);
+      await respuesta.json();
+      navigate('/');
     } catch (err) {
       setError("No se pudo generar. Revisa tu prompt o conexión.");
     } finally {
@@ -173,21 +171,6 @@ function VistaGenerarCarta() {
 
       {error && <p className="text-red-500 mt-4">{error}</p>}
       
-      {cartaGenerada && (
-        <div className="mt-8 border-2 border-purple-200 p-6 rounded-2xl bg-white shadow-xl">
-          <h3 className="font-bold text-2xl text-purple-900 mb-2">{cartaGenerada.name}</h3>
-          <div className="flex gap-4 mb-4">
-            <span className="bg-purple-100 px-3 py-1 rounded-full text-sm font-bold">Tipo: {cartaGenerada.attributes?.tipo}</span>
-          </div>
-          <img src={cartaGenerada.pictureUrl} alt="Carta" className="w-full h-48 object-cover rounded-lg mb-4" />
-          <p className="text-gray-700 mb-2 italic">"{cartaGenerada.description}"</p>
-          <div className="grid grid-cols-3 gap-2 text-center mt-4">
-            <div className="bg-gray-100 p-2 rounded">ATK: {cartaGenerada.attack}</div>
-            <div className="bg-gray-100 p-2 rounded">DEF: {cartaGenerada.defense}</div>
-            <div className="bg-gray-100 p-2 rounded">HP: {cartaGenerada.lifePoints}</div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
