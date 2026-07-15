@@ -136,10 +136,14 @@ function CampoBatalla() {
 
     let danoFinal = 0;
 
-    // 2. REGLA: Si el miedo es igual a 50, vida baja 20
-    if (miedoActual === 50) {
-      danoFinal = 20;
+    // 2. REGLA: Si el miedo es mayor o igual a 100 (tope), daño crítico
+    if (miedoActual >= 100) {
+      danoFinal = 150; 
     } 
+      // Si el miedo es mayor o igual a 50, daño moderado
+    else if (miedoActual >= 50) {
+      danoFinal = 50;
+    }
     // 3. REGLA: Si la defensa es 0, ataque directamente a la vida (daño base)
     else if (defensaActual <= 0) {
       danoFinal = ataqueBaseEmisor;
@@ -148,8 +152,11 @@ function CampoBatalla() {
     else {
       const valorActualizado = valorHabilidad >= 50 ? defensaActual : miedoActual;
       // Fórmula: DañoBase * (Ataque / (Ataque + ValorActualizado + 5))
-      danoFinal = Math.floor(ataqueBaseEmisor * (valorHabilidad / (valorHabilidad + valorActualizado + 50)));
+      danoFinal = Math.floor(ataqueBaseEmisor * (valorHabilidad / (valorHabilidad + valorActualizado + 200)));
     }
+    // Aplicamos el azar AL FINAL, después de que el daño ya fue decidido
+    const variacion = 0.9 + Math.random() * 0.2; 
+    danoFinal = Math.floor(danoFinal * variacion);
 
     // Asegurar que el daño sea al menos 0
     const danoReal = Math.max(0, danoFinal);
