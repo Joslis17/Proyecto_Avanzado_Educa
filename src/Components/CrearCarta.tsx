@@ -166,24 +166,32 @@ const manejarClickCrear = async () => {
             {/* Columna Izquierda: Nombre y Tipo */}
             <div className='flex flex-col gap-3'>
               <div className='flex gap-1'>
-                <label className='font-semibold text-md text-gray-700'>Nombre:</label>
-                <input type="text" placeholder='Ingresa el nombre' className='p-1.5 border rounded-lg border-gray-300 text-sm' value={name} onChange={(e) => setName(e.target.value)} />
+                <label className='font-semibold text-md text-purple-700'>Nombre:</label>
+                <input type="text" placeholder='Ingresa el nombre'
+                  className='p-1.5 border rounded-lg border-purple-700 text-sm shadow-md hover:shadow-gray-400 hover:scale-100 focus:outline-none focus:ring-1 focus:ring-purple-700 transition-all duration-300'
+                  value={name} onChange={(e) => setName(e.target.value)} />
               </div>
               {nameError && <p className="text-red-500 text-[12px] italic">{nameError}</p>}
 
               <div className='flex gap-1'>
-                <label className='font-semibold text-md text-gray-700'>Tipo:</label>
-                <input type="text" placeholder='Ingresa el tipo' className='p-1.5 border rounded-lg border-gray-300 text-sm' value={tipo} onChange={(e) => setTipo(e.target.value)} />
+                <label className='font-semibold text-md text-purple-700'>Tipo:</label>
+                <input type="text" placeholder='Ingresa el tipo' 
+                className='p-1.5 border rounded-lg border-purple-700 text-sm shadow-md hover:shadow-gray-400 hover:scale-100 focus:outline-none focus:ring-1 focus:ring-purple-700 transition-all duration-300' 
+                value={tipo} onChange={(e) => setTipo(e.target.value)} />
               </div>
               {tipoError && <p className="text-red-500 text-[12px] italic">{tipoError}</p>}
             </div>
 
             {/* Columna Derecha: Estadísticas (Ataque, Defensa, Vida) */}
-            <div className='flex flex-row gap-2 items-start border border-gray-300 rounded-lg px-4 py-3'>
+            <div className='flex flex-row gap-2 items-start border border-gray-400 rounded-lg px-4 py-3
+            shadow-md hover:shadow-gray-400 transition-all duration-300'>
               {[
-                { val: attack, set: setAttack, err: attackError, icon: <Swords size={25} className="text-red-500" /> },
-                { val: defense, set: setDefense, err: defenseError, icon: <Shield size={25} className="text-blue-500" /> },
-                { val: lifePoints, set: setLifePoints, err: lifePointsError, icon: <Heart size={25} className="text-green-500" /> }
+                { val: attack, set: setAttack, err: attackError, icon: 
+                <Swords size={25} className="text-red-500" /> },
+                { val: defense, set: setDefense, err: defenseError, icon: 
+                <Shield size={25} className="text-blue-500" /> },
+                { val: lifePoints, set: setLifePoints, err: lifePointsError, icon: 
+                <Heart size={25} className="text-green-500" /> }
               ].map((item, idx) => (
                 <div key={idx} className='flex flex-col gap-1 items-center flex-1'>
                   <div className="flex items-center justify-center">
@@ -191,7 +199,8 @@ const manejarClickCrear = async () => {
                   </div>
                   <input 
                     type="number" 
-                    className='p-1.5 w-full text-center border rounded-lg border-gray-300 text-sm' 
+                    className='p-1.5 w-full text-center border-2 shadow-purple-500 shadow-md rounded-lg border-purple-700 text-sm hover:scale-105 transition-all
+                     duration-300 focus:outline-none focus:ring-1 focus:ring-purple-700' 
                     value={item.val} 
                     onChange={(e) => item.set(Number(e.target.value))} 
                   />
@@ -203,8 +212,9 @@ const manejarClickCrear = async () => {
 
           {/* Resto del formulario (Habilidades, Link, Descripción) */}
           <div className='flex flex-col gap-2'>
-            <label className='font-semibold text-md text-gray-700'>Habilidades Especiales:</label>
-            <div className='grid grid-cols-1 sm:grid-cols-3 gap-3'>
+            <label className='font-semibold text-md text-purple-700'
+            >Habilidades Especiales:</label>
+            <div className='grid grid-cols-1 sm:grid-cols-3 gap-3 border-2 border-purple-700 rounded-lg p-3 shadow-md hover:shadow-gray-400 transition-all duration-300'>
               {renderSelectHabilidad(habilidad1, setHabilidad1, habilidad1Error)}
               {renderSelectHabilidad(habilidad2, setHabilidad2, habilidad2Error)}
               {renderSelectHabilidad(habilidad3, setHabilidad3, habilidad3Error)}
@@ -212,26 +222,30 @@ const manejarClickCrear = async () => {
           </div>
 
           <div className='flex flex-col gap-1'>
-            <label className='font-semibold text-md text-gray-700'>Link de Imagen:</label>
-            <input type="text" placeholder='URL' className='p-1.5 border rounded-lg border-gray-300 text-sm' value={pictureUrl} onChange={(e) => setPictureUrl(e.target.value)} />
+            <label className='font-semibold text-md text-purple-700'>Link de Imagen:</label>
+            <input type="text" placeholder='URL' 
+            className='p-1.5 border rounded-lg border-purple-700 text-sm focus:outline-none focus:ring-1 shadow-md hover:shadow-gray-400 hover:scale-100 transition-all duration-300
+            focus:ring-purple-700' value={pictureUrl} onChange={(e) => setPictureUrl(e.target.value)} />
             {pictureUrlError && <p className="text-red-500 text-[12px] italic">{pictureUrlError}</p>}
           </div>
 
           <div className='flex flex-col gap-1'>
-            <label className='font-semibold text-md text-gray-700'>Descripción:</label>
-            <textarea className='p-1.5 border rounded-lg border-gray-300 h-16 text-sm' placeholder='Breve descripción' value={description} onChange={(e) => setDescription(e.target.value)} />
+            <label className='font-semibold text-md text-purple-700'>Descripción:</label>
+            <textarea className='p-1.5 border rounded-lg border-purple-700 h-16 text-sm focus:outline-none focus:ring-1 shadow-md hover:shadow-gray-400 hover:scale-100 transition-all duration-300
+            focus:ring-purple-700' placeholder='Breve descripción' value={description} onChange={(e) => setDescription(e.target.value)} />
             {descriptionError && <p className="text-red-500 text-[12px] italic">{descriptionError}</p>}
           </div>
 
           <button onClick={manejarClickCrear}
-            className='w-full bg-purple-900 text-white font-bold py-2 rounded-lg hover:bg-purple-700 transition-all text-sm'>
+            className='w-full bg-purple-800 text-white font-bold py-2 rounded-lg hover:bg-purple-600 border-2 border-purple-900
+            transition-all text-sm hover:scale-105 duration-300 shadow-lg hover:shadow-purple-400 shadow-gray-400'>
             CREAR CARTA
           </button>
         </div>
 
         <button onClick={() => noSeMuestra()}
-          className='absolute top-2 right-2 bg-white border border-gray-200 rounded-full p-0.5 hover:bg-gray-100'>
-          <MdClear size={24} className="text-black"/>
+          className='absolute top-4 right-4 bg-white border-3 border-gray-400 rounded-full p-1 hover:bg-gray-100 hover:scale-105 transition-all shadow-md z-10 cursor-pointer'>
+          <MdClear size={30} className="text-black"/>
         </button>
       </div>
     </div>
