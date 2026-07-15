@@ -85,14 +85,14 @@ function VistaMazo({ seleccionarCarta, verDetalle, mostrarCrear, mazo, eliminarC
         </div>
       </div>
       <button onClick={() => mostrarCrear()}
-        className='fixed top-5 right-10 bg-white border-3 border-gray-400/50 rounded-full p-1 m-2 z-40
-         cursor-pointer hover:bg-gray-200 hover:scale-115 transition-all duration-400'>
+        className='fixed top-5 right-10 bg-white border-3 border-gray-300 rounded-full p-1 m-2 z-40
+         cursor-pointer hover:bg-gray-100 hover:scale-115 transition-all duration-400 shadow hover:shadow-gray-400'>
         <IoAddOutline size={40} color={'#000000'} />
       </button>
       <button 
         onClick={() => navigate('/generar-carta-ia')}
         className='fixed top-5 right-30 bg-gradient-to-r from-purple-800 to-pink-600 text-white
-        cursor-pointer rounded-xl p-4 shadow-lg z-40 hover:scale-110 transition-all'>
+        cursor-pointer rounded-lg p-4 shadow-lg shadow-gray-300 hover:scale-110 transition-all'>
         IA
       </button>
     </div>

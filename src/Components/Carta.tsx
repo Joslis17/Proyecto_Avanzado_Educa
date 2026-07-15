@@ -34,8 +34,8 @@ const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [blockClick, setBlockClick] = useState(false);
 
   const colorClase = totalSeleccionadas === 2 
-    ? 'border-violet-900 shadow-violet-800' 
-    : 'border-red-900 shadow-red-800';
+    ? 'border-4 border-violet-700 shadow-violet-600 shadow-xl hover:shadow-violet-800 hover:shadow-2xl transition-all duration-300' 
+    : 'border-2 border-red-700 shadow-red-400 shadow-xl hover:shadow-red-800 hover:shadow-2xl transition-all duration-300';
 
   const handleMouseDown = () => {
     setBlockClick(false);
@@ -70,13 +70,12 @@ const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
       className={`bg-white p-3 rounded-2xl shadow-lg transition-all duration-500 
         ${isSeleccionada 
           ? `border-3 scale-105 ${colorClase}`
-          : 'shadow-gray-400 hover:scale-106'} 
+          : 'shadow-gray-400 hover:scale-106 shadow-xl hover:shadow-purple-700 transition-all duration-300'} 
         ${isPressing ? 'opacity-70 scale-95' : 'opacity-100'}`}
     >
       <div 
-        className='w-50 h-90 border border-white rounded-2xl bg-center bg-cover m-auto my-4 
-        shadow-[0_0_20px_rgba(110,110,110)] hover:shadow-purple-900 
-        transition-shadow duration-400 cursor-pointer' 
+        className='relative w-50 h-90 border border-white rounded-2xl bg-center bg-cover m-auto my-4 
+        shadow-[5px_5px_25px_rgba(110,110,110)] transition-shadow duration-400 cursor-pointer overflow-hidden'
         onClick={() => {
           if (!blockClick) {
             seleccionarCarta2({
@@ -99,11 +98,11 @@ const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
         }}
         style={{backgroundImage: `url(${carta.pictureUrl})`}}>
 
-        <h3 className=' m-3 text-white font-bold text-2xl bg-gray-400/40 rounded-xl w-10 text-center'>
+        <h3 className='absolute top-3 left-3 text-white font-bold text-lg bg-gray-400/40 rounded-xl px-2 text-center'>
           {carta.idCard}
         </h3>
 
-        <h3 className='text-center text-white font-bold mt-65 text-2xl bg-gray-400/40 '>
+        <h3 className='absolute bottom-0 left-0 right-0 p-3 text-white font-bold text-xl bg-gradient-to-t from-white/60 to-transparent text-center break-words'>
           {carta.name}
         </h3>
       </div>
@@ -114,7 +113,7 @@ const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
             <button 
               disabled={isSeleccionada}
               className='border-3 rounded-[10px] border-gray-200 p-1 mx-2 my-1 cursor-pointer text-white h-11 w-25
-              font-semibold text-md bg-[#5c0202] hover:bg-[#940404] hover:scale-110 transition-all shadow-lg'
+              font-semibold text-md bg-red-800 hover:bg-red-600 hover:scale-110 transition-all shadow-lg'
               onClick={(e) => { e.stopPropagation(); onEliminar?.(); }}
               >
               {button}
