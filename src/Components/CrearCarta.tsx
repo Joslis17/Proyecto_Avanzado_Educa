@@ -2,6 +2,8 @@ import './crearCarta.css'
 import { useState } from 'react';
 
 import habilidadesData from '../../habilidades.json';
+import { Ghost, Swords, Shield, Heart } from 'lucide-react'
+import { MdClear } from "react-icons/md";
 
 type CrearCartaProps = {
   agregarCarta: (carta: any) => void;
@@ -146,160 +148,93 @@ const manejarClickCrear = async () => {
     );
 
   return (
-    <div className='min-h-screen bg-gray-100 flex items-center justify-center p-4'>
-      {/* Contenedor principal adaptable: max-w-6xl reemplaza w-290 */}
-      <div className='bg-white rounded-4xl shadow-xl shadow-purple-500 p-3 md:p-6 w-full max-w-5xl h-auto'>
-        
-        <div className='flex flex-col lg:flex-row gap-4'>
-          
-          {/* SECCIÓN IZQUIERDA: Imagen y Título */}
-          <div className='flex flex-col items-center lg:w-1/3'>
+    <div className='min-h-screen flex items-center justify-center p-4 bg-gray-200 backdrop-blur-sm fixed inset-0 z-50 text-black'>
+      {/* Reducimos p-8 a p-4 y max-w-5xl a max-w-3xl para que sea más estrecho */}
+      <div className='relative bg-white rounded-3xl shadow-xl shadow-purple-500 p-4 md:p-6 w-full max-w-xl h-auto overflow-y-auto max-h-[95vh] flex flex-col gap-4'>
+        
+        <div className='flex items-center justify-center w-full'>
+          {/* Título un poco más pequeño */}
+          <h1 className='text-gradient-custom text-3xl font-bold text-center'>
+            CREA TUS PROPIAS CARTAS
+          </h1>
+        </div>
 
-            <h1 className='text-gradient-custom text-4xl md:text-6xl lg:text-7xl font-bold p-2 mb-5 text-center lg:text-left leading-tight'>
-              CREA TUS PROPIAS CARTAS
-            </h1>
-
-          </div>
-
-          {/* SECCIÓN DERECHA: Formulario */}
-          <div className='flex-1 flex flex-col gap-3 p-2'>
-            
-            {/* Nombre y Tipo */}
-            <div className='flex flex-col sm:flex-row gap-4 justify-center'>
-              
-              <div className='flex-1 flex flex-col p-2 border-2 border-purple-800 rounded-2xl hover:scale-[1.02] transition-transform duration-400 shadow-lg hover:shadow-purple-500'>
-
-                <h2 className='mt-[3px] mb-1 text-ml text-center font-semibold'>Nombre:</h2>
-                
-                <div className='flex justify-center'>
-
-                  <input type="text" placeholder='Ingresa el nombre' 
-                  className='text-center mx-2 mb-2 p-1 w-full border rounded-lg border-gray-400 hover:bg-gray-50'
-                  value={name} onChange={(e) => setName(e.target.value)} />
-
-                </div>
-                
-                {nameError && <p className="text-red-500 text-[12px] text-center italic">{nameError}</p>}
-
-              </div>
-
-              <div className='flex-1 flex flex-col p-2 border-2 border-purple-800 rounded-2xl hover:scale-[1.02] transition-transform duration-400 shadow-lg hover:shadow-purple-500'>
-
-                <h2 className='mt-[3px] mb-1 text-ml text-center font-semibold'>Tipo:</h2>
-                
-                <div className='flex justify-center'>
-
-                  <input type="text" placeholder='Ingresa el tipo' 
-                  className='text-center mx-2 mb-2 p-1 w-full border rounded-lg border-gray-400 hover:bg-gray-50'
-                  value={tipo} onChange={(e) => setTipo(e.target.value)} />
-
-                </div>
-                
-                {tipoError && <p className="text-red-500 text-[12px] text-center italic">{tipoError}</p>}
-
-              </div>
-
-            </div>
-
-            {/* Ataque, Defensa y Vida */}
-            <div className='flex flex-col md:flex-row gap-4 justify-center'>
-
-              <div className='p-2 border-2 border-purple-800 rounded-2xl hover:scale-[1.02] transition-transform duration-400 shadow-lg hover:shadow-purple-500'>
-                <div className='flex-1 flex items-center justify-center '>
-
-                  <h2 className='text-sm font-semibold mr-2'>Ataque (min 100, max 500):</h2>
-                  
-                  <input type="number"
-                  className='text-center p-1 w-16 border rounded-lg border-gray-400 hover:bg-gray-50'
-                  value={attack} onChange={(e) => setAttack(Number(e.target.value))} 
-                  onBlur={(e) => setAttack(Math.max(100, Math.min(500, Number(e.target.value))))} />
-
-                </div>
-                  {attackError && <p className="text-red-500 text-[11px] text-center italic">{attackError}</p>}
+        <div className='w-full flex flex-col gap-3 py-2'>
+          {/* Contenedor principal con grid de 2 columnas para organizar izquierda y derecha */}
+          <div className='grid grid-cols-2 gap-4'>
+            
+            {/* Columna Izquierda: Nombre y Tipo */}
+            <div className='flex flex-col gap-3'>
+              <div className='flex gap-1'>
+                <label className='font-semibold text-md text-gray-700'>Nombre:</label>
+                <input type="text" placeholder='Ingresa el nombre' className='p-1.5 border rounded-lg border-gray-300 text-sm' value={name} onChange={(e) => setName(e.target.value)} />
               </div>
+              {nameError && <p className="text-red-500 text-[12px] italic">{nameError}</p>}
 
-              <div className='p-2 border-2 border-purple-800 rounded-2xl hover:scale-[1.02] transition-transform duration-400 shadow-lg hover:shadow-purple-500'>
-                <div className='flex-1 flex items-center justify-center '>
-
-                  <h2 className='text-sm font-semibold mr-2'>Defensa (min 300, max 500):</h2>
-                  
-                  <input type="number"
-                  className='text-center p-1 w-16 border rounded-lg border-gray-400 hover:bg-gray-50'
-                  value={defense} onChange={(e) => setDefense(Number(e.target.value))} 
-                  onBlur={(e) => setDefense(Math.max(300, Math.min(500, Number(e.target.value))))} />
-
-                </div>
-                  {defenseError && <p className="text-red-500 text-[11px] text-center italic">{defenseError}</p>}
+              <div className='flex gap-1'>
+                <label className='font-semibold text-md text-gray-700'>Tipo:</label>
+                <input type="text" placeholder='Ingresa el tipo' className='p-1.5 border rounded-lg border-gray-300 text-sm' value={tipo} onChange={(e) => setTipo(e.target.value)} />
               </div>
-              
+              {tipoError && <p className="text-red-500 text-[12px] italic">{tipoError}</p>}
+            </div>
 
-              <div className='p-2 border-2 border-purple-800 rounded-2xl hover:scale-[1.02] transition-transform duration-400 shadow-lg hover:shadow-purple-500'>
-                <div className='flex-1 flex items-center justify-center '>
-
-                  <h2 className='text-sm font-semibold mr-2'>Vida (min 60,max 100):</h2>
-                  
-                  <input type="number"
-                  className='text-center p-1 w-16 border rounded-lg border-gray-400 hover:bg-gray-50'
-                  value={lifePoints} onChange={(e) => setLifePoints(Number(e.target.value))} 
-                  onBlur={(e) => setLifePoints(Math.max(60, Math.min(100, Number(e.target.value))))} />
-
-                </div>
-                  {lifePointsError && <p className="text-red-500 text-[11px] text-center italic">{lifePointsError}</p>}
-              </div>
-            </div>
-
-            {/* Habilidades Especiales */}
-      <div className='py-3 px-2 border-2 border-purple-800 rounded-2xl shadow-lg'>
-          <h2 className='mb-2 text-ml text-center font-semibold'>Habilidades:</h2>
-          <div className='grid grid-cols-1 sm:grid-cols-3 gap-4'>
-            {renderSelectHabilidad(habilidad1, setHabilidad1, habilidad1Error)}
-            {renderSelectHabilidad(habilidad2, setHabilidad2, habilidad2Error)}
-            {renderSelectHabilidad(habilidad3, setHabilidad3, habilidad3Error)}
+            {/* Columna Derecha: Estadísticas (Ataque, Defensa, Vida) */}
+            <div className='flex flex-row gap-2 items-start border border-gray-300 rounded-lg px-4 py-3'>
+              {[
+                { val: attack, set: setAttack, err: attackError, icon: <Swords size={25} className="text-red-500" /> },
+                { val: defense, set: setDefense, err: defenseError, icon: <Shield size={25} className="text-blue-500" /> },
+                { val: lifePoints, set: setLifePoints, err: lifePointsError, icon: <Heart size={25} className="text-green-500" /> }
+              ].map((item, idx) => (
+                <div key={idx} className='flex flex-col gap-1 items-center flex-1'>
+                  <div className="flex items-center justify-center">
+                    {item.icon}
+                  </div>
+                  <input 
+                    type="number" 
+                    className='p-1.5 w-full text-center border rounded-lg border-gray-300 text-sm' 
+                    value={item.val} 
+                    onChange={(e) => item.set(Number(e.target.value))} 
+                  />
+                  {item.err && <p className="text-red-500 text-[10px] italic text-center leading-tight">{item.err}</p>}
+                </div>
+              ))}
+            </div>
           </div>
+
+          {/* Resto del formulario (Habilidades, Link, Descripción) */}
+          <div className='flex flex-col gap-2'>
+            <label className='font-semibold text-md text-gray-700'>Habilidades Especiales:</label>
+            <div className='grid grid-cols-1 sm:grid-cols-3 gap-3'>
+              {renderSelectHabilidad(habilidad1, setHabilidad1, habilidad1Error)}
+              {renderSelectHabilidad(habilidad2, setHabilidad2, habilidad2Error)}
+              {renderSelectHabilidad(habilidad3, setHabilidad3, habilidad3Error)}
+            </div>
+          </div>
+
+          <div className='flex flex-col gap-1'>
+            <label className='font-semibold text-md text-gray-700'>Link de Imagen:</label>
+            <input type="text" placeholder='URL' className='p-1.5 border rounded-lg border-gray-300 text-sm' value={pictureUrl} onChange={(e) => setPictureUrl(e.target.value)} />
+            {pictureUrlError && <p className="text-red-500 text-[12px] italic">{pictureUrlError}</p>}
+          </div>
+
+          <div className='flex flex-col gap-1'>
+            <label className='font-semibold text-md text-gray-700'>Descripción:</label>
+            <textarea className='p-1.5 border rounded-lg border-gray-300 h-16 text-sm' placeholder='Breve descripción' value={description} onChange={(e) => setDescription(e.target.value)} />
+            {descriptionError && <p className="text-red-500 text-[12px] italic">{descriptionError}</p>}
+          </div>
+
+          <button onClick={manejarClickCrear}
+            className='w-full bg-purple-900 text-white font-bold py-2 rounded-lg hover:bg-purple-700 transition-all text-sm'>
+            CREAR CARTA
+          </button>
+        </div>
+
+        <button onClick={() => noSeMuestra()}
+          className='absolute top-2 right-2 bg-white border border-gray-200 rounded-full p-0.5 hover:bg-gray-100'>
+          <MdClear size={24} className="text-black"/>
+        </button>
+      </div>
     </div>
-
-            {/* Link e Imagen */}
-            <div className='flex flex-col sm:flex-row gap-4 justify-center'>
-              
-              <div className='flex-1 flex flex-col p-2 border-2 border-purple-800 rounded-2xl hover:scale-[1.02] transition-transform duration-400 shadow-lg hover:shadow-purple-500'>
-
-                <h2 className='mb-1 text-ml text-center font-semibold'>Link de Imagen:</h2>
-                
-                <input type="text" placeholder='URL de imagen' 
-                className='text-center p-1 w-full border rounded-lg border-gray-400 hover:bg-gray-50'
-                value={pictureUrl} onChange={(e) => setPictureUrl(e.target.value)} />
-                {pictureUrlError && <p className="text-red-500 text-[12px] text-center italic">{pictureUrlError}</p>}
-
-              </div>
-
-              <div className='flex-1 flex flex-col p-2 border-2 border-purple-800 rounded-2xl hover:scale-[1.02] transition-transform duration-400 shadow-lg hover:shadow-purple-500'>
-
-                <h2 className='mb-1 text-ml text-center font-semibold'>Descripción:</h2>
-                
-                <input type="text" placeholder='Breve descripción' 
-                className='text-center p-1 w-full border rounded-lg border-gray-400 hover:bg-gray-50'
-                value={description} onChange={(e) => setDescription(e.target.value)} />
-                {descriptionError && <p className="text-red-500 text-[12px] text-center italic">{descriptionError}</p>}
-
-              </div>
-
-            </div>
-
-          </div>
-        </div>
-
-        {/* Botón Final Centrado */}
-        <div className='flex justify-center mt-6'>
-          <button 
-            onClick={manejarClickCrear}
-            className='bg-purple-900 hover:bg-purple-700 text-white font-bold py-2 px-10 rounded-xl transition-all duration-400 hover:scale-110 shadow-lg hover:shadow-purple-500'
-          >
-            CREAR
-          </button>
-        </div>
-
-      </div>
-    </div>
   )
 }
 
