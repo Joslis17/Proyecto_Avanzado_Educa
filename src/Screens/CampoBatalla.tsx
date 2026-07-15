@@ -112,7 +112,7 @@ function CampoBatalla() {
 
   // --- LÓGICA DE COMBATE REVISADA Y CORREGIDA ---
   const ejecutarAtaque = (valorHabilidad: number, nombreHabilidad: string) => {
-    console.log(`Usando habilidad: ${nombreHabilidad}`); // Ahora nombreHabilidad se está "leyendo"
+    console.log(`Usando habilidad: ${nombreHabilidad}`);
     if (ganador) return;
 
     const esJ1 = turnoActual === 'C1';
