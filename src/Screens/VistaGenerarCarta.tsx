@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { MdClear } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 
+import { Sparkle } from 'lucide-react';
+
 import VistaGenerarCartaAyuda from '../Components/VistaGenerarCartaAyuda';
 
 function VistaGenerarCarta() {
@@ -117,60 +119,67 @@ function VistaGenerarCarta() {
   };
 
   return (
-    <div className="p-6 max-w-2xl mx-auto relative">
-      
+    <div className=' flex items-center justify-center p-4 fixed inset-0 z-50 text-white'>
+        {/* Reducimos p-8 a p-4 y max-w-5xl a max-w-3xl para que sea más estrecho */}
+      <div className='absolute relative bg-[#0f172a] border-2 rounded-3xl shadow-xl shadow-red-500 p-4 md:p-6 w-full 
+          max-w-xl h-auto overflow-y-auto max-h-[95vh] flex flex-col gap-4 items-center'>
+        
         <button 
-        onClick={() => setMostrarAyuda(true)}
-        className='fixed top-10 left-10 bg-gray-500 text-white
-        cursor-pointer rounded-xl p-3 shadow-lg z-40 hover:scale-110 transition-all'>
-        Habilidades
-      </button>
-
-      {mostrarAyuda && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-white p-6 rounded-xl shadow-xl w-full max-w-lg flex flex-col">
-            
-            <VistaGenerarCartaAyuda />
-            <button onClick={() => setMostrarAyuda(false)} className="mt-4 text-white bg-purple-800 
-            hover:bg-gradient-to-r from-purple-700 to-pink-500 text-center px-4 py-2 font-bold rounded-md hover:scale-105 transition-all">
-              Cerrar
-            </button>
-          </div>
-        </div>
-      )}
-
-        <button  onClick={() => navigate(-1)}
-            className='fixed top-10 right-10 bg-white border-3 border-gray-400/50 rounded-full p-1 m-2
-            cursor-pointer hover:bg-gray-200 hover:scale-115 transition-background,scale duration-400'>
-            <MdClear size={40} color={'#000000'}/>
+          onClick={() => setMostrarAyuda(true)}
+          className='fixed top-5 right-30 bg-gradient-to-r from-blue-900 to-slate-900 text-white
+        cursor-pointer rounded-lg p-4 shadow-lg shadow-gray-700 hover:scale-110 transition-all border 
+        border-white'>
+            <Sparkle size={30} className="text-white" />
         </button>
-      <h2 className="text-5xl text-center font-bold mb-4 text-purple-900">
-        Generar Carta con IA
-        </h2>
-      <p className="mb-4 text-gray-900">
-        Escribe detalles (tipo, nombre, etc.) y la IA completará el resto. Si no escribes nada, se generará una carta totalmente aleatoria.
-      </p>
-      
-      <textarea 
-        className="w-full h-40 p-4 border-2 border-purple-300 rounded-xl mb-4 focus:outline-purple-600"
-        placeholder="Ej: Quiero una carta de tipo Místico, con un ataque alto..."
-        value={prompt}
-        onChange={(e) => setPrompt(e.target.value)}
-      />
 
-      <button 
-        onClick={generarCarta}
-        disabled={loading}
-        className="w-full bg-gradient-to-r from-purple-800 to-pink-600 text-white py-3 rounded-lg font-bold hover:scale-105 transition-transform duration-300 disabled:opacity-50 disabled:cursor-not-allowed
-        transition">
-        {loading ? "Pensando..." : "Generar Carta"}
-      </button>
-      <p className="mt-4 text-center text-sm text-gray-500">
-        (Tenga en cuenta de especificar las habilidades a través de un numero del 1 al 10,)
-      </p>
+        {mostrarAyuda && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+            {/* Ajustamos max-w-4xl para mayor ancho y quitamos w-200 */}
+            <div className=" bg-gradient-to-b from-red-950 to-black border border-red-900 absolute bg-white p-6 rounded-xl shadow-xl w-full max-w-6xl flex flex-col justify-center">
+              
+              <VistaGenerarCartaAyuda />
+              <button onClick={() => setMostrarAyuda(false)} 
+                className='absolute top-4 right-4 bg-white border-3 border-gray-400 rounded-full p-1 hover:bg-gray-100 hover:scale-105 transition-all shadow-md z-10 cursor-pointer'>
+                  <MdClear size={30} className="text-black"/>
+              </button>
+            </div>
+          </div>
+        )}
 
-      {error && <p className="text-red-500 mt-4">{error}</p>}
-      
+          <button  onClick={() => navigate(-1)}
+              className='absolute top-4 right-4 bg-white border-3 border-gray-400 rounded-full p-1 hover:bg-gray-100 hover:scale-105 transition-all shadow-md z-10 cursor-pointer'>
+              <MdClear size={40} color={'#000000'}/>
+          </button>
+        <h2 className='text-red-600 fuente_terror text-5xl font-bold text-center
+                      drop-shadow-lg drop-shadow-red-300 [-webkit-text-stroke:1px_white]'>
+          Generar Carta con IA
+          </h2>
+        <p className="m-2 text-gray-100 text-center">
+          Escribe detalles (tipo, nombre, etc.) y la IA completará el resto. Si no escribes nada, se generará una carta totalmente aleatoria.
+        </p>
+        
+        <textarea 
+          className="w-full h-40 p-4 border-2 shadow-lg shadow-gray-600 border-white rounded-xl mb-4 focus:outline-none focus:ring-1 hover:shadow-gray-400 hover:scale-100 transition-all duration-300
+            focus:ring-gray-300 "
+          placeholder="Ej: Quiero una carta de tipo Místico, con un ataque alto..."
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
+        />
+
+        <button 
+          onClick={generarCarta}
+          disabled={loading}
+          className='w-50 text-white font-bold py-2 rounded-lg hover:bg-red-700 border-2 border-white
+            transition-all text-sm hover:scale-105 duration-300 shadow-lg hover:shadow-red-500'>
+          {loading ? "Pensando..." : "Generar Carta"}
+        </button>
+        <p className="mt-4 text-center text-sm text-gray-500">
+          (Tenga en cuenta de especificar las habilidades a través de un numero del 1 al 40,)
+        </p>
+
+        {error && <p className="text-red-500 mt-4">{error}</p>}
+        
+      </div>
     </div>
   );
 }

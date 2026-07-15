@@ -4,7 +4,7 @@
 
 .text-gradient-custom {
   /* Define el degradado que quieres usar */
-  background-image: linear-gradient(to bottom, #683083, #e207e2); /* Púrpura a Rosa */
+  background-image: linear-gradient(to bottom, rgb(105, 2, 2), red); /* Púrpura a Rosa */
   
   /* Hace que el fondo se recorte solo al texto */
   -webkit-background-clip: text;
@@ -14,3 +14,11 @@
   -webkit-text-fill-color: transparent;
   color: transparent; /* Fallback */
 }
+
+.fuente_terror1 {
+font-family: "Creepster", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+

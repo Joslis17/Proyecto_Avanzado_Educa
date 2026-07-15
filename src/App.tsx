@@ -168,8 +168,10 @@ function App() {
   // RENDERIZADO CONDICIONAL DE CARGA ESTILO GRIS, MORADO Y ROSADO
   if (loading) {
     return (
-      <div className='min-h-screen flex flex-col items-center justify-center bg-gray-200 text-purple-900 gap-4'>
-        <div className='text-3xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-purple-800 to-pink-600 animate-pulse uppercase text-center px-4'>
+      <div className='min-h-screen flex flex-col items-center justify-center'>
+        <div className='text-5xl tracking-widest fuente_terror bg-gradient-to-b from-red-700 
+          to-red-500 bg-clip-text text-transparent font-sans mt-2 p-2  font-bold flex text-center justify-center
+          drop-shadow-xl drop-shadow-red-300 [-webkit-text-stroke:1px_white] animate-pulse uppercase px-4'>
           Cargando Colección de Cartas...
         </div>
       </div>

@@ -5,7 +5,13 @@ body {
     font-family: Arial, sans-serif;
     /* background-image: url('./assets/Imagenes/Componentes/Fondo2.jpg'); */
     /* background: rgb(2,0,32); */
-    background: rgb(240, 240, 240);
+    background-image: url("https://static.vecteezy.com/system/resources/previews/008/867/712/non_2x/dark-and-black-wall-halloween-background-concept-black-concrete-dusty-for-background-horror-cement-texture-free-photo.jpg");
     background-size: cover;
     background-position: center;
+}/*#0f172a   #131c31*/
+
+.fuente_terror {
+    font-family: "Nosifer", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }

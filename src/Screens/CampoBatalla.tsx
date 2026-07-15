@@ -211,8 +211,10 @@ function CampoBatalla() {
         <button
           key={index}
           disabled={!!ganador}
-          className={` px-5 py-3 border-2 border-purple-400 rounded-xl text-white font-semibold text-sm 
-                    bg-purple-900 hover:bg-purple-700 transition-all duration-300 shadow-md ${ganador ? 'opacity-50' : ''}`}
+          className={` px-5 py-3 border-3 border-white rounded-xl text-white font-semibold text-md text-bold 
+                     hover:bg-purple-700 hover:shadow-purple-700 transition-all duration-300 shadow-lg
+                     hover:scale-105
+                      ${ganador ? 'opacity-50' : ''}`}
           onClick={() => ejecutarAtaque(valorHabilidad, nombreHabilidad)}
         >
           {nombreHabilidad} 
@@ -223,8 +225,10 @@ function CampoBatalla() {
 
   if (loading) {
     return (
-      <div className='min-h-screen flex flex-col items-center justify-center bg-gray-200 text-purple-900 gap-4'>
-        <div className='text-3xl font-black tracking-widest animate-pulse uppercase'>
+      <div className='min-h-screen flex flex-col items-center justify-center gap-4'>
+        <div className='text-4xl tracking-widest fuente_terror fuente_terror bg-gradient-to-b from-red-700
+         to-red-500 bg-clip-text text-transparent font-sans mt-2 p-2 font-bold flex tjustify-center
+          drop-shadow-xl drop-shadow-red-300 [-webkit-text-stroke:1px_white] animate-pulse uppercase text-center px-4'>
          Cargando Arena de Batalla...
         </div>
       </div>
@@ -248,32 +252,34 @@ function CampoBatalla() {
     )
   }
   const renderStats = (miedo: number, ataque: number, defensa: number) => (
-    <div className="flex justify-center gap-7 mb-4 bg-white/50 p-4 rounded-xl border border-gray-200 shadow-sm w-full">
+    <div className="flex justify-center gap-7 bg-[#0f172a] p-4 rounded-xl border border-gray-200 shadow-sm">
       <div className="flex flex-col items-center">
         <Ghost className="w-8 h-8 text-blue-500 stroke-[1.5]" />
-        <span className="text-blue-900 font-black text-sm">{miedo}</span>
+        <span className="text-blue-500 font-black text-sm">{miedo}</span>
       </div>
       <div className="flex flex-col items-center">
         <Swords className="w-8 h-8 text-red-500 stroke-[1.5]" />
-        <span className="text-red-900 font-black text-sm">{ataque}</span>
+        <span className="text-red-500 font-black text-sm">{ataque}</span>
       </div>
       <div className="flex flex-col items-center">
-        <Shield className="w-8 h-8 text-green-600 stroke-[1.5]" />
-        <span className="text-green-900 font-black text-sm">{defensa}</span>
+        <Shield className="w-8 h-8 text-green-500 stroke-[1.5]" />
+        <span className="text-green-500 font-black text-sm">{defensa}</span>
       </div>
     </div>
   );
 
   return (
-    <div className='min-h-screen bg-gray-200 p-4 flex flex-col items-center justify-between pb-12'>
+    <div className='min-h-screen  p-4 flex flex-col items-center justify-between pb-12'>
         
-        <h1 className='text-gradient-custom mt-4 p-2 text-5xl md:text-6xl font-sans font-black flex text-center justify-center uppercase tracking-widest drop-shadow-sm'>
+        <h1 className='fuente_terror bg-gradient-to-b from-red-700 to-red-500 bg-clip-text text-transparent font-sans mt-2 p-2 text-6xl font-bold flex text-center justify-center
+      drop-shadow-xl drop-shadow-red-300 [-webkit-text-stroke:1px_white]
+      '>
             CAMPO DE BATALLA
         </h1>
 
         {/* Modal de Victoria / Interrupción */}
         {ganador && (
-          <div className="bg-yellow-100 border-4 border-yellow-500 text-yellow-900 px-6 py-4 rounded-2xl shadow-2xl mb-6 text-center max-w-lg animate-bounce">
+          <div className="bg-[#0f172a]  border-3 border-white text-white px-6 py-4 rounded-2xl shadow-2xl mb-6 text-center max-w-lg animate-bounce">
             <h3 className="text-2xl font-black uppercase">¡COMBATE TERMINADO!</h3>
             <p className="text-lg font-bold mt-1">
               {ganador === "Batalla Interrumpida" ? (
@@ -286,22 +292,23 @@ function CampoBatalla() {
         )}
 
         {/* Contenedor principal de los luchadores y el VS */}
-        <div className='flex flex-row items-start justify-center gap-2 md:gap-20 my-auto max-w-7xl w-full px-2 overflow-x-auto'>
+        <div className='flex flex-row items-start justify-center gap-2 md:gap-20 my-auto max-w-7xl w-full overflow-x-auto'>
           
           {/* Contenedor Jugador 1 */}
           {carta1 && (
             <div className='flex flex-col items-center gap-4 transition-all duration-300 filter drop-shadow-md w-1/2 md:w-auto'>
-              <span className='text-white font-black text-sm md:text-xl tracking-widest bg-purple-900 px-4 md:px-6 py-1.5 rounded-full shadow-md uppercase text-center'>
+              <span className='text-white font-black text-md tracking-widest bg-gradient-to-r from-blue-900 to-slate-900 p-1 h-8 w-35
+               rounded-full shadow-lg uppercase text-center shadow-gray-700 border border-gray-400'>
                 JUGADOR 1
               </span>
 
               {batallaIniciada && renderStats(miedoC1, ataqueC1, defensaC1)}
               
               <div className="flex flex-row items-center gap-3">
-                <div className={`p-1 md:p-2 rounded-3xl transition-all duration-300 shadow-lg ${
+                <div className={`p-0.5 rounded-3xl transition-all duration-300 shadow-lg ${
                   batallaIniciada && turnoActual === 'C1' && !ganador
-                    ? 'bg-red-600 shadow-2xl shadow-red-700 scale-105 border-4 border-red-500 ' 
-                    : 'bg-white border-2 border-purple-500/20'
+                    ? 'shadow-xl shadow-red-600 scale-105 border-4 border-red-500 ' 
+                    : 'border'
                 }`}>
                   <Carta 
                     carta={carta1} 
@@ -322,14 +329,14 @@ function CampoBatalla() {
                     <div className="w-4 bg-gray-200 rounded-full h-full flex flex-col justify-end overflow-hidden border border-gray-300">
                       <div className="bg-red-600 w-full transition-all duration-500 rounded-b-full" style={{ height: `${(vidaC1 / maxVidaC1) * 100}%` }}></div>
                     </div>
-                    <span className="text-[10px] font-bold text-gray-700">{vidaC1}</span>
+                    <span className="text-[15px] font-bold text-gray-700">{vidaC1}</span>
                   </div>
                 )}
               </div>
 
               {batallaIniciada && turnoActual === 'C1' && !ganador && (
                 <>
-                  <span className="text-red-800 font-black text-sm md:text-lg bg-gray-100 px-4 py-1 rounded-full animate-bounce shadow-sm">
+                  <span className="text-red-600 border-3 bg-white/70 border-red-600 text-sm md:text-lg px-4 py-1 rounded-full animate-bounce shadow-sm">
                     ¡Tu Turno!
                   </span>
                   
@@ -342,8 +349,9 @@ function CampoBatalla() {
           )}
 
           {/* Divisor VS */}
-          <div className='text-center select-none py-2 align-self-center self-center px-1 md:px-4'>
-            <h2 className='text-pink-800 font-black text-4xl md:text-8xl italic tracking-tighter drop-shadow-md animate-pulse uppercase'>
+          <div className='border-5 rounded-4xl border-white shadow-lg shadow-gray-400 text-center select-none p-10 align-self-center self-center'>
+            <h2 className='text-white font-black text-4xl md:text-8xl italic tracking-tighter 
+            drop-shadow-md animate-pulse uppercase'>
               VS
             </h2>
           </div>
@@ -351,7 +359,8 @@ function CampoBatalla() {
           {/* Contenedor Jugador 2 */}
           {carta2 && (
             <div className='flex flex-col items-center gap-4 transition-all duration-300 filter drop-shadow-md w-1/2 md:w-auto'>
-              <span className='text-white font-black text-sm md:text-xl tracking-widest bg-pink-600 px-4 md:px-6 py-1.5 rounded-full shadow-md uppercase text-center'>
+              <span className='text-white font-black text-md tracking-widest bg-gradient-to-r from-blue-900 to-slate-900 p-1 h-8 w-35
+               rounded-full shadow-lg uppercase text-center shadow-gray-700 border border-gray-400'>
                 JUGADOR 2
               </span>
 
@@ -365,14 +374,14 @@ function CampoBatalla() {
                     <div className="w-4 bg-gray-200 rounded-full h-full flex flex-col justify-end overflow-hidden border border-gray-300">
                       <div className="bg-red-600 w-full transition-all duration-500 rounded-b-full" style={{ height: `${(vidaC2 / maxVidaC2) * 100}%` }}></div>
                     </div>
-                    <span className="text-[10px] font-bold text-gray-700">{vidaC2}</span>
+                    <span className="text-[15px] font-bold text-gray-700">{vidaC2}</span>
                   </div>
                 )}
 
-                <div className={`p-1 md:p-2 rounded-3xl transition-all duration-300 shadow-lg ${
-                  batallaIniciada && turnoActual === 'C2' && !ganador
-                    ? 'bg-red-600 shadow-2xl shadow-red-700 scale-105 border-4 border-red-500 ' 
-                    : 'bg-white border-2 border-pink-500/20'
+                <div className={`p-0.5 rounded-3xl transition-all duration-300 shadow-lg ${
+                  batallaIniciada && turnoActual === 'C1' && !ganador
+                    ? 'shadow-xl shadow-red-600 scale-105 border-4 border-red-500 ' 
+                    : 'border'
                 }`}>
                   <Carta 
                     carta={carta2} 
@@ -389,7 +398,7 @@ function CampoBatalla() {
 
               {batallaIniciada && turnoActual === 'C2' && !ganador && (
                 <>
-                  <span className="text-red-800 font-black text-sm md:text-lg bg-gray-100 px-4 py-1 rounded-full animate-bounce shadow-sm">
+                  <span className="text-red-600 border-3 bg-white/70 border-red-600 text-sm md:text-lg px-4 py-1 rounded-full animate-bounce shadow-sm">
                     ¡Tu Turno!
                   </span>
                   
@@ -407,7 +416,9 @@ function CampoBatalla() {
         <div className='flex gap-6 justify-center mt-8'>
           <button 
             onClick={manejarBotonRojo} 
-            className='mt-8 px-10 py-3.5 bg-[#5c0202] hover:bg-[#940404] text-white font-black uppercase tracking-wider rounded-xl shadow-md transition-all duration-300 hover:scale-110 active:scale-95 border-2 border-gray-200'
+            className='m-2 p-3 h-14 max-lg: bg-red-900 hover:bg-red-700 text-white font-black uppercase
+             tracking-wider rounded-xl shadow-lg transition-all duration-300 hover:scale-110 active:scale-95
+              border-2 border-gray-200 shadow-gray-600 hover:shadow-red-700'
           >
             {batallaIniciada && !ganador ? 'Terminar Batalla' : 'Salir'}
           </button>
@@ -416,7 +427,9 @@ function CampoBatalla() {
           {!batallaIniciada && !ganador && (
             <button 
               onClick={() => setBatallaIniciada(true)}
-              className='mt-8 px-10 py-3.5 bg-purple-900 hover:bg-purple-700 text-white font-black uppercase tracking-wider rounded-xl shadow-md transition-all duration-300 hover:scale-110 active:scale-95 border-2 border-gray-200'
+              className='m-2 p-2 h-14 w-50 bg-purple-900 hover:bg-purple-700 text-white font-black uppercase
+               tracking-wider rounded-xl shadow-lg transition-all duration-300 hover:scale-110 active:scale-95 
+               border-2 border-gray-200 shadow-gray-600 hover:shadow-purple700'
             >
               Empezar Batalla
             </button>
@@ -426,7 +439,9 @@ function CampoBatalla() {
           {ganador && (
             <button 
               onClick={() => reiniciarEstadisticasCombate(carta1, carta2, true)}
-              className='mt-8 px-10 py-3.5 bg-purple-900 hover:bg-purple-700 text-white font-black uppercase tracking-wider rounded-xl shadow-md transition-all duration-300 hover:scale-110 active:scale-95 border-2 border-gray-200 animate-pulse shadow-purple-500/50'
+              className='m-2 p-2 h-14 w-50 bg-purple-900 hover:bg-purple-700 text-white font-black uppercase
+               tracking-wider rounded-xl shadow-md transition-all duration-300 hover:scale-110 active:scale-95
+               border-2 border-gray-200 animate-pulse shadow-purple-500/50 hover:shadow-purple700'
             >
               Volver a Empezar
             </button>

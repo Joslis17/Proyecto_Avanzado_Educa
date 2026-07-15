@@ -4,7 +4,7 @@ import { IoAddOutline } from "react-icons/io5";
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-import { Trash2, FileText, CheckSquare, Skull } from 'lucide-react'
+import { Trash2, FileText, CheckSquare, Skull} from 'lucide-react'
 
 type props = {
   seleccionarCarta: Function
@@ -43,7 +43,9 @@ function VistaMazo({ seleccionarCarta, verDetalle, mostrarCrear, mazo, eliminarC
 
   return (
     <div >
-      <h1 className='text-gradient-custom font-sans mt-2 p-2 text-5xl font-bold flex text-center justify-center'>
+      <h1 className='fuente_terror bg-gradient-to-b from-red-700 to-red-500 bg-clip-text text-transparent font-sans mt-2 p-2 text-6xl font-bold flex text-center justify-center
+      drop-shadow-xl drop-shadow-red-300 [-webkit-text-stroke:1px_white]
+      '>
         ENTIDADES MALIGNAS
       </h1>
       
@@ -54,8 +56,9 @@ function VistaMazo({ seleccionarCarta, verDetalle, mostrarCrear, mazo, eliminarC
             className={`fixed top-5 right-50 text-white font-bold py-3 px-6 rounded-2xl border-gray-200 shadow-2xl z-50 transition-all duration-300
               ${seleccionadas.length === 2 
                 ? 
-                'bg-purple-900 hover:bg-purple-700 hover:scale-110 hover:shadow-purple-500' 
-                : 'bg-[#5c0202] hover:bg-[#940404] hover:scale-110'}`}
+                'border border-gray-300 bg-purple-800 hover:bg-purple-600 hover:scale-110 hover:shadow-purple-500' 
+                : 
+                'border border-gray-300 bg-red-700'}`}
             onClick={manejarPelea}
           >
             {seleccionadas.length === 2 
@@ -93,15 +96,16 @@ function VistaMazo({ seleccionarCarta, verDetalle, mostrarCrear, mazo, eliminarC
         </div>
       </div>
       <button onClick={() => mostrarCrear()}
-        className='fixed top-5 right-10 bg-white border-3 border-gray-300 rounded-full p-1 m-2 z-40
-         cursor-pointer hover:bg-gray-100 hover:scale-115 transition-all duration-400 shadow hover:shadow-gray-400'>
-        <IoAddOutline size={40} color={'#000000'} />
+        className='fixed top-5 right-10 border-3 border-white rounded-full p-1 m-2 z-40
+         cursor-pointer hover:bg-white/10 hover:scale-115 transition-all duration-400 shadow-lg hover:shadow-gray-700'>
+        <IoAddOutline size={40} color={'white'} />
       </button>
       <button 
         onClick={() => navigate('/generar-carta-ia')}
-        className='fixed top-5 right-30 bg-gradient-to-r from-purple-800 to-pink-600 text-white
-        cursor-pointer rounded-lg p-4 shadow-lg shadow-gray-300 hover:scale-110 transition-all'>
-        IA
+        className='fixed top-5 right-30 bg-gradient-to-r from-blue-950 to-slate-900 text-white
+        cursor-pointer rounded-lg p-4 shadow-lg shadow-gray-700 hover:scale-110 transition-all border 
+        border-white'>
+        I.A.
       </button>
     </div>
   )

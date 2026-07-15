@@ -132,7 +132,7 @@ const manejarClickCrear = async () => {
   const renderSelectHabilidad = (value: string, setter: (v: string) => void, error: string) => (
         <div className='flex flex-col items-center w-full'>
           <select 
-            className='text-center p-1 w-full border rounded-lg border-gray-400 bg-white hover:bg-gray-50'
+            className='text-center text-black bg-white p-1 w-full border-2 rounded-lg border-white  hover:scale-105'
             value={value} 
             onChange={(e) => setter(e.target.value)}
           >
@@ -148,37 +148,37 @@ const manejarClickCrear = async () => {
     );
 
   return (
-    <div className='min-h-screen flex items-center justify-center p-4 bg-gray-200 backdrop-blur-sm fixed inset-0 z-50 text-black'>
+    <div className=' flex items-center justify-center p-4 fixed inset-0 z-50 text-white'>
       {/* Reducimos p-8 a p-4 y max-w-5xl a max-w-3xl para que sea más estrecho */}
-      <div className='relative bg-white rounded-3xl shadow-xl shadow-purple-500 p-4 md:p-6 w-full max-w-xl h-auto overflow-y-auto max-h-[95vh] flex flex-col gap-4'>
+      <div className='relative bg-[#0f172a] border-2 rounded-3xl shadow-xl shadow-red-500 p-4 md:p-6 w-full max-w-xl h-auto overflow-y-auto max-h-[95vh] flex flex-col gap-4'>
         
         <div className='flex items-center justify-center w-full'>
           {/* Título un poco más pequeño */}
-          <h1 className='text-gradient-custom text-3xl font-bold text-center'>
+          <h1 className='text-red-600 fuente_terror text-3xl font-bold text-center drop-shadow-lg drop-shadow-red-400 [-webkit-text-stroke:1px_white]'>
             CREA TUS PROPIAS CARTAS
           </h1>
         </div>
 
-        <div className='w-full flex flex-col gap-3 py-2'>
+        <div className='w-full flex flex-col gap-3 py-2 items-center'>
           {/* Contenedor principal con grid de 2 columnas para organizar izquierda y derecha */}
           <div className='grid grid-cols-2 gap-4'>
             
             {/* Columna Izquierda: Nombre y Tipo */}
             <div className='flex flex-col gap-3'>
-              <div className='flex gap-1'>
-                <label className='font-semibold text-md text-purple-700'>Nombre:</label>
+              <div className='flex gap-1 items-center'>
+                <label className='font-semibold text-md'>Nombre:</label>
                 <input type="text" placeholder='Ingresa el nombre'
-                  className='p-1.5 border rounded-lg border-purple-700 text-sm shadow-md hover:shadow-gray-400 
+                  className='p-1.5 border-3 rounded-lg border-purple-700 text-sm shadow-lg hover:shadow-purple-400 
                   hover:scale-100 focus:outline-none focus:ring-1 focus:ring-purple-700 transition-all duration-300
                   w-full'
                   value={name} onChange={(e) => setName(e.target.value)} />
               </div>
               {nameError && <p className="text-red-500 text-[12px] italic">{nameError}</p>}
 
-              <div className='flex gap-1'>
-                <label className='font-semibold text-md text-purple-700'>Tipo:</label>
+              <div className='flex gap-1 items-center'>
+                <label className='font-semibold text-md'>Tipo:</label>
                 <input type="text" placeholder='Ingresa el tipo' 
-                className='p-1.5 border rounded-lg border-purple-700 text-sm shadow-md hover:shadow-gray-400 
+                className='p-1.5 border-3 rounded-lg border-purple-700 text-sm shadow-lg hover:shadow-purple-400 
                 hover:scale-100 focus:outline-none focus:ring-1 focus:ring-purple-700 transition-all duration-300
                 w-full' 
                 value={tipo} onChange={(e) => setTipo(e.target.value)} />
@@ -187,7 +187,7 @@ const manejarClickCrear = async () => {
             </div>
 
             {/* Columna Derecha: Estadísticas (Ataque, Defensa, Vida) */}
-            <div className='flex flex-row gap-2 items-start border border-gray-400 rounded-lg px-4 py-3
+            <div className='flex flex-row gap-2 items-start border-3 border-gray-400 rounded-lg px-4 py-3
             shadow-md hover:shadow-gray-400 transition-all duration-300'>
               {[
                 { val: attack, set: setAttack, err: attackError, icon: 
@@ -203,7 +203,7 @@ const manejarClickCrear = async () => {
                   </div>
                   <input 
                     type="number" 
-                    className='p-1.5 w-full text-center border-2 shadow-purple-500 shadow-md rounded-lg border-purple-700 text-sm hover:scale-105 transition-all
+                    className='p-1 m-1 w-full text-center border-3 shadow-purple-400 shadow-md rounded-lg border-purple-700 text-sm hover:scale-107 transition-all
                      duration-300 focus:outline-none focus:ring-1 focus:ring-purple-700' 
                     value={item.val} 
                     onChange={(e) => item.set(Number(e.target.value))} 
@@ -216,33 +216,33 @@ const manejarClickCrear = async () => {
 
           {/* Resto del formulario (Habilidades, Link, Descripción) */}
           <div className='flex flex-col gap-2'>
-            <label className='font-semibold text-md text-purple-700'
+            <label className='font-semibold text-md '
             >Habilidades Especiales:</label>
-            <div className='grid grid-cols-1 sm:grid-cols-3 gap-3 border-2 border-purple-700 rounded-lg p-3 shadow-md hover:shadow-gray-400 transition-all duration-300'>
+            <div className='grid grid-cols-1 sm:grid-cols-3 gap-3 border-3 border-purple-700 rounded-lg p-3 shadow-md hover:shadow-purple-400 transition-all duration-300'>
               {renderSelectHabilidad(habilidad1, setHabilidad1, habilidad1Error)}
               {renderSelectHabilidad(habilidad2, setHabilidad2, habilidad2Error)}
               {renderSelectHabilidad(habilidad3, setHabilidad3, habilidad3Error)}
             </div>
           </div>
 
-          <div className='flex flex-col gap-1'>
-            <label className='font-semibold text-md text-purple-700'>Link de Imagen:</label>
+          <div className='flex flex-col gap-1 h-full w-full'>
+            <label className='font-semibold text-md'>Link de Imagen:</label>
             <input type="text" placeholder='URL' 
-            className='p-1.5 border rounded-lg border-purple-700 text-sm focus:outline-none focus:ring-1 shadow-md hover:shadow-gray-400 hover:scale-100 transition-all duration-300
-            focus:ring-purple-700' value={pictureUrl} onChange={(e) => setPictureUrl(e.target.value)} />
+            className='p-1.5 border-3 rounded-lg border-purple-700 text-sm focus:outline-none focus:ring-1 shadow-md hover:shadow-purple-400 hover:scale-100 transition-all duration-300
+            focus:ring-purple-700 ' value={pictureUrl} onChange={(e) => setPictureUrl(e.target.value)} />
             {pictureUrlError && <p className="text-red-500 text-[12px] italic">{pictureUrlError}</p>}
           </div>
 
-          <div className='flex flex-col gap-1'>
-            <label className='font-semibold text-md text-purple-700'>Descripción:</label>
-            <textarea className='p-1.5 border rounded-lg border-purple-700 h-16 text-sm focus:outline-none focus:ring-1 shadow-md hover:shadow-gray-400 hover:scale-100 transition-all duration-300
+          <div className='flex flex-col gap-1 h-full w-full'>
+            <label className='font-semibold text-md'>Descripción:</label>
+            <textarea className='p-1.5 border-3 rounded-lg border-purple-700 h-16 text-sm focus:outline-none focus:ring-1 shadow-md hover:shadow-purple-400 hover:scale-100 transition-all duration-300
             focus:ring-purple-700' placeholder='Breve descripción' value={description} onChange={(e) => setDescription(e.target.value)} />
             {descriptionError && <p className="text-red-500 text-[12px] italic">{descriptionError}</p>}
           </div>
 
           <button onClick={manejarClickCrear}
-            className='w-full bg-purple-800 text-white font-bold py-2 rounded-lg hover:bg-purple-600 border-2 border-purple-900
-            transition-all text-sm hover:scale-105 duration-300 shadow-lg hover:shadow-purple-400 shadow-gray-400'>
+            className='w-50 text-white font-bold py-2 rounded-lg hover:bg-red-700 border-2 border-white
+            transition-all text-sm hover:scale-105 duration-300 shadow-lg hover:shadow-red-500'>
             CREAR CARTA
           </button>
         </div>
