@@ -14,7 +14,6 @@ type props = {
   lifePoints: number;
   tipo: string;
   description: string;
-  button2: string;
   button: any;
   button2: any;
   noMostrar2: Function;
