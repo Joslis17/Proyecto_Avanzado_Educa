@@ -2,7 +2,7 @@ import './crearCarta.css'
 import { useState } from 'react';
 
 import habilidadesData from '../../habilidades.json';
-import { Ghost, Swords, Shield, Heart } from 'lucide-react'
+import { Swords, Shield, Heart } from 'lucide-react'
 import { MdClear } from "react-icons/md";
 
 type CrearCartaProps = {
