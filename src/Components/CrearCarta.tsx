@@ -168,7 +168,9 @@ const manejarClickCrear = async () => {
               <div className='flex gap-1'>
                 <label className='font-semibold text-md text-purple-700'>Nombre:</label>
                 <input type="text" placeholder='Ingresa el nombre'
-                  className='p-1.5 border rounded-lg border-purple-700 text-sm shadow-md hover:shadow-gray-400 hover:scale-100 focus:outline-none focus:ring-1 focus:ring-purple-700 transition-all duration-300'
+                  className='p-1.5 border rounded-lg border-purple-700 text-sm shadow-md hover:shadow-gray-400 
+                  hover:scale-100 focus:outline-none focus:ring-1 focus:ring-purple-700 transition-all duration-300
+                  w-full'
                   value={name} onChange={(e) => setName(e.target.value)} />
               </div>
               {nameError && <p className="text-red-500 text-[12px] italic">{nameError}</p>}
@@ -176,7 +178,9 @@ const manejarClickCrear = async () => {
               <div className='flex gap-1'>
                 <label className='font-semibold text-md text-purple-700'>Tipo:</label>
                 <input type="text" placeholder='Ingresa el tipo' 
-                className='p-1.5 border rounded-lg border-purple-700 text-sm shadow-md hover:shadow-gray-400 hover:scale-100 focus:outline-none focus:ring-1 focus:ring-purple-700 transition-all duration-300' 
+                className='p-1.5 border rounded-lg border-purple-700 text-sm shadow-md hover:shadow-gray-400 
+                hover:scale-100 focus:outline-none focus:ring-1 focus:ring-purple-700 transition-all duration-300
+                w-full' 
                 value={tipo} onChange={(e) => setTipo(e.target.value)} />
               </div>
               {tipoError && <p className="text-red-500 text-[12px] italic">{tipoError}</p>}
