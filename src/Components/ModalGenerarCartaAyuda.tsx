@@ -1,6 +1,4 @@
 
-import React from 'react'
-
 function ModalGenerarCartaAyuda() {
   return (
          <div className=" p-2 bg-[#0f172a] text-white border-2 border-white rounded-2xl shadow-lg
