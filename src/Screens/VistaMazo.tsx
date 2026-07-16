@@ -1,6 +1,5 @@
 import './vistaMazo.css'
 import Carta from "../Components/Carta"
-import { IoAddOutline } from "react-icons/io5";
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
