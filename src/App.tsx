@@ -173,7 +173,7 @@ function App() {
         <div className='text-5xl tracking-widest fuente_terror bg-gradient-to-b from-red-700 
           to-red-500 bg-clip-text text-transparent font-sans mt-2 p-2  font-bold flex text-center justify-center
           drop-shadow-xl drop-shadow-red-300 [-webkit-text-stroke:1px_white] animate-pulse uppercase px-4'>
-          Cargando Colección de Cartas...
+          Entrando a la oscuridad...
         </div>
       </div>
     );
