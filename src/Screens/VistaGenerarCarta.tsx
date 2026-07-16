@@ -6,10 +6,10 @@ import { Sparkle } from 'lucide-react';
 
 import VistaGenerarCartaAyuda from '../Components/VistaGenerarCartaAyuda';
 type props = {
-  recargarMazo: Function
+  recargarMazo: () => Promise<void>;
 }
 
-function VistaGenerarCarta({ recargarMazo }: { recargarMazo: () => Promise<void> }) {
+function VistaGenerarCarta({ recargarMazo }: props) {
   const [prompt, setPrompt] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
