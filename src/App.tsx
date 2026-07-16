@@ -8,6 +8,7 @@ import PaginaInexistente from './Screens/PaginaInexistente';
 import VistaEditar from './Screens/VistaEditar';
 import CampoBatalla from './Screens/CampoBatalla';
 import VistaGenerarCarta from './Screens/VistaGenerarCarta';
+import VistaPlay from './Screens/VistaPlay'
 
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 
@@ -61,7 +62,7 @@ function App() {
   useEffect(() => {
     console.log("La ruta cambió a:", location.pathname);
     getCarta();
-  }, [location]);
+  }, []);
 
 
   const editarCartaGlobal = async (idCard: string, datosActualizados: any) => {
@@ -104,7 +105,7 @@ function App() {
         setMazo(mazo.map(carta => carta.idCard === idCard ? { ...carta, ...datosActualizados } : carta));
      
         await getCarta();
-        navigate('/'); 
+        navigate('/mazo'); 
         setCartaSeleccionada(resultado.data); 
 
         console.log("Carta actualizada con éxito");
@@ -128,7 +129,7 @@ function App() {
 
     if (respuesta.status === 200 || respuesta.status === 204) {
       setMazo(mazo.filter(carta => carta.idCard !== numero));
-      navigate('/');
+      navigate('/mazo');
     }
   };
 
@@ -149,7 +150,7 @@ function App() {
   const navegarCerrarCrearCarta = () => {
     setMostrarVistaCrear(false);
     mostrarVistaCrear;
-    navigate(`/`);
+    navigate(`/mazo`);
   }
 
   const agregarNuevaCarta = (nuevaCarta: any) => {
@@ -182,7 +183,7 @@ function App() {
     <div>
       <main>
         <Routes>
-          <Route path="/" element={
+          <Route path="/mazo" element={
             <VistaMazo  
               mazo={mazo} 
               setMazo={setMazo} 
@@ -193,12 +194,13 @@ function App() {
               irBatalla={irBatalla}
             />
           } />
-          <Route path="/detalle/:numero" element={<VistaDetalle carta={cartaSeleccionada} noMostrar={() => { setCartaSeleccionada(false); navigate('/'); }} onEliminarDetalle={eliminarCartaGlobal} />} />
+          <Route path="/detalle/:numero" element={<VistaDetalle carta={cartaSeleccionada} noMostrar={() => { setCartaSeleccionada(false); navigate('/mazo'); }} onEliminarDetalle={eliminarCartaGlobal} />} />
           <Route path="/crear" element={<VistaCrearCarta noMostrar={navegarCerrarCrearCarta} agregarCarta={agregarNuevaCarta} />} />
           <Route path="/editar/:numero" element={<VistaEditar carta={cartaSeleccionada} onEditar={editarCartaGlobal} />} />
           <Route path="*" element={<PaginaInexistente />} />
           <Route path="/CampoBatalla/:id1/:id2" element={<CampoBatalla />} />
           <Route path="/generar-carta-ia" element={<VistaGenerarCarta />} />
+          <Route path='/' element={<VistaPlay/>} />
         </Routes>
       </main>
     </div>

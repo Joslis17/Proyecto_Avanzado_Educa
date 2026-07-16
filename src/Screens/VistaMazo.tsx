@@ -4,7 +4,12 @@ import { IoAddOutline } from "react-icons/io5";
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-import { Trash2, FileText, CheckSquare, Skull} from 'lucide-react'
+import { MdClear } from "react-icons/md";
+import { Trash2, FileText, CheckSquare, Skull, Undo2, Info
+
+} from 'lucide-react'
+
+import ModalAyuda from '../Components/ModalAyuda';
 
 type props = {
   seleccionarCarta: Function
@@ -17,6 +22,8 @@ type props = {
 }
 
 function VistaMazo({ seleccionarCarta, verDetalle, mostrarCrear, mazo, eliminarCarta, irBatalla }: props) {
+
+  const [mostrarAyuda, setMostrarAyuda] = useState(false);
 
   const [seleccionadas, setSeleccionadas] = useState<string[]>([]);
   const navigate = useNavigate();
@@ -46,14 +53,15 @@ function VistaMazo({ seleccionarCarta, verDetalle, mostrarCrear, mazo, eliminarC
       <h1 className='fuente_terror bg-gradient-to-b from-red-700 to-red-500 bg-clip-text text-transparent font-sans mt-2 p-2 text-6xl font-bold flex text-center justify-center
       drop-shadow-xl drop-shadow-red-300 [-webkit-text-stroke:1px_white]
       '>
-        ENTIDADES MALIGNAS
+        Mazo de Cartas
       </h1>
       
-      <div >
+      <div>
      
         {seleccionadas.length > 0 && (
           <button
-            className={`fixed top-5 right-50 text-white font-bold py-3 px-6 rounded-2xl border-gray-200 shadow-2xl z-50 transition-all duration-300
+            className={`flex justify-center text-center items-center fixed top-5 right-50 text-white
+               font-bold p1 h-13 w-13 rounded-2xl border-gray-200 shadow-2xl z-50 transition-all duration-300
               ${seleccionadas.length === 2 
                 ? 
                 'border border-gray-300 bg-purple-800 hover:bg-purple-600 hover:scale-110 hover:shadow-purple-500' 
@@ -95,6 +103,19 @@ function VistaMazo({ seleccionarCarta, verDetalle, mostrarCrear, mazo, eliminarC
           }
         </div>
       </div>
+      {mostrarAyuda && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+            <div className=" bg-gradient-to-b from-red-950 to-black border border-red-900 absolute
+             bg-white p-6 rounded-xl shadow-xl w-full max-w-3xl flex flex-col justify-center">
+              
+              <ModalAyuda />
+              <button onClick={() => setMostrarAyuda(false)} 
+                className='absolute top-4 right-4 bg-white border-3 border-gray-400 rounded-full p-1 hover:bg-gray-100 hover:scale-105 transition-all shadow-md z-10 cursor-pointer'>
+                  <MdClear size={30} className="text-black"/>
+              </button>
+            </div>
+          </div>
+        )}
       <button onClick={() => mostrarCrear()}
         className='fixed top-5 right-10 border-3 border-white rounded-full p-1 m-2 z-40
          cursor-pointer hover:bg-white/10 hover:scale-115 transition-all duration-400 shadow-lg hover:shadow-gray-700'>
@@ -103,10 +124,24 @@ function VistaMazo({ seleccionarCarta, verDetalle, mostrarCrear, mazo, eliminarC
       <button 
         onClick={() => navigate('/generar-carta-ia')}
         className='fixed top-5 right-30 bg-gradient-to-r from-blue-950 to-slate-900 text-white
-        cursor-pointer rounded-lg p-4 shadow-lg shadow-gray-700 hover:scale-110 transition-all border 
+        cursor-pointer rounded-lg p-3 shadow-lg shadow-gray-700 hover:scale-110 transition-all border 
         border-white'>
         I.A.
       </button>
+      <button 
+          onClick={() => setMostrarAyuda(true)}
+          className='fixed top-5 left-30 bg-gradient-to-r from-blue-900 to-slate-900 text-white
+        cursor-pointer rounded-lg p-2 shadow-lg shadow-gray-700 hover:scale-110 transition-all border 
+        border-white'>
+            <Info size={30} className="text-white" />
+        </button>
+        <button 
+          onClick={() =>  navigate('/')}
+          className='fixed top-5 left-10 bg-gradient-to-r from-blue-900 to-slate-900 text-white
+        cursor-pointer rounded-lg p-2 shadow-lg shadow-gray-700 hover:scale-110 transition-all border 
+        border-white'>
+            <Undo2 size={30} className="text-white" />
+        </button>
     </div>
   )
 }

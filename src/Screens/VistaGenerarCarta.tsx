@@ -110,7 +110,7 @@ function VistaGenerarCarta() {
 
       if (!respuesta.ok) throw new Error("Error en la IA");
       await respuesta.json();
-      navigate('/');
+      navigate('/mazo');
     } catch (err) {
       setError("No se pudo generar. Revisa tu prompt o conexión.");
     } finally {
@@ -146,7 +146,7 @@ function VistaGenerarCarta() {
           </div>
         )}
 
-          <button  onClick={() => navigate(-1)}
+          <button  onClick={() => navigate('/mazo')}
               className='absolute top-4 right-4 bg-white border-3 border-gray-400 rounded-full p-1 hover:bg-gray-100 hover:scale-105 transition-all shadow-md z-10 cursor-pointer'>
               <MdClear size={40} color={'#000000'}/>
           </button>

@@ -17,7 +17,7 @@ function VistaEditar({ carta, onEditar }: Props) {
         onSave={(datos) => {
             onEditar(carta.idCard, datos);
         }}
-        onCancel={() => navigate('/')}
+        onCancel={() => navigate('/mazo')}
       />
     </div>
   );

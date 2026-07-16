@@ -35,7 +35,7 @@ const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const colorClase = totalSeleccionadas === 2 
     ? 'border-4 border-violet-700 shadow-violet-600 shadow-xl hover:shadow-violet-800 hover:shadow-2xl transition-all duration-300' 
-    : 'border-4 border-red-500 shadow-red-400 shadow-xl hover:shadow-red-800 hover:shadow-2xl transition-all duration-300';
+    : 'border-5 border-red-500 shadow-red-400 shadow-xl hover:shadow-red-800 hover:shadow-2xl transition-all duration-300';
 
   const handleMouseDown = () => {
     setBlockClick(false);
@@ -44,7 +44,7 @@ const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     feedbackTimerRef.current = setTimeout(() => {
       setShowFeedback(true);
-    }, 500);
+    }, 300);
 
     timerRef.current = setTimeout(() => {
       onLongPress();

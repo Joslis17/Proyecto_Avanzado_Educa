@@ -184,7 +184,7 @@ function CampoBatalla() {
   const manejarBotonRojo = () => {
     if (!batallaIniciada) {
       // Caso 1: Antes de empezar, te saca a la vista del mazo
-      navigate('/');
+      navigate('/mazo');
     } else if (batallaIniciada && !ganador) {
       // Caso 2: Durante el juego, interrumpe la pelea
       setGanador("Batalla Interrumpida");
@@ -242,7 +242,7 @@ function CampoBatalla() {
           <p className='text-purple-600 text-2xl font-black uppercase tracking-wider mb-2'> Error de Carga</p>
           <p className='text-gray-600 font-medium mb-6'>{error}</p>
           <button 
-            onClick={() => navigate('/')} 
+            onClick={() => navigate('/mazo')} 
             className='px-6 py-2 bg-purple-900 hover:bg-purple-700 text-white font-bold rounded-lg transition-transform hover:scale-105'
           >
             Regresar al Mazo

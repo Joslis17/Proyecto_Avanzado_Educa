@@ -18,7 +18,7 @@ function PaginaInexistente() {
         <div className="mt-10 flex items-center justify-center gap-x-6">
           {/* Botón principal estilizado */}
           <Link
-            to="/"
+            to="/mazo"
             className="rounded-md bg-purple-700 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-purple-600 hover:scale-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600 transition-colors"
           >
             Volver al inicio
