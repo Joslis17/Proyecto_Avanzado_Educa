@@ -62,14 +62,14 @@ function CartaEditar({ cartaInicial, onSave, onCancel }: Props) {
 
   const renderSelectHabilidad = (value: string, setter: (v: string) => void) => (
     <select 
-      className='w-full border-2 rounded-lg p-2 text-sm  border-purple-700 outline-none focus:border-purple-600 transition-all'
+      className='w-full border-3 rounded-lg p-2 text-sm  bg-white text-black border-purple-700 outline-none focus:border-purple-600 transition-all'
       value={value} 
       onChange={(e) => setter(e.target.value)}
     >
       <option value="">Selecciona una habilidad</option>
       {listaHabilidadesJSON.map((hab: any) => (
         <option key={hab.id} value={hab.id}>
-          {hab.nombre} (Atq: {hab.ataque})
+          {hab.nombre}
         </option>
       ))}
     </select>
@@ -146,7 +146,7 @@ function CartaEditar({ cartaInicial, onSave, onCancel }: Props) {
           <div className='p-5 border-3 border-purple-700 rounded-2xl shadow-lg hover:shadow-purple-400 transition-all
            flex-1'>
             <h3 className='text-center font-bold mb-2 '>Descripción:</h3>
-            <textarea className='w-full h-18 p-2 bg-transparent outline-none resize-none text-md italic text-gray-300' 
+            <textarea className='w-full h-16 p-2 bg-transparent outline-none resize-none text-md italic text-gray-300' 
                       placeholder="Escribe aquí la historia..."
                       value={description} onChange={(e) => setDescription(e.target.value)} />
           </div>

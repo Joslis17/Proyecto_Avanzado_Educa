@@ -139,7 +139,7 @@ const manejarClickCrear = async () => {
             <option value="">Selecciona habilidad</option>
             {habilidadesData.map((hab) => (
               <option key={hab.id} value={hab.id}>
-                {hab.nombre} (Atq: {hab.ataque})
+                {hab.nombre}
               </option>
             ))}
           </select>
