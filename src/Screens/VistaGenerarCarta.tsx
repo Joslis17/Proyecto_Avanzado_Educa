@@ -73,7 +73,7 @@ function VistaGenerarCarta({ recargarMazo }: props) {
       - Si el usuario proporciona datos, ÚSALOS.
       - Si falta algún dato, invéntalo de forma coherente.
       - Si no se proporciona un link de imagen, usa una URL genérica de placeholder.
-      - La tematica de la carta ajuro tiene que ser de personajes de peliculas/series de terror, leyendas urbanas latinoamericanas o inventadas/aleatorias.
+      - La tematica de la carta ajuro tiene que ser de personajes de peliculas o series de terror, leyendas urbanas latinoamericanas aleatorias.
       - El ataque, vida y defensa deben ser coherentes con su tipo y habilidades.
       - La carta generada ajuro tendra que poseer ajuro 3 habiliades especiales, si el prompt no especifica habilidades, asigna 3 habilidades aleatorias.
       - La carta generada debe tener un nombre, descripción y tipo coherentes con la temática de terror.
