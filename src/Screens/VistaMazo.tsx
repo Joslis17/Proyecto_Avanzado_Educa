@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 import { MdClear } from "react-icons/md";
-import { Trash2, FileText, CheckSquare, Skull, Undo2, Info
+import { Trash2, FileText, CheckSquare, Skull, Undo2, Info, PlusCircle, 
 
 } from 'lucide-react'
 
@@ -117,10 +117,11 @@ function VistaMazo({ seleccionarCarta, verDetalle, mostrarCrear, mazo, eliminarC
           </div>
         )}
       <button onClick={() => mostrarCrear()}
-        className='fixed top-5 right-10 border-3 border-white rounded-full p-1 m-2 z-40
-         cursor-pointer hover:bg-white/10 hover:scale-115 transition-all duration-400 shadow-lg hover:shadow-gray-700'>
-        <IoAddOutline size={40} color={'white'} />
-      </button>
+        className='fixed top-5 right-10 bg-gradient-to-r from-blue-900 to-slate-900 text-white
+        cursor-pointer rounded-lg p-2 shadow-lg shadow-gray-700 hover:scale-110 transition-all border 
+        border-white'>
+          <PlusCircle size={30} className="text-white" />
+        </button>
       <button 
         onClick={() => navigate('/generar-carta-ia')}
         className='fixed top-5 right-30 bg-gradient-to-r from-blue-950 to-slate-900 text-white
