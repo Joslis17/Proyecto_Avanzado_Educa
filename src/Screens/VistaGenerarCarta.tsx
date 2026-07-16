@@ -3,8 +3,8 @@ import { MdClear } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 
 import { Sparkle } from 'lucide-react';
+import ModalGenerarCartaAyuda from '../Components/ModalGenerarCartaAyuda';
 
-import VistaGenerarCartaAyuda from '../Components/VistaGenerarCartaAyuda';
 type props = {
   recargarMazo: () => Promise<void>;
 }
@@ -140,7 +140,7 @@ function VistaGenerarCarta({ recargarMazo }: props) {
             {/* Ajustamos max-w-4xl para mayor ancho y quitamos w-200 */}
             <div className=" bg-gradient-to-b from-red-950 to-black border border-red-900 absolute bg-white p-6 rounded-xl shadow-xl w-full max-w-6xl flex flex-col justify-center">
               
-              <VistaGenerarCartaAyuda />
+              <ModalGenerarCartaAyuda />
               <button onClick={() => setMostrarAyuda(false)} 
                 className='absolute top-4 right-4 bg-white border-3 border-gray-400 rounded-full p-1 hover:bg-gray-100 hover:scale-105 transition-all shadow-md z-10 cursor-pointer'>
                   <MdClear size={30} className="text-black"/>

@@ -1,8 +1,7 @@
 
+import React from 'react'
 
-function VistaGenerarCartaAyuda() {
-  
-
+function ModalGenerarCartaAyuda() {
   return (
          <div className=" p-2 bg-[#0f172a] text-white border-2 border-white rounded-2xl shadow-lg
            hover:shadow-gray-400 transition-all duration-300 overflow-y-auto">
@@ -73,4 +72,4 @@ function VistaGenerarCartaAyuda() {
   )
 }
 
-export default VistaGenerarCartaAyuda
+export default ModalGenerarCartaAyuda
