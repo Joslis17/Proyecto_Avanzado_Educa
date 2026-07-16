@@ -178,6 +178,9 @@ function App() {
       </div>
     );
   }
+  const recargarMazo = async () => {
+    await getCarta(); // Esta función ya la tienes definida
+  };
 
   return (
     <div>
@@ -199,7 +202,7 @@ function App() {
           <Route path="/editar/:numero" element={<VistaEditar carta={cartaSeleccionada} onEditar={editarCartaGlobal} />} />
           <Route path="*" element={<PaginaInexistente />} />
           <Route path="/CampoBatalla/:id1/:id2" element={<CampoBatalla />} />
-          <Route path="/generar-carta-ia" element={<VistaGenerarCarta />} />
+          <Route path="/generar-carta-ia" element={<VistaGenerarCarta recargarMazo={recargarMazo} />} />
           <Route path='/' element={<VistaPlay/>} />
         </Routes>
       </main>

@@ -5,8 +5,10 @@ import { useNavigate } from 'react-router-dom';
 import { Sparkle } from 'lucide-react';
 
 import VistaGenerarCartaAyuda from '../Components/VistaGenerarCartaAyuda';
+type props = {
+}
 
-function VistaGenerarCarta() {
+function VistaGenerarCarta({ recargarMazo }: { recargarMazo: () => Promise<void> }) {
   const [prompt, setPrompt] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -109,7 +111,7 @@ function VistaGenerarCarta() {
       });
 
       if (!respuesta.ok) throw new Error("Error en la IA");
-      await respuesta.json();
+      await recargarMazo();
       navigate('/mazo');
     } catch (err) {
       setError("No se pudo generar. Revisa tu prompt o conexión.");
