@@ -6,6 +6,7 @@ import { Sparkle } from 'lucide-react';
 
 import VistaGenerarCartaAyuda from '../Components/VistaGenerarCartaAyuda';
 type props = {
+  recargarMazo: Function
 }
 
 function VistaGenerarCarta({ recargarMazo }: { recargarMazo: () => Promise<void> }) {
