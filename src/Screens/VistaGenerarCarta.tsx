@@ -72,6 +72,7 @@ function VistaGenerarCarta({ recargarMazo }: props) {
       REGLAS GENERALES:
       - Si el usuario proporciona datos, ÚSALOS.
       - Si falta algún dato, invéntalo de forma coherente.
+      - Si el prompt está vacío o pide algo aleatorio o aleatoriamente, **DEBES VARIAR OBLIGATORIAMENTE LA TEMÁTICA**. Rotar entre: personajes icónicos de películas de terror (ej: Freddy Krueger, El Exorcista, entre otros...), series de terror modernas, creepypastas o leyendas urbanas de distintos países (evitando repetir las mismas y la llorona o sayona)
       - Si no se proporciona un link de imagen, usa una URL genérica de placeholder.
       - La tematica de la carta ajuro tiene que ser de personajes de peliculas o series de terror, leyendas urbanas latinoamericanas aleatorias.
       - El ataque, vida y defensa deben ser coherentes con su tipo y habilidades.
