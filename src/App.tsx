@@ -153,12 +153,10 @@ function App() {
     navigate(`/mazo`);
   }
 
-  const agregarNuevaCarta = (nuevaCarta: any) => {
-    const cartaNumero = {
-       ...nuevaCarta,
-        numero: mazo.length + 1 };
-    setMazo([...mazo, cartaNumero]);
+  const agregarNuevaCarta = async (_nuevaCarta: any) => {
+    await getCarta(); 
     setMostrarVistaCrear(false);
+    navigate('/mazo');
   };
 
   const irBatalla = (idCarta1: string, idCarta2: string) => {
